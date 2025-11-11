@@ -4,7 +4,7 @@ from models.user import User
 from schemas.user_schema import user_entity
 from schemas.login_schema import LoginUser
 
-auth = APIRouter(prefix="/auth", tags=["Auth"])
+auth = APIRouter(prefix="/auth")
 user_collection = db["User"]
 
 @auth.post("/register")
