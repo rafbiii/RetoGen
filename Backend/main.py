@@ -18,3 +18,6 @@ app.add_middleware(
 @app.get("/")
 def root():
     return {"message": "API siap digunakan"}
+
+#unicorn main:app --reload
+#http://localhost:8000/docs
