@@ -1,8 +1,14 @@
 from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError
+
+from core.API_handlers import validation_exception_handler
 from routes import auth
 import uvicorn
 
 app = FastAPI(title="Updated Backend Template")
+
+# Pasang custom error handler
+app.add_exception_handler(RequestValidationError, validation_exception_handler)
 
 app.include_router(auth.router, prefix="/auth", tags=["Auth"])
 
