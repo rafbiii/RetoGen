@@ -4,16 +4,15 @@ from utils.image_validator import validate_image_bytes
 from datetime import datetime
 
 class ArticleService:
-
+    
     @staticmethod
     async def fetch_article(article_id: str):
         try:
-            article = await db.articles.find_one({
+            return await db.articles.find_one({
                 "_id": ObjectId(article_id),
                 "is_deleted": False
             })
-            return article
-        except Exception:
+        except:
             return None
 
     @staticmethod
@@ -22,13 +21,10 @@ class ArticleService:
 
         if data.article_title is not None:
             update_fields["article_title"] = data.article_title
-
         if data.article_preview is not None:
             update_fields["article_preview"] = data.article_preview
-
         if data.article_content is not None:
             update_fields["article_content"] = data.article_content
-
         if data.article_tag is not None:
             update_fields["article_tag"] = data.article_tag
 
@@ -45,5 +41,5 @@ class ArticleService:
                 {"$set": update_fields}
             )
             return result.modified_count > 0
-        except Exception:
+        except:
             return False

@@ -1,9 +1,9 @@
+# services/auth_service.py
 from core.security import verify_password, hash_password, create_token, decode_token
 from db.connection import db
 from datetime import datetime
 
 class AuthService:
-
     @staticmethod
     async def register(data):
         existing_email = await db.users.find_one({"email": data.email})
@@ -13,7 +13,7 @@ class AuthService:
         existing_username = await db.users.find_one({"username": data.username})
         if existing_username:
             return {"confirmation": "username already taken"}
-        
+
         hashed_pw = hash_password(data.password)
         now = datetime.utcnow()
 
@@ -22,7 +22,7 @@ class AuthService:
             "fullname": data.fullname,
             "email": data.email,
             "password": hashed_pw,
-            "role": "user",  # default
+            "role": "user",
             "created_at": now,
             "updated_at": now,
         }
@@ -57,8 +57,7 @@ class AuthService:
     @staticmethod
     async def is_admin(payload):
         try:
-            email = payload.get("email")
-            user = await db.users.find_one({"email": email})
+            user = await db.users.find_one({"email": payload.get("email")})
             if not user:
                 return False
             return user.get("role") == "admin"

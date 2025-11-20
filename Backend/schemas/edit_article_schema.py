@@ -8,4 +8,4 @@ class EditArticleRequest(BaseModel):
     article_preview: Optional[str] = None
     article_content: Optional[str] = None
     article_tag: Optional[str] = None
-    article_image: Optional[str] = None  # base64 dari frontend
+    article_image: Optional[str] = None  # base64 string
