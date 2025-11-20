@@ -1,14 +1,15 @@
 from fastapi import APIRouter
-from schemas.edit_article_schema import EditArticleRequest
-from services.auth_service import AuthService
+from schemas.edit_article_get_schema import EditArticleGetRequest
+from schemas.edit_article_update_schema import EditArticleUpdateRequest
 from services.article_service import ArticleService
+from services.auth_service import AuthService
 from utils.base64_utils import base64_to_bytes, bytes_to_base64
 
-router = APIRouter(prefix="/article")
+router = APIRouter()
 
 # STEP 1: Fetch article for editing
 @router.post("/edit/get")
-async def edit_get_article(req: EditArticleRequest):
+async def edit_get_article(req: EditArticleGetRequest):
 
     article = await ArticleService.fetch_article(req.article_id)
     if article is None:
@@ -37,7 +38,7 @@ async def edit_get_article(req: EditArticleRequest):
 
 # STEP 2: Update article
 @router.post("/edit/update")
-async def edit_update_article(req: EditArticleRequest):
+async def edit_update_article(req: EditArticleUpdateRequest):
 
     article = await ArticleService.fetch_article(req.article_id)
     if article is None:
