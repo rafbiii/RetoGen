@@ -2,6 +2,7 @@ from db.connection import db
 from bson import ObjectId, Binary
 from utils.image_validator import validate_image_bytes
 from datetime import datetime
+import uuid
 
 class ArticleService:
 
@@ -47,3 +48,33 @@ class ArticleService:
             return result.modified_count > 0
         except Exception:
             return False
+        
+    @staticmethod
+    async def add_article(title, preview, content, tag, image_bytes, author_id):
+        try:
+            article_id = str(uuid.uuid4())
+            now = datetime.utcnow()
+
+            doc = {
+                "article_id": article_id,
+                "article_title": title,
+                "article_preview": preview,
+                "article_content": content,
+                "article_tag": tag,
+                "article_image": image_bytes,
+                "author_id": author_id,
+                "created_at": now,
+                "updated_at": now,
+                "is_deleted": False
+            }
+
+            result = await db.articles.insert_one(doc)
+
+            if result.inserted_id:
+                return article_id
+
+            return None
+
+        except Exception as e:
+            print("ADD ARTICLE ERROR:", e)
+            return None
