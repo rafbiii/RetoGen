@@ -43,7 +43,7 @@ def validate_login_input(data: LoginUser):
         return {"confirmation": "password is incorrect"}
     return None
 
-@router.post("/register")
+@router.post("/registration")
 async def register(data: RegisterUser):
     validate_error = validate_register_input(data)
     if validate_error:
