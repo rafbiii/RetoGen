@@ -1,0 +1,76 @@
+[{
+  "_id": {
+    "$oid": "807f1f77bcf86cd799439041"
+  },
+  "article_id": {
+    "$oid": "607f1f77bcf86cd799439021"
+  },
+  "user_id": {
+    "$oid": "507f1f77bcf86cd799439012"
+  },
+  "comment_text": "Great review! The M3 chip really is a game changer for video editing.",
+  "created_at": {
+    "$date": "2024-01-20T11:30:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-20T11:30:00.000Z"
+  },
+  "is_deleted": false
+},
+{
+  "_id": {
+    "$oid": "807f1f77bcf86cd799439042"
+  },
+  "article_id": {
+    "$oid": "607f1f77bcf86cd799439021"
+  },
+  "user_id": {
+    "$oid": "507f1f77bcf86cd799439013"
+  },
+  "comment_text": "I've been using the M2 MacBook Pro and it's already amazing. Can't wait to upgrade to M3!",
+  "created_at": {
+    "$date": "2024-01-20T12:15:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-20T12:15:00.000Z"
+  },
+  "is_deleted": false
+},
+{
+  "_id": {
+    "$oid": "807f1f77bcf86cd799439043"
+  },
+  "article_id": {
+    "$oid": "607f1f77bcf86cd799439022"
+  },
+  "user_id": {
+    "$oid": "507f1f77bcf86cd799439014"
+  },
+  "comment_text": "Thanks for this list! The Acer Nitro 5 seems perfect for my budget.",
+  "created_at": {
+    "$date": "2024-01-19T13:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-19T13:45:00.000Z"
+  },
+  "is_deleted": false
+},
+{
+  "_id": {
+    "$oid": "807f1f77bcf86cd799439044"
+  },
+  "article_id": {
+    "$oid": "607f1f77bcf86cd799439023"
+  },
+  "user_id": {
+    "$oid": "507f1f77bcf86cd799439012"
+  },
+  "comment_text": "Dell XPS 13 has been my work laptop for 2 years now. Absolutely love it!",
+  "created_at": {
+    "$date": "2024-01-18T15:20:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-18T15:20:00.000Z"
+  },
+  "is_deleted": false
+}]

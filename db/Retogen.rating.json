@@ -1,0 +1,90 @@
+[{
+  "_id": {
+    "$oid": "907f1f77bcf86cd799439051"
+  },
+  "article_id": {
+    "$oid": "607f1f77bcf86cd799439021"
+  },
+  "user_id": {
+    "$oid": "507f1f77bcf86cd799439012"
+  },
+  "rating_value": 5,
+  "created_at": {
+    "$date": "2024-01-20T11:35:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-20T11:35:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "907f1f77bcf86cd799439052"
+  },
+  "article_id": {
+    "$oid": "607f1f77bcf86cd799439021"
+  },
+  "user_id": {
+    "$oid": "507f1f77bcf86cd799439013"
+  },
+  "rating_value": 4,
+  "created_at": {
+    "$date": "2024-01-20T12:20:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-20T12:20:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "907f1f77bcf86cd799439053"
+  },
+  "article_id": {
+    "$oid": "607f1f77bcf86cd799439022"
+  },
+  "user_id": {
+    "$oid": "507f1f77bcf86cd799439014"
+  },
+  "rating_value": 5,
+  "created_at": {
+    "$date": "2024-01-19T13:50:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-19T13:50:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "907f1f77bcf86cd799439054"
+  },
+  "article_id": {
+    "$oid": "607f1f77bcf86cd799439023"
+  },
+  "user_id": {
+    "$oid": "507f1f77bcf86cd799439012"
+  },
+  "rating_value": 4,
+  "created_at": {
+    "$date": "2024-01-18T15:25:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-18T15:25:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "907f1f77bcf86cd799439055"
+  },
+  "article_id": {
+    "$oid": "607f1f77bcf86cd799439024"
+  },
+  "user_id": {
+    "$oid": "507f1f77bcf86cd799439013"
+  },
+  "rating_value": 5,
+  "created_at": {
+    "$date": "2024-01-17T17:30:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-17T17:30:00.000Z"
+  }
+}]

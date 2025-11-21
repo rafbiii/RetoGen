@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "507f1f77bcf86cd799439011"
+  },
+  "username": "admin_tech",
+  "email": "admin@techblog.com",
+  "password": "$2b$10$EXAMPLEHASHEDPASSWORD123456789",
+  "fullname": "Admin Tech",
+  "userclass": "admin",
+  "created_at": {
+    "$date": "2024-01-15T10:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-15T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "507f1f77bcf86cd799439012"
+  },
+  "username": "johndoe88",
+  "email": "john.doe@email.com",
+  "password": "$2b$10$EXAMPLEHASHEDPASSWORD234567890",
+  "fullname": "John Doe",
+  "userclass": "user",
+  "created_at": {
+    "$date": "2024-01-16T14:30:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-16T14:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "507f1f77bcf86cd799439013"
+  },
+  "username": "gamer_queen",
+  "email": "sarah.gamer@email.com",
+  "password": "$2b$10$EXAMPLEHASHEDPASSWORD345678901",
+  "fullname": "Sarah Johnson",
+  "userclass": "user",
+  "created_at": {
+    "$date": "2024-01-17T09:15:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-17T09:15:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "507f1f77bcf86cd799439014"
+  },
+  "username": "office_pro",
+  "email": "mike.office@email.com",
+  "password": "$2b$10$EXAMPLEHASHEDPASSWORD456789012",
+  "fullname": "Michael Brown",
+  "userclass": "user",
+  "created_at": {
+    "$date": "2024-01-18T16:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-18T16:45:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "507f1f77bcf86cd799439010"
+  },
+  "username": "superadmin_tech",
+  "email": "superadmin@techblog.com",
+  "password": "$2b$10$EXAMPLEHASHEDPASSWORD567890123",
+  "fullname": "Super Admin",
+  "userclass": "superadmin",
+  "created_at": {
+    "$date": "2024-01-15T10:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-15T10:00:00.000Z"
+  }
+}]
