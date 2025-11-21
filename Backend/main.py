@@ -1,11 +1,21 @@
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
-
+from fastapi.middleware.cors import CORSMiddleware
 from core.API_handlers import validation_exception_handler
 from routes import auth, article
 import uvicorn
 
 app = FastAPI(title="Updated Backend Template")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Pasang custom error handler
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
