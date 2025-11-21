@@ -188,27 +188,38 @@ async def add_article(req: AddArticle):
 
     author_id = str(user["_id"])
 
+    if not (10 <= len(req.article_title) <= 64):
+        return {"confirmation": "Title must be 10-64 characters long."}
+
+    if not (20 <= len(req.article_preview) <= 160):
+        return {"confirmation": "Preview must be 20-160 characters long."}
+
+    if len(req.article_content) < 50:
+        return {"confirmation": "Content must be at least 50 characters long."}
+
     try:
         image_bytes = base64_to_bytes(req.article_image)
-    except:
-        return {"confirmation": "invalid image format"}
-
+    except Exception:
+        return {"confirmation": "Image format must be valid Base64."}
+    
     article_id = await ArticleService.add_article(
         req.article_title,
         req.article_preview,
         req.article_content,
         req.article_tag,
         image_bytes,
-        author_id 
+        author_id
     )
 
     if article_id is None:
         return {"confirmation": "backend error"}
 
     return {
-        "confirmation": "successful: article created",
+        "confirmation": "success: article created",
         "article_id": article_id
     }
+
+
     
 @router.post("/main_page")
 async def main_page(req: MainPageRequest):
@@ -239,7 +250,6 @@ async def main_page(req: MainPageRequest):
             "article_title": a.get("article_title"),
             "article_preview": a.get("article_preview"),
             "article_tag": a.get("article_tag"),
-            # convert binary to base64 agar bisa dikirim ke frontend
             "article_image": a.get("article_image").decode("latin1") if a.get("article_image") else None
         })
 
