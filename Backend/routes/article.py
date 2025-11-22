@@ -89,7 +89,7 @@ async def view_article(req: ViewArticleRequest):
             image_base64 = None
 
     return {
-        "confirmation": "successful",
+        "confirmation": "article fetch successful",
         "userclass": userclass,
         "article_title": article["article_title"],
         "article_content": article["article_content"],
@@ -177,11 +177,11 @@ async def add_article(req: AddArticle):
 
     user_email = payload.get("email")
     if user_email is None:
-        return {"confirmation": "token missing email"}
+        return {"confirmation": "token invalid"}
 
     user = await db.users.find_one({"email": user_email})
     if not user:
-        return {"confirmation": "user not found"}
+        return {"confirmation": "token invalid"}
     
     if user.get("role") != "admin":
         return {"confirmation": "not admin"}
