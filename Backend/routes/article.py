@@ -42,6 +42,7 @@ async def edit_get_article(req: EditArticleGetRequest):
         "article_image": image_base64
     }
 
+
 @router.post("/edit/update")
 async def edit_update_article(req: EditArticleUpdateRequest):
 
@@ -68,6 +69,7 @@ async def edit_update_article(req: EditArticleUpdateRequest):
         "confirmation": "successful: article edited",
         "article_id": req.article_id
     }
+
 
 @router.post("/view")
 async def view_article(req: ViewArticleRequest):
@@ -131,6 +133,7 @@ async def delete_article(req: DeleteArticleRequest):
 
     return {"confirmation": "successful: article deleted"}
     
+    
 @router.post("/main_page")
 async def main_page(req: MainPageRequest):
 
@@ -192,7 +195,6 @@ async def verification(req : VerificationRequest):
     }
 
 
-
 @router.post("/add")
 async def add_article(req: AddArticle):
 
@@ -243,43 +245,4 @@ async def add_article(req: AddArticle):
         "confirmation": "success: article created",
         "article_id": article_id
     }
-
-
     
-@router.post("/main_page")
-async def main_page(req: MainPageRequest):
-
-    payload = await AuthService.verify_token(req.token)
-    if payload is None:
-        return {"confirmation": "token invalid"}
-
-    user_email = payload.get("email")
-    user = await db.users.find_one({"email": user_email})
-
-    if not user:
-        return {"confirmation": "token invalid"}
-
-    username = user.get("username", "")
-
-    try:
-        cursor = db.articles.find({"is_deleted": False})
-        articles = await cursor.to_list(length=None)
-    except Exception as e:
-        print("MAIN PAGE ERROR:", e)
-        return {"confirmation": "backend error"}
-
-    list_article = []
-    for a in articles:
-        list_article.append({
-            "article_id": a.get("article_id"),
-            "article_title": a.get("article_title"),
-            "article_preview": a.get("article_preview"),
-            "article_tag": a.get("article_tag"),
-            "article_image": a.get("article_image").decode("latin1") if a.get("article_image") else None
-        })
-
-    return {
-        "confirmation": "fetch data successful",
-        "username": username,
-        "list_article": list_article
-    }
