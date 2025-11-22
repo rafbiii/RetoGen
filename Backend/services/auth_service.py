@@ -10,10 +10,6 @@ class AuthService:
         if existing_email:
             return {"confirmation": "email already registered"}
 
-        existing_username = await db.users.find_one({"username": data.username})
-        if existing_username:
-            return {"confirmation": "username already taken"}
-
         hashed_pw = hash_password(data.password)
         now = datetime.utcnow()
 
