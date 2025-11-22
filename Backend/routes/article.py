@@ -242,7 +242,5 @@ async def add_article(req: AddArticle):
         return {"confirmation": "backend error"}
 
     return {
-        "confirmation": "success: article created",
-        "article_id": article_id
+        "confirmation": "success: article added",
     }
-    
