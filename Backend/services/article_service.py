@@ -48,11 +48,9 @@ class ArticleService:
     @staticmethod
     async def add_article(title, preview, content, tag, image_bytes, author_id):
         try:
-            article_id = str(uuid.uuid4())
             now = datetime.utcnow()
 
             doc = {
-                "article_id": article_id,
                 "article_title": title,
                 "article_preview": preview,
                 "article_content": content,
@@ -67,7 +65,7 @@ class ArticleService:
             result = await db.articles.insert_one(doc)
 
             if result.inserted_id:
-                return article_id
+                return str(result.inserted_id)   # ⬅️ ini ID dari MongoDB
 
             return None
 

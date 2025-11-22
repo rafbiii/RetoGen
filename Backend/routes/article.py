@@ -159,7 +159,7 @@ async def main_page(req: MainPageRequest):
     list_article = []
     for a in articles:
         list_article.append({
-            "article_id": a.get("article_id"),
+            "article_id": str(a["_id"]),
             "article_title": a.get("article_title"),
             "article_preview": a.get("article_preview"),
             "article_tag": a.get("article_tag"),
