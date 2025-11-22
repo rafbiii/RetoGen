@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from schemas.edit_article_get_schema import EditArticleGetRequest
 from schemas.edit_article_update_schema import EditArticleUpdateRequest
 from schemas.view_article_schema import ViewArticleRequest
+from schemas.verification_schema import VerificationRequest
 from services.article_service import ArticleService
 from services.auth_service import AuthService
 from utils.base64_utils import base64_to_bytes, bytes_to_base64
@@ -167,6 +168,30 @@ async def main_page(req: MainPageRequest):
         "username": username,
         "list_article": list_article
     }
+
+
+@router.post("/verification")
+async def verification(req : VerificationRequest):
+    payload = await AuthService.verify_token(req.token)
+    if payload is None:
+        return {"confirmation": "token invalid"}
+
+    user_email = payload.get("email")
+    if user_email is None:
+        return {"confirmation": "token invalid"}
+
+    user = await db.users.find_one({"email": user_email})
+    if not user:
+        return {"confirmation": "backend error"}
+    
+    if user.get("role") != "admin":
+        return {"confirmation": "not admin"}
+    
+    return {
+        "confirmation": "successful"
+    }
+
+
 
 @router.post("/add")
 async def add_article(req: AddArticle):
