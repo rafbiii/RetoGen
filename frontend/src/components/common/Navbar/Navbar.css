@@ -1,19 +1,20 @@
+/* Navbar Styles */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background: #FFFFFF;
+  background: rgba(246, 238, 238, 0.8);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(232, 232, 232, 0.4);
+  border-bottom: 1px solid rgba(100, 100, 100, 0.1);
   z-index: 1000;
   height: 64px;
   transition: all 0.3s ease;
 }
 
 body.dark-mode .navbar {
-  background: #424242;
-  border-bottom: 1px solid rgba(74, 74, 74, 0.5);
+  background: rgba(67, 68, 67, 0.8);
+  border-bottom: 1px solid rgba(240, 69, 69, 0.1);
 }
 
 .navbar-inner {
@@ -24,12 +25,14 @@ body.dark-mode .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .navbar-left {
   display: flex;
   align-items: center;
   gap: 16px;
+  position: relative;
 }
 
 .navbar-logo {
@@ -40,12 +43,13 @@ body.dark-mode .navbar {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #333333;
+  color: #6b7280;
   transition: color 0.3s ease;
+  margin-left: 0;
 }
 
 body.dark-mode .navbar-logo {
-  color: #E8E8E8;
+  color: #b8b8b8;
 }
 
 .navbar-icon {
@@ -61,6 +65,7 @@ body.dark-mode .navbar-logo {
   object-fit: cover;
 }
 
+/* Back Button */
 .navbar-back-btn {
   display: flex;
   align-items: center;
@@ -75,6 +80,13 @@ body.dark-mode .navbar-logo {
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Poppins', sans-serif;
+  min-width: 88px;
+}
+
+/* Placeholder untuk spacing konsisten saat tidak ada tombol Back */
+.navbar-back-placeholder {
+  min-width: 88px;
+  height: 40px;
 }
 
 .navbar-back-btn svg {
@@ -85,7 +97,7 @@ body.dark-mode .navbar-logo {
 
 .navbar-back-btn:hover {
   background: rgba(100, 100, 100, 0.08);
-  color: #333333;
+  color: #6b7280;
   border-color: rgba(100, 100, 100, 0.3);
 }
 
@@ -96,7 +108,7 @@ body.dark-mode .navbar-back-btn {
 
 body.dark-mode .navbar-back-btn:hover {
   background: rgba(200, 200, 200, 0.1);
-  color: #E8E8E8;
+  color: #b8b8b8;
   border-color: rgba(200, 200, 200, 0.3);
 }
 
@@ -117,12 +129,12 @@ body.dark-mode .navbar-back-btn:hover {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #333333;
+  color: #6b7280;
 }
 
 body.dark-mode .navbar-theme-toggle {
   border-color: rgba(200, 200, 200, 0.2);
-  color: #E8E8E8;
+  color: #b8b8b8;
 }
 
 .navbar-theme-toggle svg {
@@ -132,14 +144,14 @@ body.dark-mode .navbar-theme-toggle {
 }
 
 .navbar-theme-toggle:hover {
-  background: rgba(0, 188, 212, 0.1);
-  border-color: #00BCD4;
+  background: rgba(0, 206, 209, 0.1);
+  border-color: #00ced1;
   transform: scale(1.05);
 }
 
 body.dark-mode .navbar-theme-toggle:hover {
-  background: rgba(0, 188, 212, 0.1);
-  border-color: #00BCD4;
+  background: rgba(93, 215, 218, 0.1);
+  border-color: #5dd7da;
 }
 
 .navbar-btn {
@@ -161,7 +173,7 @@ body.dark-mode .navbar-theme-toggle:hover {
 
 .navbar-btn-login:hover {
   background: rgba(100, 100, 100, 0.08);
-  color: #333333;
+  color: #6b7280;
   border-color: rgba(100, 100, 100, 0.3);
 }
 
@@ -172,35 +184,36 @@ body.dark-mode .navbar-btn-login {
 
 body.dark-mode .navbar-btn-login:hover {
   background: rgba(200, 200, 200, 0.1);
-  color: #E8E8E8;
+  color: #b8b8b8;
   border-color: rgba(200, 200, 200, 0.3);
 }
 
 .navbar-btn-register {
-  background: #00BCD4;
+  background: #00ced1;
   color: white;
 }
 
 .navbar-btn-register:hover {
-  background: #00a8b8;
+  background: #00b8bb;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 206, 209, 0.3);
 }
 
 body.dark-mode .navbar-btn-register {
-  background: #00BCD4;
-  color: white;
+  background: #5dd7da;
+  color: #1a1a1a;
 }
 
 body.dark-mode .navbar-btn-register:hover {
-  background: #00d4ed;
+  background: #7de2e5;
 }
 
+/* Account Button */
 .navbar-btn-account {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #00BCD4;
+  background: #00ced1;
   color: white;
 }
 
@@ -211,20 +224,21 @@ body.dark-mode .navbar-btn-register:hover {
 }
 
 .navbar-btn-account:hover {
-  background: #00a8b8;
+  background: #00b8bb;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 206, 209, 0.3);
 }
 
 body.dark-mode .navbar-btn-account {
-  background: #00BCD4;
-  color: white;
+  background: #5dd7da;
+  color: #1a1a1a;
 }
 
 body.dark-mode .navbar-btn-account:hover {
-  background: #00d4ed;
+  background: #7de2e5;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .navbar-inner {
     padding: 0 20px;
@@ -241,7 +255,13 @@ body.dark-mode .navbar-btn-account:hover {
   .navbar-back-btn {
     padding: 8px;
     width: 40px;
+    min-width: 40px;
     justify-content: center;
+  }
+
+  .navbar-back-placeholder {
+    width: 40px;
+    min-width: 40px;
   }
 
   .navbar-btn-account span {

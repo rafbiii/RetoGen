@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiUser, FiMail, FiCalendar, FiStar, FiLogOut, FiArrowLeft } from 'react-icons/fi';
 import Navbar from '../../common/Navbar/Navbar';
 import './Account.css';
+import { initializeTheme } from '../../../services/themeUtils';
 
 function Account() {
   const navigate = useNavigate();
@@ -15,6 +16,10 @@ function Account() {
     reviewsCount: 21,
     averageRating: 4.21
   };
+  
+  useEffect(() => {
+      initializeTheme();
+    }, []);
 
   return (
     <>

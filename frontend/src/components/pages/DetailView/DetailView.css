@@ -1,3 +1,9 @@
+/* Navbar Placeholder - untuk mencegah konten tertutupi navbar fixed */
+.navbar-placeholder {
+  height: 64px;
+  width: 100%;
+}
+
 .loading-container,
 .error-container {
   display: flex;
@@ -29,7 +35,7 @@
 
 body.dark-mode .loading-container p,
 body.dark-mode .error-container h2 {
-  color: #b8b8b8;
+  color: #2a2a2a;
 }
 
 .tag-container {
@@ -721,10 +727,6 @@ body.dark-mode .btn-cancel:hover {
   text-align: center;
 }
 
-.delete-confirm-modal svg {
-  margin-bottom: 16px;
-}
-
 .btn-confirm-delete {
   flex: 1;
   background: #E34234;
@@ -735,7 +737,7 @@ body.dark-mode .btn-cancel:hover {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -755,6 +757,8 @@ body.dark-mode .btn-cancel:hover {
 .btn-confirm-delete svg {
   width: 16px;
   height: 16px;
+  display: block;
+  object-fit: contain;
 }
 
 .success-modal {

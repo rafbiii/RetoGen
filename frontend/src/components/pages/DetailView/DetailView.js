@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FiSun, FiMoon, FiUser, FiArrowLeft, FiStar, FiSend, FiEdit, FiFlag, FiTrash2, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import { FiStar, FiSend, FiEdit, FiFlag, FiTrash2, FiCheckCircle, FiAlertCircle, FiUser } from 'react-icons/fi';
+import Navbar from '../../common/Navbar/Navbar';
 import DetailArticleService from '../../../services/DetailArticleService';
 import DeleteArticleService from '../../../services/DeleteArticleService';
+import { initializeTheme } from '../../../services/themeUtils';
 import './DetailView.css';
 
 function DetailView() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [showReportModal, setShowReportModal] = useState(false);
@@ -23,6 +24,10 @@ function DetailView() {
   const [successMessage, setSuccessMessage] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   
+  useEffect(() => {
+    initializeTheme();
+  }, []);
+
   // Article data from API
   const [article, setArticle] = useState(null);
   const [userclass, setUserclass] = useState('user');
@@ -91,11 +96,6 @@ function DetailView() {
     setTimeout(() => {
       setShowPopup(false);
     }, 3000);
-  };
-
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    document.body.classList.toggle('dark-mode');
   };
 
   const handleSubmit = (e) => {
@@ -187,25 +187,8 @@ function DetailView() {
         <div className="bg-shape-2"></div>
         <div className="bg-shape-3"></div>
         
-        <nav>
-          <div className="nav-inner">
-            <div className="logo" onClick={() => navigate('/main')} style={{ cursor: 'pointer' }}>
-              <div className="anteater-icon">
-                <img src="/figures/logo.png" alt="Retogen Logo" />
-              </div>
-              <span>Retogen</span>
-            </div>
-            <div className="nav-buttons">
-              <button className="theme-toggle" onClick={toggleTheme}>
-                {isDarkMode ? <FiMoon /> : <FiSun />}
-              </button>
-              <button className="btn-account" onClick={() => navigate('/account')}>
-                <FiUser />
-                <span>{username || 'User'}</span>
-              </button>
-            </div>
-          </div>
-        </nav>
+        <Navbar showBack={true} showAccount={true} onBackClick={() => navigate('/main')} />
+        <div className="navbar-placeholder"></div>
 
         <div className="container">
           <div className="loading-container">
@@ -224,24 +207,12 @@ function DetailView() {
         <div className="bg-shape-2"></div>
         <div className="bg-shape-3"></div>
         
-        <nav>
-          <div className="nav-inner">
-            <div className="logo" onClick={() => navigate('/main')} style={{ cursor: 'pointer' }}>
-              <div className="anteater-icon">
-                <img src="/figures/logo.png" alt="Retogen Logo" />
-              </div>
-              <span>Retogen</span>
-            </div>
-          </div>
-        </nav>
+        <Navbar showBack={true} showAccount={false} onBackClick={() => navigate('/main')} />
+        <div className="navbar-placeholder"></div>
 
         <div className="container">
           <div className="error-container">
             <h2>Article not found</h2>
-            <button className="btn-back" onClick={() => navigate('/main')}>
-              <FiArrowLeft />
-              Back to Main
-            </button>
           </div>
         </div>
       </>
@@ -254,32 +225,10 @@ function DetailView() {
       <div className="bg-shape-2"></div>
       <div className="bg-shape-3"></div>
       
-      <nav>
-        <div className="nav-inner">
-          <div className="logo" onClick={() => navigate('/main')} style={{ cursor: 'pointer' }}>
-            <div className="anteater-icon">
-              <img src="/figures/logo.png" alt="Retogen Logo" />
-            </div>
-            <span>Retogen</span>
-          </div>
-          <div className="nav-buttons">
-            <button className="theme-toggle" onClick={toggleTheme}>
-              {isDarkMode ? <FiMoon /> : <FiSun />}
-            </button>
-            <button className="btn-account" onClick={() => navigate('/account')}>
-              <FiUser />
-              <span>{username || 'User'}</span>
-            </button>
-          </div>
-        </div>
-      </nav>
+      <Navbar showBack={true} showAccount={true} onBackClick={() => navigate('/main')} />
+      <div className="navbar-placeholder"></div>
 
       <div className="container">
-        <button className="btn-back" onClick={() => navigate('/main')}>
-          <FiArrowLeft />
-          Back
-        </button>
-
         <div className="article-detail">
           {article.image && (
             <div className="laptop-image">
@@ -304,17 +253,17 @@ function DetailView() {
                 <>
                   <button className="btn-edit" onClick={handleEditArticle}>
                     <FiEdit />
-                    Edit Article
+                    Edit
                   </button>
                   <button className="btn-delete" onClick={handleDeleteArticle}>
                     <FiTrash2 />
-                    Delete Article
+                    Delete
                   </button>
                 </>
               )}
               <button className="btn-report" onClick={() => openReportModal('article')}>
                 <FiFlag />
-                Report Article
+                Report
               </button>
             </div>
           </div>

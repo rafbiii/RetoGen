@@ -3,12 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../common/Navbar/Navbar';
 import { FiSearch, FiUsers, FiShield, FiZap, FiLock, FiBarChart2 } from 'react-icons/fi';
 import './LandingPage.css';
+import { initializeTheme } from '../../../services/themeUtils';
 
 function LandingPage() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [selectedLaptop, setSelectedLaptop] = useState(null);
 
+  useEffect(() => {
+    initializeTheme();
+  }, []);
+  
   const laptopDetails = {
     1: {
       title: "Ultralight Silver Laptop",

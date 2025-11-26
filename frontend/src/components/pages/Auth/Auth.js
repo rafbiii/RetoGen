@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { FiAlertCircle, FiCheckCircle } from 'react-icons/fi';
 import Navbar from '../../common/Navbar/Navbar';
 import { authService } from '../../../services/AuthService';
+import { initializeTheme } from '../../../services/themeUtils';
 import './Auth.css';
 
 function Auth() {
@@ -10,6 +11,10 @@ function Auth() {
   const location = useLocation();
   const isLogin = location.pathname === '/login';
   
+  useEffect(() => {
+      initializeTheme();
+    }, []);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);

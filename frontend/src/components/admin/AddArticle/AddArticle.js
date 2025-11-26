@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiSun, FiMoon, FiArrowLeft, FiSave, FiImage, FiAlertCircle, FiCheckCircle, FiXCircle, FiX } from 'react-icons/fi';
+import { FiSave, FiImage, FiAlertCircle, FiCheckCircle, FiXCircle, FiX } from 'react-icons/fi';
 import { verifyAdmin } from '../../../services/VerificationService';
 import { addArticle, validateArticleInput, validateImageFormat } from '../../../services/AddArticleService';
+import Navbar from '../../common/Navbar/Navbar';
+import { initializeTheme } from '../../../services/themeUtils';
 import './AddArticle.css';
 
 function AddArticle() {
   const navigate = useNavigate();
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
@@ -22,6 +23,11 @@ function AddArticle() {
     article_image: null
   });
   const [imagePreview, setImagePreview] = useState(null);
+
+
+  useEffect(() => {
+      initializeTheme();
+    }, []);
 
   useEffect(() => {
     const checkAdminAccess = async () => {
@@ -80,11 +86,6 @@ function AddArticle() {
 
     checkAdminAccess();
   }, [navigate]);
-
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    document.body.classList.toggle('dark-mode');
-  };
 
   const closeModal = () => {
     setShowModal(false);
@@ -209,28 +210,9 @@ function AddArticle() {
       <div className="bg-shape-2"></div>
       <div className="bg-shape-3"></div>
       
-      <nav className="add-article-nav">
-        <div className="add-article-nav-inner">
-          <div className="add-article-logo" onClick={() => navigate('/main')}>
-            <div className="add-article-logo-icon">
-              <img src="/figures/logo.png" alt="Retogen Logo" />
-            </div>
-            <span>Retogen</span>
-          </div>
-          <div className="add-article-nav-buttons">
-            <button className="add-article-theme-toggle" onClick={toggleTheme}>
-              {isDarkMode ? <FiMoon /> : <FiSun />}
-            </button>
-          </div>
-        </div>
-      </nav>
+      <Navbar showBack={true} showAccount={true} onBackClick={() => navigate('/main')} />
 
       <div className="add-article-container">
-        <button className="add-article-btn-back" onClick={() => navigate('/main')}>
-          <FiArrowLeft />
-          Back
-        </button>
-
         <div className="add-article-header">
           <div className="add-article-header-accent"></div>
           <h1>Write New Article</h1>
@@ -239,7 +221,7 @@ function AddArticle() {
 
         <form onSubmit={handleSubmit} className="add-article-form">
           <div className="add-article-form-row">
-            <div className="add-article-form-group">
+            <div className="add-article-form-group add-article-form-group-title">
               <label>Title</label>
               <input
                 type="text"
@@ -256,7 +238,7 @@ function AddArticle() {
               )}
             </div>
 
-            <div className="add-article-form-group">
+            <div className="add-article-form-group add-article-form-group-category">
               <label>Category</label>
               <select
                 name="article_tag"

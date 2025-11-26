@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FiSun, FiMoon, FiArrowLeft, FiSave, FiImage, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
-import { getArticleForEdit, updateArticle } from '../../../services/EditArticleService';
+import { FiSave, FiImage, FiCheckCircle, FiXCircle, FiAlertCircle, FiX } from 'react-icons/fi';
+import { getArticleForEdit, updateArticle } from "../../../services/EditArticleService";
 import { verifyAdmin } from '../../../services/VerificationService';
+import Navbar from '../../common/Navbar/Navbar';
+import { initializeTheme } from '../../../services/themeUtils';
 import './EditArticle.css';
 
 function EditArticle() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showErrorModal, setShowErrorModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [validationErrors, setValidationErrors] = useState({});
   
@@ -25,6 +26,10 @@ function EditArticle() {
     article_image: null
   });
   
+  useEffect(() => {
+    initializeTheme();
+  }, []);
+
   const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
@@ -32,36 +37,70 @@ function EditArticle() {
       const token = localStorage.getItem('token');
       
       if (!token) {
-        navigate('/login', { state: { message: 'token invalid' } });
+        localStorage.removeItem('token');
+        setModalType('token_invalid');
+        setModalMessage('Token invalid. Please login again.');
+        setShowModal(true);
+        setTimeout(() => navigate('/login'), 2000);
         return;
       }
 
       try {
         const responseData = await verifyAdmin(token);
+        
         if (responseData.confirmation === 'token invalid') {
-          navigate('/login', { state: { message: 'token invalid' } });
-        } else if (responseData.confirmation === 'not admin') {
-          setErrorMessage("You're not admin");
-          setShowErrorModal(true);
-          setTimeout(() => {
-            navigate('/main');
-          }, 2000);
+          localStorage.removeItem('token');
+          setModalType('token_invalid');
+          setModalMessage('Token invalid. Please login again.');
+          setShowModal(true);
+          setTimeout(() => navigate('/login'), 2000);
+          return;
+        }
+        
+        if (responseData.confirmation === 'not admin') {
+          setModalType('not_admin');
+          setModalMessage("You're not admin. Access denied.");
+          setShowModal(true);
+          setTimeout(() => navigate('/main'), 2000);
+          return;
+        }
+
+        if (responseData.confirmation === 'backend error') {
+          setModalType('error');
+          setModalMessage('Server busy. Please try again later.');
+          setShowModal(true);
+          setIsLoading(false);
+          return;
         }
 
         const response = await getArticleForEdit(id, token);
         
         if (response.confirmation === 'token invalid') {
-          navigate('/login', { state: { message: 'token invalid' } });
-        } else if (response.confirmation === 'not admin') {
-          setErrorMessage("You're not admin");
-          setShowErrorModal(true);
-          setTimeout(() => {
-            navigate('/main');
-          }, 2000);
-        } else if (response.confirmation === 'backend error') {
-          setErrorMessage('Server busy');
-          setShowErrorModal(true);
-        } else if (response.confirmation === 'successful') {
+          localStorage.removeItem('token');
+          setModalType('token_invalid');
+          setModalMessage('Token invalid. Please login again.');
+          setShowModal(true);
+          setTimeout(() => navigate('/login'), 2000);
+          return;
+        }
+        
+        if (response.confirmation === 'not admin') {
+          setModalType('not_admin');
+          setModalMessage("You're not admin. Access denied.");
+          setShowModal(true);
+          setTimeout(() => navigate('/main'), 2000);
+          return;
+        }
+        
+        if (response.confirmation === 'backend error') {
+          setModalType('error');
+          setModalMessage('Server busy. Please try again later.');
+          setShowModal(true);
+          setIsLoading(false);
+          return;
+        }
+        
+        if (response.confirmation === 'successful') {
           console.log('Article data received:', response);
           console.log('Article image:', response.article_image ? 'Image exists' : 'No image');
           
@@ -91,8 +130,10 @@ function EditArticle() {
           setIsLoading(false);
         }
       } catch (error) {
-        setErrorMessage('Server busy');
-        setShowErrorModal(true);
+        console.error('Error loading article:', error);
+        setModalType('error');
+        setModalMessage('Server busy. Please try again later.');
+        setShowModal(true);
         setIsLoading(false);
       }
     };
@@ -100,9 +141,10 @@ function EditArticle() {
     loadArticleData();
   }, [id, navigate]);
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    document.body.classList.toggle('dark-mode');
+  const closeModal = () => {
+    setShowModal(false);
+    setModalMessage('');
+    setModalType('');
   };
 
   const handleChange = (e) => {
@@ -159,22 +201,30 @@ function EditArticle() {
     const errors = {};
 
     if (!article.article_title.trim()) {
-      errors.article_title = 'Please fill';
+      errors.article_title = 'Title is required';
     }
     if (!article.article_tag.trim()) {
-      errors.article_tag = 'Please fill';
+      errors.article_tag = 'Category is required';
     }
     if (!article.article_preview.trim()) {
-      errors.article_preview = 'Please fill';
+      errors.article_preview = 'Preview is required';
     }
     if (!article.article_content.trim()) {
-      errors.article_content = 'Please fill';
+      errors.article_content = 'Content is required';
     }
     if (!article.article_image) {
-      errors.article_image = 'Please fill';
+      errors.article_image = 'Image is required';
     }
 
     setValidationErrors(errors);
+    
+    if (Object.keys(errors).length > 0) {
+      const firstError = Object.values(errors)[0];
+      setModalType('error');
+      setModalMessage(firstError);
+      setShowModal(true);
+    }
+    
     return Object.keys(errors).length === 0;
   };
 
@@ -195,53 +245,42 @@ function EditArticle() {
     try {
       const response = await updateArticle(article, token);
       
+      if (response.confirmation === 'token invalid') {
+        localStorage.removeItem('token');
+        setModalType('token_invalid');
+        setModalMessage('Session expired. Please login again.');
+        setShowModal(true);
+        setTimeout(() => navigate('/login'), 2000);
+        return;
+      }
+      
       if (response.confirmation === 'backend error') {
-        setErrorMessage('Server busy');
-        setShowErrorModal(true);
-      } else if (response.confirmation === 'successful: article edited') {
-        setShowSuccessModal(true);
+        setModalType('error');
+        setModalMessage('Server busy. Please try again later.');
+        setShowModal(true);
+        return;
+      }
+      
+      if (response.confirmation === 'successful: article edited') {
+        setModalType('success');
+        setModalMessage('Article updated successfully!');
+        setShowModal(true);
         
         setTimeout(() => {
           navigate(`/article/${response.article_id}`);
         }, 2000);
       }
     } catch (error) {
-      setErrorMessage('Server busy');
-      setShowErrorModal(true);
+      console.error('Error updating article:', error);
+      setModalType('error');
+      setModalMessage('Server busy. Please try again later.');
+      setShowModal(true);
     }
   };
 
-  if (isLoading) {
-    return (
-      <>
-        <div className="bg-shape-1"></div>
-        <div className="bg-shape-2"></div>
-        <div className="bg-shape-3"></div>
-        
-        <nav className="edit-article-nav">
-          <div className="edit-article-nav-inner">
-            <div className="edit-article-logo" onClick={() => navigate('/main')}>
-              <div className="edit-article-logo-icon">
-                <img src="/figures/logo.png" alt="Retogen Logo" />
-              </div>
-              <span>Retogen</span>
-            </div>
-            <div className="edit-article-nav-buttons">
-              <button className="edit-article-theme-toggle" onClick={toggleTheme}>
-                {isDarkMode ? <FiMoon /> : <FiSun />}
-              </button>
-            </div>
-          </div>
-        </nav>
-
-        <div className="edit-article-container">
-          <div className="edit-article-loading">
-            <p>Loading article...</p>
-          </div>
-        </div>
-      </>
-    );
-  }
+  const handleBackClick = () => {
+    navigate(`/article/${id}`);
+  };
 
   return (
     <>
@@ -249,36 +288,18 @@ function EditArticle() {
       <div className="bg-shape-2"></div>
       <div className="bg-shape-3"></div>
       
-      <nav className="edit-article-nav">
-        <div className="edit-article-nav-inner">
-          <div className="edit-article-logo" onClick={() => navigate('/main')}>
-            <div className="edit-article-logo-icon">
-              <img src="/figures/logo.png" alt="Retogen Logo" />
-            </div>
-            <span>Retogen</span>
-          </div>
-          <div className="edit-article-nav-buttons">
-            <button className="edit-article-theme-toggle" onClick={toggleTheme}>
-              {isDarkMode ? <FiMoon /> : <FiSun />}
-            </button>
-          </div>
-        </div>
-      </nav>
+      <Navbar showBack={true} showAccount={true} onBackClick={handleBackClick} />
 
       <div className="edit-article-container">
-        <button className="edit-article-btn-back" onClick={() => navigate(`/article/${id}`)}>
-          <FiArrowLeft />
-          Back
-        </button>
-
         <div className="edit-article-header">
           <div className="edit-article-header-accent"></div>
           <h1>Edit Article</h1>
+          <p>Update your product review</p>
         </div>
 
         <form onSubmit={handleSubmit} className="edit-article-form">
           <div className="edit-article-form-row">
-            <div className="edit-article-form-group">
+            <div className="edit-article-form-group edit-article-form-group-title">
               <label>Title</label>
               <input
                 type="text"
@@ -295,7 +316,7 @@ function EditArticle() {
               )}
             </div>
 
-            <div className="edit-article-form-group">
+            <div className="edit-article-form-group edit-article-form-group-category">
               <label>Category</label>
               <select
                 name="article_tag"
@@ -333,18 +354,13 @@ function EditArticle() {
                 <FiAlertCircle /> {validationErrors.article_image}
               </span>
             )}
-            {imagePreview && (
-              <p className="edit-article-image-status">
-                ✓ Image loaded (Click to change)
-              </p>
-            )}
           </div>
 
           {imagePreview && (
             <div className="edit-article-image-preview">
               <img 
                 src={imagePreview} 
-                alt="Preview"
+                alt="Article Preview"
                 onError={(e) => {
                   console.error('Image failed to load');
                   console.log('Image src length:', imagePreview.length);
@@ -355,9 +371,6 @@ function EditArticle() {
                   console.log('Image loaded successfully');
                 }}
               />
-              <div className="edit-article-image-preview-label">
-                Current Image Preview
-              </div>
             </div>
           )}
 
@@ -422,25 +435,18 @@ function EditArticle() {
           </div>
         )}
 
-        {showSuccessModal && (
-          <div className="edit-article-modal-overlay">
-            <div className="edit-article-success-modal">
-              <FiCheckCircle size={64} color="#00BCD4" />
-              <h3>Article Updated!</h3>
-              <p>Redirecting to article page...</p>
-            </div>
-          </div>
-        )}
-
-        {showErrorModal && (
-          <div className="edit-article-modal-overlay" onClick={() => setShowErrorModal(false)}>
-            <div className="edit-article-error-modal" onClick={(e) => e.stopPropagation()}>
-              <FiAlertCircle size={64} color="#E34234" />
-              <h3>Error</h3>
-              <p>{errorMessage}</p>
-              <button className="edit-article-btn-close" onClick={() => setShowErrorModal(false)}>
-                Close
+        {showModal && (
+          <div className="edit-article-modal-overlay" onClick={closeModal}>
+            <div className={`edit-article-modal ${modalType}`} onClick={(e) => e.stopPropagation()}>
+              <button className="edit-article-modal-close" onClick={closeModal}>
+                <FiX />
               </button>
+              {modalType === 'success' && <FiCheckCircle size={64} color="#00BCD4" />}
+              {(modalType === 'error' || modalType === 'token_invalid' || modalType === 'not_admin') && (
+                <FiXCircle size={64} color="#E34234" />
+              )}
+              <h3>{modalType === 'success' ? 'Success!' : 'Error'}</h3>
+              <p>{modalMessage}</p>
             </div>
           </div>
         )}
