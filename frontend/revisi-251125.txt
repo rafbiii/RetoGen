@@ -1,0 +1,46 @@
+Navbar:
+- warna jangan hitam, tapi abu abu
+- ikut viewpoint user, jangan diam diatas
+- icon darkmode / lightmode harus tetap sama antar page, kalau darkmode di landing page maka tetap lightmode di login page
+- tombol "Back" (seperti pada login dan sign up) seharusnya tidak menggeser logo retogen
+
+Landing Page:
+- bagian bawah jangan warna hitam
+- ubah "© 2024 Retogen. All rights reserved." jadi "© 2026 Retogen. All rights reserved."
+- lightmode terlalu cerah, buat background lebih gelap
+- lightmode tambah grid background seperti darkmode
+
+SignUp Page:
+- pada darkmode (lightmode ga terlalu keliatan), tulisan "or" di bagian bawah, atasnya "Already have an account? Sign in", pada tulisan "or" beri background yang lebih gelap agar tidak terlihat horizontal line
+
+Login Page:
+- pada darkmode (lightmode ga terlalu keliatan), tulisan "or" di bagian bawah, atasnya "Already have an account? Sign in", pada tulisan "or" beri background yang lebih gelap agar tidak terlihat horizontal line
+- loading saat melakukan sign up / login muncul icon aneh untuk loading, ganti icon login biasa
+
+Main Page:
+- pindah tombol "Add Article" di sebelah tombol filter
+- tombol "Add Article" dikurangi warnanya, icon saja yang berwarna
+- perluas search bar dan buat rata kiri
+- hilangkan teks filter (hanya muncul opsi filter kalau di klik
+- tombol user dihilangkan nama usernya, cukup icon
+
+(Admin) Add Article Page:
+- tombol "Browse" di buat abu abu dan styling mirip komponen lainnya
+- ubah warna "publish article" sebagai biru muda
+- input bar title di perluas, category diperkecil
+- tombol back di hapus, harusnya muncul di navbar aja
+- tambahkan navbar, ada tombol back dan tombol akun
+- tag jadikan warna orange, samakan dengan tag pada main page
+- tombol "Add Article", "Delete Article", dan "Report Article" dikurangi warnanya, icon saja yang berwarna
+
+(Admin) Edit Article Page:
+- tombol "Browse" di buat abu abu dan styling mirip komponen lainnya
+- ubah warna "publish article" sebagai biru muda
+- input bar title di perluas, category diperkecil
+- tombol back di hapus, harusnya muncul di navbar aja
+- tambahkan navbar, ada tombol back dan tombol akun
+- tag jadikan warna orange, samakan dengan tag pada main page
+- tombol "Add Article", "Delete Article", dan "Report Article" dikurangi warnanya, icon saja yang berwarna
+
+(Admin) Delete Article Pop-up: 
+- icon tempat sampah saat melakukan delete di geser kebawah agar posisinya sesuai

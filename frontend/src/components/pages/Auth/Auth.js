@@ -292,6 +292,7 @@ function Auth() {
 
   return (
     <>
+      <div className="grid-background"></div>
       <div className="bg-shape-1"></div>
       <div className="bg-shape-2"></div>
       <div className="bg-shape-3"></div>
@@ -430,9 +431,7 @@ function Auth() {
                 disabled={loading}
               >
                 {loading ? (
-                  <span className="loading-spinner">
-                    {isLogin ? 'Signing in...' : 'Creating account...'}
-                  </span>
+                  isLogin ? 'Signing in' : 'Creating account'
                 ) : (
                   isLogin ? 'Sign In' : 'Create Account'
                 )}

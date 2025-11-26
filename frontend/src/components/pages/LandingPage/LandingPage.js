@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../common/Navbar/Navbar';
 import { FiSearch, FiUsers, FiShield, FiZap, FiLock, FiBarChart2 } from 'react-icons/fi';
@@ -7,10 +7,40 @@ import { initializeTheme } from '../../../services/themeUtils';
 
 function LandingPage() {
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const [selectedLaptop, setSelectedLaptop] = useState(null);
 
   useEffect(() => {
     initializeTheme();
   }, []);
+  
+  const laptopDetails = {
+    1: {
+      title: "Ultralight Silver Laptop",
+      description: "A slim silver notebook featuring a minimalist keyboard layout and a vibrant, colorful display.",
+      image: "/figures/landingpage_showcase_1.png"
+    },
+    2: {
+      title: "Slim Silver Productivity Laptop",
+      description: "A sleek silver notebook with a clean keyboard layout and a bright Windows interface displayed on its screen.",
+      image: "/figures/landingpage_showcase_2.png"
+    },
+    3: {
+      title: "RGB Gaming Laptop",
+      description: "A black performance-focused notebook featuring a vivid RGB keyboard and a bold, neon-themed display.",
+      image: "/figures/landingpage_showcase_3.png"
+    }
+  };
+
+  const handleShowcaseClick = (laptopId) => {
+    setSelectedLaptop(laptopDetails[laptopId]);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedLaptop(null);
+  };
 
   return (
     <>
@@ -18,6 +48,10 @@ function LandingPage() {
       <div className="bg-shape-1"></div>
       <div className="bg-shape-2"></div>
       <div className="bg-shape-3"></div>
+      <div className="bg-shape-4"></div>
+      <div className="bg-shape-5"></div>
+      <div className="bg-shape-6"></div>
+      <div className="bg-shape-7"></div>
       
       <Navbar />
 
@@ -36,19 +70,46 @@ function LandingPage() {
           </div>
         </div>
 
-        {/* Showcase Section */}
         <div className="showcase-section">
           <div className="showcase-decorations">
             <div className="showcase-circle circle-1"></div>
             <div className="showcase-circle circle-2"></div>
             <div className="showcase-circle circle-3"></div>
           </div>
-          <div className="showcase-image-container">
-            <img 
-              src="/figures/landingpage_showcase.png" 
-              alt="Retogen Platform Showcase" 
-              className="showcase-image"
-            />
+          <div className="showcase-carousel">
+            <div className="showcase-card" onClick={() => handleShowcaseClick(1)}>
+              <div className="showcase-image-container">
+                <img 
+                  src={laptopDetails[1].image}
+                  alt={laptopDetails[1].title}
+                  className="showcase-image"
+                />
+              </div>
+              <h3 className="showcase-title">{laptopDetails[1].title}</h3>
+              <p className="showcase-description">{laptopDetails[1].description}</p>
+            </div>
+            <div className="showcase-card" onClick={() => handleShowcaseClick(2)}>
+              <div className="showcase-image-container">
+                <img 
+                  src={laptopDetails[2].image}
+                  alt={laptopDetails[2].title}
+                  className="showcase-image"
+                />
+              </div>
+              <h3 className="showcase-title">{laptopDetails[2].title}</h3>
+              <p className="showcase-description">{laptopDetails[2].description}</p>
+            </div>
+            <div className="showcase-card" onClick={() => handleShowcaseClick(3)}>
+              <div className="showcase-image-container">
+                <img 
+                  src={laptopDetails[3].image}
+                  alt={laptopDetails[3].title}
+                  className="showcase-image"
+                />
+              </div>
+              <h3 className="showcase-title">{laptopDetails[3].title}</h3>
+              <p className="showcase-description">{laptopDetails[3].description}</p>
+            </div>
           </div>
         </div>
 
@@ -106,6 +167,26 @@ function LandingPage() {
         </div>
       </div>
 
+      {showModal && selectedLaptop && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>×</button>
+            <div className="modal-image-container">
+              <img 
+                src={selectedLaptop.image} 
+                alt={selectedLaptop.title}
+                className="modal-image"
+              />
+            </div>
+            <h2 className="modal-title">{selectedLaptop.title}</h2>
+            <p className="modal-description">{selectedLaptop.description}</p>
+            <button className="btn btn-register" onClick={() => navigate('/register')}>
+              Join to See More
+            </button>
+          </div>
+        </div>
+      )}
+
       <footer>
         <div className="footer-content">
           <div className="footer-section">
@@ -115,30 +196,30 @@ function LandingPage() {
           <div className="footer-section">
             <h3>Quick Links</h3>
             <ul className="footer-links">
-              <li><a href="#" className="footer-link">Home</a></li>
-              <li><a href="#" className="footer-link">Reviews</a></li>
-              <li><a href="#" className="footer-link">Community</a></li>
-              <li><a href="#" className="footer-link">About Us</a></li>
+              <li><button className="footer-link" onClick={() => navigate('/')}>Home</button></li>
+              <li><button className="footer-link" onClick={() => navigate('/reviews')}>Reviews</button></li>
+              <li><button className="footer-link" onClick={() => navigate('/community')}>Community</button></li>
+              <li><button className="footer-link" onClick={() => navigate('/about')}>About Us</button></li>
             </ul>
           </div>
           <div className="footer-section">
             <h3>Support</h3>
             <ul className="footer-links">
-              <li><a href="#" className="footer-link">Help Center</a></li>
-              <li><a href="#" className="footer-link">Contact Us</a></li>
-              <li><a href="#" className="footer-link">FAQs</a></li>
+              <li><button className="footer-link" onClick={() => navigate('/help')}>Help Center</button></li>
+              <li><button className="footer-link" onClick={() => navigate('/contact')}>Contact Us</button></li>
+              <li><button className="footer-link" onClick={() => navigate('/faq')}>FAQs</button></li>
             </ul>
           </div>
           <div className="footer-section">
             <h3>Legal</h3>
             <ul className="footer-links">
-              <li><a href="#" className="footer-link">Privacy Policy</a></li>
-              <li><a href="#" className="footer-link">Terms of Service</a></li>
+              <li><button className="footer-link" onClick={() => navigate('/privacy')}>Privacy Policy</button></li>
+              <li><button className="footer-link" onClick={() => navigate('/terms')}>Terms of Service</button></li>
             </ul>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© 2024 Retogen. All rights reserved.</p>
+          <p>© 2026 Retogen. All rights reserved.</p>
         </div>
       </footer>
     </>
