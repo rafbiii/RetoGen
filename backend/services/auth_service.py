@@ -6,7 +6,7 @@ from datetime import datetime
 class AuthService:
     @staticmethod
     async def register(data):
-        existing_email = await db.users.find_one({"email": data.email})
+        existing_email = await db.user.find_one({"email": data.email})
         if existing_email:
             return {"confirmation": "email already registered"}
 
@@ -23,13 +23,13 @@ class AuthService:
             "updated_at": now,
         }
 
-        await db.users.insert_one(new_user)
+        await db.user.insert_one(new_user)
         return {"confirmation": "register successful"}
 
     @staticmethod
     async def login(data):
         try:
-            users = await db.users.find_one({"email": data.email})
+            users = await db.user.find_one({"email": data.email})
         except Exception:
             return {"confirmation": "backend error"}
 
@@ -53,7 +53,7 @@ class AuthService:
     @staticmethod
     async def is_admin(payload):
         try:
-            user = await db.users.find_one({"email": payload.get("email")})
+            user = await db.user.find_one({"email": payload.get("email")})
             if not user:
                 return False
             return user.get("role") == "admin"
