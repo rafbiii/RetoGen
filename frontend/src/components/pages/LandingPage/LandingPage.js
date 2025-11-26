@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../common/Navbar/Navbar';
 import { FiSearch, FiUsers, FiShield, FiZap, FiLock, FiBarChart2 } from 'react-icons/fi';
