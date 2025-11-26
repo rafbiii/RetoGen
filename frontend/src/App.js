@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LandingPage from './components/landingPage';
-import Auth from './components/auth';
-import MainPage from './components/mainPage';
-import Account from './components/account';
-import DetailView from './components/detailView';
-import AdminWrite from './components/adminAddArticle';
-import AdminEdit from './components/adminEditArticle';
-import './styles/styles.css';
+import LandingPage from './components/pages/LandingPage/LandingPage';
+import Auth from './components/pages/Auth/Auth';
+import MainPage from './components/pages/MainPage/MainPage';
+import Account from './components/pages/Account/Account';
+import DetailView from './components/pages/DetailView/DetailView';
+import AdminWrite from './components/admin/AddArticle/AddArticle';
+import AdminEdit from './components/admin/EditArticle/EditArticle';
+import './styles/global.css';
 
 function App() {
   return (

@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from './navbar';
+import Navbar from '../../common/Navbar/Navbar';
 import { FiSearch, FiUsers, FiShield, FiZap, FiLock, FiBarChart2 } from 'react-icons/fi';
+import './LandingPage.css';
+import { initializeTheme } from '../../../services/themeUtils';
 
 function LandingPage() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    initializeTheme();
+  }, []);
+
   return (
     <>
+      <div className="grid-background"></div>
       <div className="bg-shape-1"></div>
       <div className="bg-shape-2"></div>
       <div className="bg-shape-3"></div>
@@ -26,6 +33,22 @@ function LandingPage() {
             <div className="badge">100% Consumer Driven</div>
             <div className="badge">Reliable Server</div>
             <div className="badge">Authentic Reviews</div>
+          </div>
+        </div>
+
+        {/* Showcase Section */}
+        <div className="showcase-section">
+          <div className="showcase-decorations">
+            <div className="showcase-circle circle-1"></div>
+            <div className="showcase-circle circle-2"></div>
+            <div className="showcase-circle circle-3"></div>
+          </div>
+          <div className="showcase-image-container">
+            <img 
+              src="/figures/landingpage_showcase.png" 
+              alt="Retogen Platform Showcase" 
+              className="showcase-image"
+            />
           </div>
         </div>
 

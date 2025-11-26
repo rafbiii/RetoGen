@@ -1,36 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiSun, FiMoon, FiUser, FiSearch, FiFilter, FiPlus } from 'react-icons/fi';
-import { fetchMainPageData, transformArticles } from '../services/mainPageService';
-import { verifyAdmin } from '../services/verificationService';
-import '../styles/MainPage.css';
+import { 
+  FiSearch, 
+  FiPlus, 
+  FiChevronDown,
+  FiFilter
+} from 'react-icons/fi';
+import { fetchMainPageData, transformArticles } from '../../../services/MainPageService';
+import { verifyAdmin } from '../../../services/VerificationService';
+import { initializeTheme } from '../../../services/themeUtils';
+import Navbar from '../../common/Navbar/Navbar';
+import './MainPage.css';
 
 function MainPage() {
   const navigate = useNavigate();
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('newest');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const [username, setUsername] = useState('');
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // Load dark mode preference from localStorage
+  // Sort options tanpa icon
+  const sortOptions = [
+    { value: 'newest', label: 'Newest' },
+    { value: 'oldest', label: 'Oldest' },
+    { value: 'popular', label: 'Popular' }
+  ];
+
+  // Close dropdown when clicking outside
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      setIsDarkMode(true);
-      document.body.classList.add('dark-mode');
-    }
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const toggleTheme = () => {
-    const newTheme = !isDarkMode;
-    setIsDarkMode(newTheme);
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-  };
+  // Initialize theme on component mount
+  useEffect(() => {
+    initializeTheme();
+  }, []);
 
   useEffect(() => {
     const loadMainPageData = async () => {
@@ -47,17 +63,17 @@ function MainPage() {
         const verifyResult = await verifyAdmin(token);
 
         if (!verifyResult.success) {
-          if (verifyResult.error === 'token_invalid') {
+          if (verifyResult.error === 'token invalid') {
             localStorage.removeItem('token');
             alert('Token invalid. Please login again.');
             navigate('/login');
             return;
           }
 
-          if (verifyResult.error === 'backend_error') {
+          if (verifyResult.error === 'backend error') {
             console.warn('Backend error during admin verification');
           }
-
+          
           setIsAdmin(false);
         } else {
           setIsAdmin(verifyResult.isAdmin);
@@ -140,6 +156,18 @@ function MainPage() {
     return filtered;
   };
 
+  // Handle sort selection
+  const handleSortSelect = (value) => {
+    setSortBy(value);
+    setIsDropdownOpen(false);
+  };
+
+  // Get current sort label
+  const getCurrentSortLabel = () => {
+    const option = sortOptions.find(opt => opt.value === sortBy);
+    return option ? option.label : 'Sort';
+  };
+
   // Loading state
   if (loading) {
     return (
@@ -148,16 +176,7 @@ function MainPage() {
         <div className="bg-shape-2"></div>
         <div className="bg-shape-3"></div>
 
-        <nav className="navbar">
-          <div className="nav-inner">
-            <div className="logo">
-              <div className="anteater-icon">
-                <img src="/figures/logo circle no bg.png" alt="Retogen Logo" />
-              </div>
-              <span>Retogen</span>
-            </div>
-          </div>
-        </nav>
+        <Navbar showAccount={true} />
 
         <div className="container">
           <div className="loading-message">
@@ -176,16 +195,7 @@ function MainPage() {
         <div className="bg-shape-2"></div>
         <div className="bg-shape-3"></div>
 
-        <nav className="navbar">
-          <div className="nav-inner">
-            <div className="logo">
-              <div className="anteater-icon">
-                <img src="/figures/logo circle no bg.png" alt="Retogen Logo" />
-              </div>
-              <span>Retogen</span>
-            </div>
-          </div>
-        </nav>
+        <Navbar showAccount={true} />
 
         <div className="container">
           <div className="error-message">
@@ -207,31 +217,7 @@ function MainPage() {
       <div className="bg-shape-2"></div>
       <div className="bg-shape-3"></div>
 
-      <nav className="navbar">
-        <div className="nav-inner">
-          <div className="logo" onClick={() => navigate('/main')} style={{ cursor: 'pointer' }}>
-            <div className="anteater-icon">
-              <img src="/figures/logo circle no bg.png" alt="Retogen Logo" />
-            </div>
-            <span>Retogen</span>
-          </div>
-          <div className="nav-buttons">
-            {isAdmin && (
-              <button className="btn-add-article" onClick={() => navigate('/admin/write')}>
-                <FiPlus size={18} />
-                <span>Add Article</span>
-              </button>
-            )}
-            <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-              {isDarkMode ? <FiMoon size={20} /> : <FiSun size={20} />}
-            </button>
-            <button className="btn-account" onClick={() => navigate('/account')}>
-              <FiUser size={18} />
-              <span>{username || 'User'}</span>
-            </button>
-          </div>
-        </div>
-      </nav>
+      <Navbar showAccount={true} />
 
       <div className="container">
         <div className="hero-section">
@@ -252,17 +238,43 @@ function MainPage() {
             />
           </div>
 
-          <div className="sort-box">
-            <FiFilter className="filter-icon" size={18} />
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              aria-label="Sort articles"
-            >
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
-              <option value="popular">Most Popular</option>
-            </select>
+          <div className="filter-actions">
+            {/* Modern Dropdown */}
+            <div className="sort-box" ref={dropdownRef}>
+              <button
+                className={`sort-button ${isDropdownOpen ? 'active' : ''}`}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                aria-label="Sort options"
+              >
+                <span className="sort-label">
+                  <FiFilter size={16} />
+                  {getCurrentSortLabel()}
+                </span>
+                <FiChevronDown 
+                  className={`chevron-icon ${isDropdownOpen ? 'open' : ''}`} 
+                  size={16} 
+                />
+              </button>
+
+              <div className={`sort-dropdown ${isDropdownOpen ? 'open' : ''}`}>
+                {sortOptions.map((option) => (
+                  <div
+                    key={option.value}
+                    className={`sort-option ${sortBy === option.value ? 'selected' : ''}`}
+                    onClick={() => handleSortSelect(option.value)}
+                  >
+                    <span className="option-text">{option.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {isAdmin && (
+              <button className="btn-add-article" onClick={() => navigate('/admin/write')}>
+                <FiPlus size={18} />
+                <span className="btn-add-text">Article</span>
+              </button>
+            )}
           </div>
         </div>
 
