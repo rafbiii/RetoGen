@@ -12,9 +12,9 @@ router = APIRouter()
 @router.post("/add")
 async def add_comment(req: AddCommentRequest):
 
-    # --- VALIDATE COMMENT LENGTH ---
+    # --- VALIDATE COMMENT CONTENT LENGTH ---
     if not (1 <= len(req.comment_content) <= 8192):
-        return {"confirmation": "backend error"}  # sesuai setup, tidak ada pesan lain
+        return {"confirmation": "backend error"}
 
     # --- VERIFY TOKEN ---
     payload = await AuthService.verify_token(req.token)
@@ -33,13 +33,31 @@ async def add_comment(req: AddCommentRequest):
     owner_id = str(user["_id"])
 
     # ========================================================
-    # 0) CEK ARTICLE EXISTS *SEBELUM INSERT COMMENT*
+    # 1) CEK ARTICLE EXISTS *SEBELUM APA PUN*
     # ========================================================
     article = await ArticleService.fetch_article(req.article_id)
     if article is None:
         return {"confirmation": "backend error"}
 
-    # --- INSERT COMMENT (setelah yakin article valid) ---
+    # ========================================================
+    # 2) VALIDASI PARENT COMMENT (Jika diisi)
+    # ========================================================
+    if req.parent_comment_id not in (None, "", "null"):
+
+        try:
+            parent = await db.comments.find_one(
+                {"_id": ObjectId(req.parent_comment_id)}
+            )
+        except:
+            parent = None
+
+        if parent is None:
+            # ❗ Parent tidak ditemukan → JANGAN INSERT KOMENTAR
+            return {"confirmation": "backend error"}
+
+    # ========================================================
+    # 3) INSERT COMMENT (hanya setelah semua valid)
+    # ========================================================
     new_comment_id = await CommentService.add_comment(
         article_id=req.article_id,
         parent_comment_id=req.parent_comment_id if req.parent_comment_id else None,
@@ -50,10 +68,14 @@ async def add_comment(req: AddCommentRequest):
     if not new_comment_id:
         return {"confirmation": "backend error"}
 
-    # --- DETERMINE USERCLASS ---
+    # ========================================================
+    # 4) LANJUT FETCH ULANG & KEMBALIKAN RESPONSE FULL
+    # (sama seperti sebelumnya)
+    # ========================================================
+
     userclass = "admin" if user.get("role") == "admin" else "user"
 
-    # --- FORMAT IMAGE ---
+    # convert image
     image_base64 = None
     if article.get("article_image"):
         try:
@@ -61,7 +83,7 @@ async def add_comment(req: AddCommentRequest):
         except:
             image_base64 = None
 
-    # --- FETCH COMMENTS ---
+    # fetch comments
     comments_raw = await CommentService.get_comments(req.article_id)
     if comments_raw is None:
         return {"confirmation": "backend error"}
@@ -69,18 +91,18 @@ async def add_comment(req: AddCommentRequest):
     comments = []
     for c in comments_raw:
         try:
-            owner = await db.users.find_one({"_id": ObjectId(c["owner_id"])})
+            u = await db.users.find_one({"_id": ObjectId(c["owner_id"])})
         except:
-            owner = None
+            u = None
 
         comments.append({
             "comment_id": str(c["_id"]),
             "parent_comment_id": c.get("parent_comment_id"),
-            "owner": owner["username"] if owner else "Unknown",
+            "owner": u["username"] if u else "Unknown",
             "comment_content": c["comment_content"]
         })
 
-    # --- FETCH RATINGS ---
+    # fetch ratings
     ratings_raw = await ArticleService.get_ratings(req.article_id)
     if ratings_raw is None:
         return {"confirmation": "backend error"}
@@ -88,17 +110,16 @@ async def add_comment(req: AddCommentRequest):
     ratings = []
     for r in ratings_raw:
         try:
-            owner = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
+            u = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
         except:
-            owner = None
+            u = None
 
         ratings.append({
             "rating_id": str(r["_id"]),
-            "owner": owner["username"] if owner else "Unknown",
+            "owner": u["username"] if u else "Unknown",
             "rating_value": r["rating_value"]
         })
 
-    # --- FINAL RESPONSE ---
     return {
         "confirmation": "successful",
         "userclass": userclass,
@@ -109,4 +130,5 @@ async def add_comment(req: AddCommentRequest):
         "comments": comments,
         "ratings": ratings
     }
+
 
