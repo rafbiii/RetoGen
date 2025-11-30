@@ -1,5 +1,6 @@
 from db.connection import db
 from datetime import datetime
+from bson import ObjectId
 
 class CommentService:
 
@@ -7,7 +8,7 @@ class CommentService:
     async def add_comment(article_id, parent_comment_id, owner_id, comment_content):
         try:
             data = {
-                "article_id": article_id,
+                "article_id": ObjectId(article_id),
                 "owner_id": owner_id,
                 "parent_comment_id": parent_comment_id,
                 "comment_content": comment_content,

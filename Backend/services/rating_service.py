@@ -8,8 +8,8 @@ class RatingService:
     async def add_rating(article_id, owner, rating_value):
         try:
             data = {
-                "article_id": ObjectId(article_id),
-                "owner": owner,  # username
+                "article_id": article_id,   # ← STRING
+                "owner": owner,             # username
                 "rating_value": rating_value,
                 "created_at": datetime.utcnow(),
             }
@@ -22,8 +22,8 @@ class RatingService:
     async def get_rating_by_user(article_id, owner):
         try:
             return await db.rating.find_one({
-                "article_id": ObjectId(article_id),
-                "owner": owner  # username
+                "article_id": article_id,   # ← STRING
+                "owner": owner
             })
         except:
             return None
@@ -31,7 +31,7 @@ class RatingService:
     @staticmethod
     async def get_ratings(article_id):
         try:
-            return await db.rating.find({"article_id": ObjectId(article_id)}).to_list(None)
+            return await db.rating.find({"article_id": article_id}).to_list(None)
         except:
             return None
 
@@ -45,6 +45,6 @@ class RatingService:
     @staticmethod
     async def get_comments(article_id):
         try:
-            return await db.comments.find({"article_id": ObjectId(article_id)}).to_list(None)
+            return await db.comments.find({"article_id": article_id}).to_list(None)
         except:
             return None

@@ -33,6 +33,9 @@ async def add_rating(req: AddRatingSchema):
     if article is None:
         return {"confirmation": "backend error"}
 
+    if article.get("is_deleted") == True:
+        return {"confirmation": "backend error"}
+    
     # 5) CHECK EXISTING RATING
     already = await RatingService.get_rating_by_user(
         article_id=req.article_id,
@@ -69,10 +72,13 @@ async def add_rating(req: AddRatingSchema):
 
     comments = []
     for c in comments_raw:
+        user = await db.users.find_one({"_id": ObjectId(c["owner_id"])})
+        username = user["username"] if user else "Unknown"
+
         comments.append({
             "comment_id": str(c["_id"]),
             "parent_comment_id": c.get("parent_comment_id"),
-            "owner": c["owner"],  # username langsung
+            "owner": username,
             "comment_content": c["comment_content"]
         })
 
