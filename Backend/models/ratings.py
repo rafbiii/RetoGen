@@ -1,10 +1,7 @@
-from datetime import datetime
+from pydantic import BaseModel
+from typing import Literal
 
-def rating_document():
-    return {
-        "rating_id": None,
-        "article_id": None,
-        "owner": None,             # username
-        "rating_value": None,      # int 1-5
-        "created_at": datetime.utcnow()
-    }
+class Rating(BaseModel):
+    article_id: str
+    owner_id: str
+    rating_value: Literal[1, 2, 3, 4, 5]

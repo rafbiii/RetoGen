@@ -1,32 +1,50 @@
-from bson import ObjectId
-from datetime import datetime
 from db.connection import db
-from models.ratings import rating_document
+from datetime import datetime
+from bson import ObjectId
 
 class RatingService:
 
     @staticmethod
-    async def add_rating(user_payload, article_id, rating_value):
+    async def add_rating(article_id, owner, rating_value):
         try:
-            rating = rating_document()
-            rating["rating_id"] = str(ObjectId())
-            rating["article_id"] = article_id
-            rating["owner"] = user_payload.get("username")  # username
-            rating["rating_value"] = rating_value
-            rating["created_at"] = datetime.utcnow()
+            data = {
+                "article_id": ObjectId(article_id),
+                "owner": owner,  # username
+                "rating_value": rating_value,
+                "created_at": datetime.utcnow(),
+            }
+            result = await db.rating.insert_one(data)
+            return str(result.inserted_id)
+        except:
+            return None
 
-            await db.ratings.insert_one(rating)
-            return True
-
-        except Exception as e:
-            print("ADD RATING ERROR:", e)
-            return False
-
+    @staticmethod
+    async def get_rating_by_user(article_id, owner):
+        try:
+            return await db.rating.find_one({
+                "article_id": ObjectId(article_id),
+                "owner": owner  # username
+            })
+        except:
+            return None
 
     @staticmethod
     async def get_ratings(article_id):
         try:
-            cursor = db.ratings.find({"article_id": article_id})
-            return await cursor.to_list(length=None)
+            return await db.rating.find({"article_id": ObjectId(article_id)}).to_list(None)
+        except:
+            return None
+
+    @staticmethod
+    async def fetch_article(article_id):
+        try:
+            return await db.articles.find_one({"_id": ObjectId(article_id)})
+        except:
+            return None
+
+    @staticmethod
+    async def get_comments(article_id):
+        try:
+            return await db.comments.find({"article_id": ObjectId(article_id)}).to_list(None)
         except:
             return None
