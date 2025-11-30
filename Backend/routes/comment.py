@@ -12,16 +12,16 @@ router = APIRouter()
 @router.post("/add")
 async def add_comment(req: AddCommentRequest):
 
-    # --- VALIDASI COMMENT CONTENT LENGTH ---
+    # --- VALIDATE COMMENT LENGTH ---
     if not (1 <= len(req.comment_content) <= 8192):
-        return {"confirmation": "backend error"}  # sesuai setup → bukan message baru
-    
+        return {"confirmation": "backend error"}  # sesuai setup, tidak ada pesan lain
+
     # --- VERIFY TOKEN ---
     payload = await AuthService.verify_token(req.token)
     if payload is None:
         return {"confirmation": "token invalid"}
 
-    # --- GET USER DATA ---
+    # --- GET USER ---
     try:
         user = await db.users.find_one({"email": payload.get("email")})
     except:
@@ -32,20 +32,22 @@ async def add_comment(req: AddCommentRequest):
 
     owner_id = str(user["_id"])
 
-    # --- INSERT COMMENT ---
+    # ========================================================
+    # 0) CEK ARTICLE EXISTS *SEBELUM INSERT COMMENT*
+    # ========================================================
+    article = await ArticleService.fetch_article(req.article_id)
+    if article is None:
+        return {"confirmation": "backend error"}
+
+    # --- INSERT COMMENT (setelah yakin article valid) ---
     new_comment_id = await CommentService.add_comment(
         article_id=req.article_id,
-        parent_comment_id=req.parent_comment_id,
+        parent_comment_id=req.parent_comment_id if req.parent_comment_id else None,
         owner_id=owner_id,
         comment_content=req.comment_content
     )
 
     if not new_comment_id:
-        return {"confirmation": "backend error"}
-
-    # --- FETCH ARTICLE ---
-    article = await ArticleService.fetch_article(req.article_id)
-    if article is None:
         return {"confirmation": "backend error"}
 
     # --- DETERMINE USERCLASS ---
@@ -64,14 +66,14 @@ async def add_comment(req: AddCommentRequest):
     if comments_raw is None:
         return {"confirmation": "backend error"}
 
-    formatted_comments = []
+    comments = []
     for c in comments_raw:
         try:
             owner = await db.users.find_one({"_id": ObjectId(c["owner_id"])})
         except:
             owner = None
 
-        formatted_comments.append({
+        comments.append({
             "comment_id": str(c["_id"]),
             "parent_comment_id": c.get("parent_comment_id"),
             "owner": owner["username"] if owner else "Unknown",
@@ -83,20 +85,20 @@ async def add_comment(req: AddCommentRequest):
     if ratings_raw is None:
         return {"confirmation": "backend error"}
 
-    formatted_ratings = []
+    ratings = []
     for r in ratings_raw:
         try:
             owner = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
         except:
             owner = None
 
-        formatted_ratings.append({
+        ratings.append({
             "rating_id": str(r["_id"]),
             "owner": owner["username"] if owner else "Unknown",
             "rating_value": r["rating_value"]
         })
 
-    # --- FINAL SUCCESS RESPONSE (SESUAI SETUP) ---
+    # --- FINAL RESPONSE ---
     return {
         "confirmation": "successful",
         "userclass": userclass,
@@ -104,6 +106,7 @@ async def add_comment(req: AddCommentRequest):
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],
         "article_image": image_base64,
-        "comments": formatted_comments,
-        "ratings": formatted_ratings
+        "comments": comments,
+        "ratings": ratings
     }
+
