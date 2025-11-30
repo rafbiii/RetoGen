@@ -2,7 +2,6 @@ from db.connection import db
 from bson import ObjectId, Binary
 from utils.image_validator import validate_image_bytes
 from datetime import datetime
-import uuid
 
 class ArticleService:
     
@@ -65,10 +64,20 @@ class ArticleService:
             result = await db.articles.insert_one(doc)
 
             if result.inserted_id:
-                return str(result.inserted_id)   # ⬅️ ini ID dari MongoDB
+                return str(result.inserted_id)
 
             return None
 
         except Exception as e:
             print("ADD ARTICLE ERROR:", e)
+            return None
+
+    # ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    # Tambahan: get_ratings → DIPAKAI DI add_comment
+    # ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    @staticmethod
+    async def get_ratings(article_id: str):
+        try:
+            return await db.ratings.find({"article_id": article_id}).to_list(None)
+        except:
             return None
