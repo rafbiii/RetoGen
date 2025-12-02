@@ -117,7 +117,7 @@ async def view_article(req: ViewArticleRequest):
         except:
             image_base64 = None
 
-    # ===== Fetch Comments =====
+    # fetch comments
     comments_raw = await CommentService.get_comments(req.article_id)
     if comments_raw is None:
         return {"confirmation": "backend error"}
@@ -125,32 +125,32 @@ async def view_article(req: ViewArticleRequest):
     comments = []
     for c in comments_raw:
         try:
-            user = await db.user.find_one({"_id": ObjectId(c["owner_id"])})
+            u = await db.user.find_one({"_id": ObjectId(c["owner_id"])})
         except:
-            user = None
+            u = None
 
         comments.append({
             "comment_id": str(c["_id"]),
             "parent_comment_id": c.get("parent_comment_id"),
-            "owner": user["username"] if user else "Unknown",
+            "owner": u["username"] if u else "Unknown",
             "comment_content": c["comment_content"]
         })
 
-    # ===== Fetch Ratings (PASTI BENAR) =====
-    ratings_raw = await ArticleService.get_ratings(req.article_id)
+    # ---- FETCH RATINGS ----
+    ratings_raw = await RatingService.get_ratings(req.article_id)
     if ratings_raw is None:
         return {"confirmation": "backend error"}
 
     ratings = []
     for r in ratings_raw:
         try:
-            user = await db.user.find_one({"_id": ObjectId(r["owner_id"])})
+            u = await db.user.find_one({"_id": ObjectId(r["owner_id"])})
         except:
-            user = None
+            u = None
 
         ratings.append({
             "rating_id": str(r["_id"]),
-            "owner": user["username"] if user else "Unknown",
+            "owner": u["username"] if u else "Unknown",
             "rating_value": r["rating_value"]
         })
 
