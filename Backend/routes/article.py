@@ -104,6 +104,8 @@ async def view_article(req: ViewArticleRequest):
     if payload is None:
         return {"confirmation": "token invalid"}
 
+    user_email = payload.get("email")
+    user = await db.user.find_one({"email": user_email})
     is_admin = await AuthService.is_admin(payload)
     userclass = "admin" if is_admin else "user"
 
