@@ -9,7 +9,7 @@ class RatingService:
         try:
             data = {
                 "article_id": article_id,
-                "owner_id": ObjectId(owner_id),
+                "owner_id": owner_id,
                 "rating_value": rating_value,
                 "created_at": datetime.utcnow()
             }
@@ -24,10 +24,11 @@ class RatingService:
         try:
             return await db.rating.find_one({
                 "article_id": article_id,
-                "owner_id": ObjectId(owner_id)
+                "owner_id": owner_id
             })
         except:
             return None
+
 
 
     @staticmethod

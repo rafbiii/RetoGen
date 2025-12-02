@@ -106,20 +106,15 @@ async def add_comment(req: AddCommentRequest):
         })
 
     # fetch ratings
-    ratings_raw = await ArticleService.get_ratings(req.article_id)
+    ratings_raw = await RatingService.get_ratings(req.article_id)
     if ratings_raw is None:
         return {"confirmation": "backend error"}
 
     ratings = []
     for r in ratings_raw:
-        try:
-            u = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
-        except:
-            u = None
-
         ratings.append({
             "rating_id": str(r["_id"]),
-            "owner": u["username"] if u else "Unknown",
+            "owner": r["owner"],
             "rating_value": r["rating_value"]
         })
 
@@ -133,6 +128,7 @@ async def add_comment(req: AddCommentRequest):
         "comments": comments,
         "ratings": ratings
     }
+
 
 @router.post("/edit/update")
 async def edit_comment(req: EditCommentRequest):
@@ -179,10 +175,13 @@ async def edit_comment(req: EditCommentRequest):
     except:
         return {"confirmation": "backend error"}
 
+    # fetch comments
+    comments_raw = await CommentService.get_comments(req.article_id)
+    if comments_raw is None:
+        return {"confirmation": "backend error"}
+
     comments = []
     for c in comments_raw:
-
-        # cari username dari owner_id
         try:
             u = await db.users.find_one({"_id": ObjectId(c["owner_id"])})
         except:
@@ -202,9 +201,14 @@ async def edit_comment(req: EditCommentRequest):
 
     ratings = []
     for r in ratings_raw:
+        try:
+            u = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
+        except:
+            u = None
+
         ratings.append({
             "rating_id": str(r["_id"]),
-            "owner": r["owner"],            # langsung username
+            "owner": u["username"] if u else "Unknown",
             "rating_value": r["rating_value"]
         })
 
@@ -230,7 +234,7 @@ async def edit_get_comment(req: EditCommentGetRequest):
 
     user_email = payload.get("email")
 
-    # dapatkan user untuk ambil owner_id
+    # dapatkan user untuk ambil owner_id + username
     try:
         user = await db.users.find_one({"email": user_email})
     except:
@@ -240,6 +244,7 @@ async def edit_get_comment(req: EditCommentGetRequest):
         return {"confirmation": "token invalid"}
 
     owner_id = str(user["_id"])
+    username = user.get("username", "")
 
     # ===== FETCH COMMENT =====
     try:
@@ -259,5 +264,6 @@ async def edit_get_comment(req: EditCommentGetRequest):
         "comment_id": str(comment["_id"]),
         "article_id": str(comment["article_id"]),
         "parent_comment_id": comment.get("parent_comment_id"),
-        "comment_content": comment.get("comment_content")
+        "comment_content": comment.get("comment_content"),
+        "oowner": username
     }

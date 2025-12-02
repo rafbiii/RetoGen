@@ -8,7 +8,7 @@ class CommentService:
     async def add_comment(article_id, parent_comment_id, owner_id, comment_content):
         try:
             data = {
-                "article_id": ObjectId(article_id),
+                "article_id": article_id,
                 "owner_id": owner_id,
                 "parent_comment_id": parent_comment_id,
                 "comment_content": comment_content,
@@ -37,7 +37,7 @@ class CommentService:
         try:
             comment = await db.comments.find_one({
                 "_id": ObjectId(comment_id),
-                "article_id": ObjectId(article_id),
+                "article_id": article_id,
                 "owner_id": owner_id
             })
         except:

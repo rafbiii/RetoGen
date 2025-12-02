@@ -95,14 +95,17 @@ async def add_rating(req: AddRatingSchema):
 
     ratings = []
     for r in ratings_raw:
-        user_owner = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
-        username_owner = user_owner["username"] if user_owner else "Unknown"
+        try:
+            u = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
+        except:
+            u = None
 
         ratings.append({
             "rating_id": str(r["_id"]),
-            "owner": username_owner,       # ← tampilkan username
+            "owner": u["username"] if u else "Unknown",
             "rating_value": r["rating_value"]
         })
+
 
 
 
@@ -133,17 +136,16 @@ async def edit_rating_get(req: EditRatingGetRequest):
         rating = await db.rating.find_one({
             "_id": ObjectId(req.rating_id),
             "article_id": req.article_id,
-            "owner_id": user["_id"]
+            "owner_id": str(user["_id"])
         })
 
         if not rating:
-            return {"confirmation": "backend error"}
+            return {"confirmation": "disini"}
 
-        # Convert ObjectId to string
         rating_data = {
             "rating_id": str(rating["_id"]),
             "article_id": rating["article_id"],
-            "owner_id": str(rating["owner_id"]),
+            "owner_id": rating["owner_id"],
             "rating_value": rating["rating_value"],
             "created_at": rating["created_at"]
         }
@@ -155,7 +157,8 @@ async def edit_rating_get(req: EditRatingGetRequest):
 
     except Exception as e:
         print("ERR:", e)
-        return {"confirmation": "backend error"}
+        return {"confirmation": "wkwk"}
+
 
 
 @router.post("/edit/update")
@@ -220,12 +223,17 @@ async def edit_rating_update(req: EditRatingUpdateRequest):
     ratings_raw = await RatingService.get_ratings(req.article_id)
     ratings = []
     for r in ratings_raw:
-        u = await db.users.find_one({"_id": r["owner_id"]})
+        try:
+            u = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
+        except:
+            u = None
+
         ratings.append({
             "rating_id": str(r["_id"]),
             "owner": u["username"] if u else "Unknown",
             "rating_value": r["rating_value"]
         })
+
 
     return {
         "confirmation": "successful",
