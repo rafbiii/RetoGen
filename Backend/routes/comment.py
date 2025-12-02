@@ -27,7 +27,7 @@ async def add_comment(req: AddCommentRequest):
 
     # --- GET USER ---
     try:
-        user = await db.users.find_one({"email": payload.get("email")})
+        user = await db.user.find_one({"email": payload.get("email")})
     except:
         return {"confirmation": "backend error"}
 
@@ -49,7 +49,7 @@ async def add_comment(req: AddCommentRequest):
     if req.parent_comment_id not in (None, "", "null"):
 
         try:
-            parent = await db.comments.find_one(
+            parent = await db.comment.find_one(
                 {"_id": ObjectId(req.parent_comment_id)}
             )
         except:
@@ -95,7 +95,7 @@ async def add_comment(req: AddCommentRequest):
     comments = []
     for c in comments_raw:
         try:
-            u = await db.users.find_one({"_id": ObjectId(c["owner_id"])})
+            u = await db.user.find_one({"_id": ObjectId(c["owner_id"])})
         except:
             u = None
 
@@ -114,7 +114,7 @@ async def add_comment(req: AddCommentRequest):
     ratings = []
     for r in ratings_raw:
         try:
-            u = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
+            u = await db.user.find_one({"_id": ObjectId(r["owner_id"])})
         except:
             u = None
 
@@ -127,6 +127,7 @@ async def add_comment(req: AddCommentRequest):
     return {
         "confirmation": "successful",
         "userclass": userclass,
+        "username": user["username"],
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],
@@ -145,7 +146,7 @@ async def edit_comment(req: EditCommentRequest):
         return {"confirmation": "token invalid"}
 
     user_email = payload.get("email")
-    user = await db.users.find_one({"email": user_email})
+    user = await db.user.find_one({"email": user_email})
     owner_id = str(user["_id"])
 
     if req.parent_comment_id:
@@ -154,7 +155,7 @@ async def edit_comment(req: EditCommentRequest):
         except:
             return {"confirmation": "backend error"}
 
-        parent_exists = await db.comments.find_one({
+        parent_exists = await db.comment.find_one({
             "_id": parent_oid,
             "article_id": req.article_id
         })
@@ -189,7 +190,7 @@ async def edit_comment(req: EditCommentRequest):
         image_base64 = None
 
     try:
-        comments_raw = await db.comments.find({"article_id": ObjectId(req.article_id)}).to_list(None)
+        comments_raw = await db.comment.find({"article_id": ObjectId(req.article_id)}).to_list(None)
     except:
         return {"confirmation": "backend error"}
 
@@ -201,7 +202,7 @@ async def edit_comment(req: EditCommentRequest):
     comments = []
     for c in comments_raw:
         try:
-            u = await db.users.find_one({"_id": ObjectId(c["owner_id"])})
+            u = await db.user.find_one({"_id": ObjectId(c["owner_id"])})
         except:
             u = None
 
@@ -220,7 +221,7 @@ async def edit_comment(req: EditCommentRequest):
     ratings = []
     for r in ratings_raw:
         try:
-            u = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
+            u = await db.user.find_one({"_id": ObjectId(r["owner_id"])})
         except:
             u = None
 
@@ -234,6 +235,7 @@ async def edit_comment(req: EditCommentRequest):
     return {
         "confirmation": "successful",
         "userclass": userclass,
+        "username": user["username"],
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],
@@ -254,7 +256,7 @@ async def edit_get_comment(req: EditCommentGetRequest):
 
     # dapatkan user untuk ambil owner_id + username
     try:
-        user = await db.users.find_one({"email": user_email})
+        user = await db.user.find_one({"email": user_email})
     except:
         return {"confirmation": "backend error"}
 
@@ -266,7 +268,7 @@ async def edit_get_comment(req: EditCommentGetRequest):
 
     # ===== FETCH COMMENT =====
     try:
-        comment = await db.comments.find_one({
+        comment = await db.comment.find_one({
             "_id": ObjectId(req.comment_id),
             "owner_id": owner_id
         })
@@ -293,7 +295,7 @@ async def delete_comment(req: DeleteCommentRequest):
     # 0) DB ACCESS CHECK
     # =====================================================
     try:
-        comment = await db.comments.find_one({"_id": ObjectId(req.comment_id)})
+        comment = await db.comment.find_one({"_id": ObjectId(req.comment_id)})
     except:
         return {"confirmation": "disini"}
 
@@ -313,7 +315,7 @@ async def delete_comment(req: DeleteCommentRequest):
     # 2) GET USER
     # =====================================================
     try:
-        user = await db.users.find_one({"email": payload.get("email")})
+        user = await db.user.find_one({"email": payload.get("email")})
     except:
         return {"confirmation": "backend error"}
 
@@ -356,7 +358,7 @@ async def delete_comment(req: DeleteCommentRequest):
     comments = []
     for c in comments_raw:
         try:
-            u = await db.users.find_one({"_id": ObjectId(c["owner_id"])})
+            u = await db.user.find_one({"_id": ObjectId(c["owner_id"])})
         except:
             u = None
 
@@ -375,7 +377,7 @@ async def delete_comment(req: DeleteCommentRequest):
     ratings = []
     for r in ratings_raw:
         try:
-            u = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
+            u = await db.user.find_one({"_id": ObjectId(r["owner_id"])})
         except:
             u = None
 
@@ -391,6 +393,7 @@ async def delete_comment(req: DeleteCommentRequest):
     return {
         "confirmation": "successful",
         "userclass": userclass,
+        
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],

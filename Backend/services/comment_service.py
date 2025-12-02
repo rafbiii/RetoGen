@@ -14,7 +14,7 @@ class CommentService:
                 "comment_content": comment_content,
                 "created_at": datetime.utcnow(),
             }
-            result = await db.comments.insert_one(data)
+            result = await db.comment.insert_one(data)
             return str(result.inserted_id)
         except:
             return None
@@ -22,7 +22,7 @@ class CommentService:
     @staticmethod
     async def get_comments(article_id):
         try:
-            return await db.comments.find({"article_id": article_id}).to_list(None)
+            return await db.comment.find({"article_id": article_id}).to_list(None)
         except:
             return None
         
@@ -35,7 +35,7 @@ class CommentService:
 
         # pastikan comment milik user
         try:
-            comment = await db.comments.find_one({
+            comment = await db.comment.find_one({
                 "_id": ObjectId(comment_id),
                 "article_id": article_id,
                 "owner_id": owner_id
@@ -48,7 +48,7 @@ class CommentService:
 
         # update content (walaupun sama)
         try:
-            res = await db.comments.update_one(
+            res = await db.comment.update_one(
                 {"_id": ObjectId(comment_id)},
                 {"$set": {"comment_content": new_content}}
             )
@@ -65,10 +65,10 @@ class CommentService:
             oid = ObjectId(comment_id)
 
             # Hapus komentar utama
-            await db.comments.delete_one({"_id": oid})
+            await db.comment.delete_one({"_id": oid})
 
             # Hapus semua child comment (level 1)
-            await db.comments.delete_many({"parent_comment_id": comment_id})
+            await db.comment.delete_many({"parent_comment_id": comment_id})
 
             return True
         except:

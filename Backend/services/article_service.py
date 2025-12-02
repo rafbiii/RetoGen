@@ -8,7 +8,7 @@ class ArticleService:
     @staticmethod
     async def fetch_article(article_id: str):
         try:
-            return await db.articles.find_one({
+            return await db.article.find_one({
                 "_id": ObjectId(article_id),
                 "is_deleted": False
             })
@@ -36,7 +36,7 @@ class ArticleService:
         update_fields["updated_at"] = datetime.utcnow()
 
         try:
-            result = await db.articles.update_one(
+            result = await db.article.update_one(
                 {"_id": ObjectId(data.article_id)},
                 {"$set": update_fields}
             )
@@ -61,7 +61,7 @@ class ArticleService:
                 "is_deleted": False
             }
 
-            result = await db.articles.insert_one(doc)
+            result = await db.article.insert_one(doc)
 
             if result.inserted_id:
                 return str(result.inserted_id)

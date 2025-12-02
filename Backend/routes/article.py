@@ -123,7 +123,7 @@ async def view_article(req: ViewArticleRequest):
     comments = []
     for c in comments_raw:
         try:
-            user = await db.users.find_one({"_id": ObjectId(c["owner_id"])})
+            user = await db.user.find_one({"_id": ObjectId(c["owner_id"])})
         except:
             user = None
 
@@ -142,7 +142,7 @@ async def view_article(req: ViewArticleRequest):
     ratings = []
     for r in ratings_raw:
         try:
-            user = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
+            user = await db.user.find_one({"_id": ObjectId(r["owner_id"])})
         except:
             user = None
 
@@ -156,6 +156,7 @@ async def view_article(req: ViewArticleRequest):
     return {
         "confirmation": "successful",
         "userclass": userclass,
+        "username": user["username"],
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],
@@ -187,7 +188,7 @@ async def delete_article(req: DeleteArticleRequest):
         return {"confirmation": "not admin"}
 
     try:
-        result = await db.articles.update_one(
+        result = await db.article.update_one(
             {"_id": article_oid},
             {"$set": {"is_deleted": True}}
         )
@@ -208,7 +209,7 @@ async def main_page(req: MainPageRequest):
         return {"confirmation": "token invalid"}
 
     user_email = payload.get("email")
-    user = await db.users.find_one({"email": user_email})
+    user = await db.user.find_one({"email": user_email})
 
     if not user:
         return {"confirmation": "token invalid"}
@@ -216,7 +217,7 @@ async def main_page(req: MainPageRequest):
     username = user.get("username", "")
 
     try:
-        cursor = db.articles.find({"is_deleted": False})
+        cursor = db.article.find({"is_deleted": False})
         articles = await cursor.to_list(length=None)
     except Exception as e:
         print("MAIN PAGE ERROR:", e)
@@ -249,7 +250,7 @@ async def verification(req : VerificationRequest):
     if user_email is None:
         return {"confirmation": "token invalid"}
 
-    user = await db.users.find_one({"email": user_email})
+    user = await db.user.find_one({"email": user_email})
     if not user:
         return {"confirmation": "backend error"}
     
@@ -273,7 +274,7 @@ async def add_article(req: AddArticle):
     if user_email is None:
         return {"confirmation": "token invalid"}
 
-    user = await db.users.find_one({"email": user_email})
+    user = await db.user.find_one({"email": user_email})
     if not user:
         return {"confirmation": "token invalid"}
 
