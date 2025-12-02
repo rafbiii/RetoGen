@@ -144,9 +144,9 @@ async def edit_rating_get(req: EditRatingGetRequest):
             "rating_id": str(rating["_id"]),
             "article_id": rating["article_id"],
             "owner_id": str(rating["owner_id"]),
-            "rating_value": rating["rating_value"]
+            "rating_value": rating["rating_value"],
+            "created_at": rating["created_at"]
         }
-
 
         return {
             "confirmation": "successful",
