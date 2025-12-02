@@ -1,14 +1,15 @@
 from fastapi import APIRouter
 from schemas.add_comment_schema import AddCommentRequest
+from schemas.edit_comment_update_schema import EditCommentRequest
+from schemas.edit_comment_get_schema import EditCommentGetRequest
+from schemas.comment_delete_schema import DeleteCommentRequest
 from services.comment_service import CommentService
 from services.article_service import ArticleService
 from services.auth_service import AuthService
 from db.connection import db
 from bson import ObjectId
 from utils.base64_utils import bytes_to_base64
-from schemas.comment_delete_schema import DeleteCommentRequest
 from services.rating_service import RatingService
-from db.connection import db
 
 router = APIRouter()
 
@@ -235,4 +236,132 @@ async def delete_comment(req: DeleteCommentRequest):
         "article_image": image_base64,
         "comments": comments,
         "ratings": ratings
+    }
+    
+@router.post("/edit/update")
+async def edit_comment(req: EditCommentRequest):
+
+    # ---- VERIFY TOKEN ----
+    payload = await AuthService.verify_token(req.token)
+    if payload is None:
+        return {"confirmation": "token invalid"}
+
+    user_email = payload.get("email")
+    user = await db.users.find_one({"email": user_email})
+    owner_id = str(user["_id"])
+
+
+    # ---- EDIT COMMENT ----
+    edit_ok = await CommentService.edit_comment(
+        article_id=req.article_id,
+        comment_id=req.comment_id,
+        owner_id=owner_id,
+        new_content=req.comment_content
+    )
+
+
+    if not edit_ok:
+        return {"confirmation": "backend error"}
+
+    # ---- FETCH ULANG ARTICLE ----
+    article = await ArticleService.fetch_article(req.article_id)
+    if not article:
+        return {"confirmation": "backend error"}
+
+    # ---- USERCLASS ----
+    is_admin = await AuthService.is_admin(payload)
+    userclass = "admin" if is_admin else "user"
+
+    # ---- IMAGE ----
+    try:
+        image_base64 = bytes_to_base64(bytes(article.get("article_image"))) if article.get("article_image") else None
+    except:
+        image_base64 = None
+
+    try:
+        comments_raw = await db.comments.find({"article_id": ObjectId(req.article_id)}).to_list(None)
+    except:
+        return {"confirmation": "backend error"}
+
+    comments = []
+    for c in comments_raw:
+
+        # cari username dari owner_id
+        try:
+            u = await db.users.find_one({"_id": ObjectId(c["owner_id"])})
+        except:
+            u = None
+
+        comments.append({
+            "comment_id": str(c["_id"]),
+            "parent_comment_id": c.get("parent_comment_id"),
+            "owner": u["username"] if u else "Unknown",
+            "comment_content": c["comment_content"]
+        })
+
+    # ---- FETCH RATINGS ----
+    ratings_raw = await RatingService.get_ratings(req.article_id)
+    if ratings_raw is None:
+        return {"confirmation": "backend error"}
+
+    ratings = []
+    for r in ratings_raw:
+        ratings.append({
+            "rating_id": str(r["_id"]),
+            "owner": r["owner"],            # langsung username
+            "rating_value": r["rating_value"]
+        })
+
+
+    return {
+        "confirmation": "successful",
+        "userclass": userclass,
+        "article_title": article["article_title"],
+        "article_content": article["article_content"],
+        "article_tag": article["article_tag"],
+        "article_image": image_base64,
+        "comments": comments,
+        "ratings": ratings
+    }
+
+@router.post("/edit/get")
+async def edit_get_comment(req: EditCommentGetRequest):
+
+    # ===== VERIFY TOKEN =====
+    payload = await AuthService.verify_token(req.token)
+    if payload is None:
+        return {"confirmation": "token invalid"}
+
+    user_email = payload.get("email")
+
+    # dapatkan user untuk ambil owner_id
+    try:
+        user = await db.users.find_one({"email": user_email})
+    except:
+        return {"confirmation": "backend error"}
+
+    if not user:
+        return {"confirmation": "token invalid"}
+
+    owner_id = str(user["_id"])
+
+    # ===== FETCH COMMENT =====
+    try:
+        comment = await db.comments.find_one({
+            "_id": ObjectId(req.comment_id),
+            "owner_id": owner_id
+        })
+    except:
+        return {"confirmation": "backend error"}
+
+    if not comment:
+        return {"confirmation": "backend error"}
+
+    # ===== RETURN DATA =====
+    return {
+        "confirmation": "successful",
+        "comment_id": str(comment["_id"]),
+        "article_id": str(comment["article_id"]),
+        "parent_comment_id": comment.get("parent_comment_id"),
+        "comment_content": comment.get("comment_content")
     }
