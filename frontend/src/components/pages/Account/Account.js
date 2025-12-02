@@ -80,7 +80,10 @@ function Account() {
               </div>
             </div>
 
-            <button className="btn-logout" onClick={() => navigate('/')}>
+            <button className="btn-logout" onClick={() => {
+              localStorage.removeItem('token');
+              navigate('/');
+            }}>
               <FiLogOut />
               Logout
             </button>
