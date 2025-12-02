@@ -113,9 +113,14 @@ async def add_comment(req: AddCommentRequest):
 
     ratings = []
     for r in ratings_raw:
+        try:
+            u = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
+        except:
+            u = None
+
         ratings.append({
             "rating_id": str(r["_id"]),
-            "owner": r["owner"],
+            "owner": u["username"] if u else "Unknown",
             "rating_value": r["rating_value"]
         })
 
@@ -143,7 +148,19 @@ async def edit_comment(req: EditCommentRequest):
     user = await db.users.find_one({"email": user_email})
     owner_id = str(user["_id"])
 
+    if req.parent_comment_id:
+        try:
+            parent_oid = ObjectId(req.parent_comment_id)
+        except:
+            return {"confirmation": "backend error"}
 
+        parent_exists = await db.comments.find_one({
+            "_id": parent_oid,
+            "article_id": req.article_id
+        })
+        if not parent_exists:
+            return {"confirmation": "backend error"}
+    
     # ---- EDIT COMMENT ----
     edit_ok = await CommentService.edit_comment(
         article_id=req.article_id,
@@ -202,9 +219,14 @@ async def edit_comment(req: EditCommentRequest):
 
     ratings = []
     for r in ratings_raw:
+        try:
+            u = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
+        except:
+            u = None
+
         ratings.append({
             "rating_id": str(r["_id"]),
-            "owner": r["owner"],  # username
+            "owner": u["username"] if u else "Unknown",
             "rating_value": r["rating_value"]
         })
 
@@ -224,25 +246,6 @@ async def edit_comment(req: EditCommentRequest):
 async def edit_get_comment(req: EditCommentGetRequest):
 
     # ===== VERIFY TOKEN =====
-@router.post("/delete")
-async def delete_comment(req: DeleteCommentRequest):
-
-    # =====================================================
-    # 0) DB ACCESS CHECK
-    # =====================================================
-    try:
-        comment = await db.comments.find_one({"_id": ObjectId(req.comment_id)})
-    except:
-        return {"confirmation": "backend error"}
-
-    if comment is None:
-        return {"confirmation": "backend error"}
-
-    article_id = str(comment["article_id"])
-
-    # =====================================================
-    # 1) VERIFY TOKEN
-    # =====================================================
     payload = await AuthService.verify_token(req.token)
     if payload is None:
         return {"confirmation": "token invalid"}
@@ -252,11 +255,6 @@ async def delete_comment(req: DeleteCommentRequest):
     # dapatkan user untuk ambil owner_id + username
     try:
         user = await db.users.find_one({"email": user_email})
-    # =====================================================
-    # 2) GET USER
-    # =====================================================
-    try:
-        user = await db.users.find_one({"email": payload.get("email")})
     except:
         return {"confirmation": "backend error"}
 
@@ -285,7 +283,43 @@ async def delete_comment(req: DeleteCommentRequest):
         "article_id": str(comment["article_id"]),
         "parent_comment_id": comment.get("parent_comment_id"),
         "comment_content": comment.get("comment_content"),
-        "oowner": username
+        "owner": username
+    }
+    
+@router.post("/delete")
+async def delete_comment(req: DeleteCommentRequest):
+
+    # =====================================================
+    # 0) DB ACCESS CHECK
+    # =====================================================
+    try:
+        comment = await db.comments.find_one({"_id": ObjectId(req.comment_id)})
+    except:
+        return {"confirmation": "disini"}
+
+    if comment is None:
+        return {"confirmation": "disini"}
+
+    article_id = str(comment["article_id"])
+
+    # =====================================================
+    # 1) VERIFY TOKEN
+    # =====================================================
+    payload = await AuthService.verify_token(req.token)
+    if payload is None:
+        return {"confirmation": "token invalid"}
+
+    # =====================================================
+    # 2) GET USER
+    # =====================================================
+    try:
+        user = await db.users.find_one({"email": payload.get("email")})
+    except:
+        return {"confirmation": "backend error"}
+
+    if not user:
+        return {"confirmation": "token invalid"}
+
     # Only owner can delete
     if str(user["_id"]) != str(comment["owner_id"]):
         return {"confirmation": "backend error"}
@@ -340,9 +374,14 @@ async def delete_comment(req: DeleteCommentRequest):
 
     ratings = []
     for r in ratings_raw:
+        try:
+            u = await db.users.find_one({"_id": ObjectId(r["owner_id"])})
+        except:
+            u = None
+
         ratings.append({
             "rating_id": str(r["_id"]),
-            "owner": r["owner"],  # username
+            "owner": u["username"] if u else "Unknown",
             "rating_value": r["rating_value"]
         })
 

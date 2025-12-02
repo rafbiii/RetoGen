@@ -107,8 +107,6 @@ async def add_rating(req: AddRatingSchema):
         })
 
 
-
-
     # 11) RETURN SUCCESS
     return {
         "confirmation": "successful",
