@@ -8,7 +8,7 @@ class CommentService:
     async def add_comment(article_id, parent_comment_id, owner_id, comment_content):
         try:
             data = {
-                "article_id": ObjectId(article_id),
+                "article_id": article_id,
                 "owner_id": owner_id,
                 "parent_comment_id": parent_comment_id,
                 "comment_content": comment_content,
@@ -56,5 +56,20 @@ class CommentService:
             # MongoDB: modified_count mungkin 0 jika value sama → tetap dianggap sukses
             return res.acknowledged
 
+        except:
+            return False
+    
+    @staticmethod
+    async def delete_comment_and_children(comment_id: str):
+        try:
+            oid = ObjectId(comment_id)
+
+            # Hapus komentar utama
+            await db.comments.delete_one({"_id": oid})
+
+            # Hapus semua child comment (level 1)
+            await db.comments.delete_many({"parent_comment_id": comment_id})
+
+            return True
         except:
             return False
