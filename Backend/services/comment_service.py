@@ -40,36 +40,3 @@ class CommentService:
             return True
         except:
             return False
-        
-    @staticmethod
-    async def edit_comment(article_id: str, comment_id: str, owner_id: str, new_content: str):
-
-        # validate content
-        if not (1 <= len(new_content) <= 8192):
-            return False
-
-        # pastikan comment milik user
-        try:
-            comment = await db.comments.find_one({
-                "_id": ObjectId(comment_id),
-                "article_id": ObjectId(article_id),
-                "owner_id": owner_id
-            })
-        except:
-            return False
-
-        if not comment:
-            return False
-
-        # update content (walaupun sama)
-        try:
-            res = await db.comments.update_one(
-                {"_id": ObjectId(comment_id)},
-                {"$set": {"comment_content": new_content}}
-            )
-
-            # MongoDB: modified_count mungkin 0 jika value sama → tetap dianggap sukses
-            return res.acknowledged
-
-        except:
-            return False
