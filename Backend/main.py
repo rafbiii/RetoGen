@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from core.API_handlers import validation_exception_handler
+from core.api_handlers import validation_exception_handler
 from routes import auth, article, comment, rating
 import uvicorn
 
