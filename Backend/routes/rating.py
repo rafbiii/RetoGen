@@ -205,7 +205,7 @@ async def edit_rating_update(req: EditRatingUpdateRequest):
     except:
         image_base64 = None
 
-    # FETCH COMMENTS
+    # FETCH COMMENT
     comments_raw = await RatingService.get_comments(req.article_id)
     comments = []
     from bson import ObjectId
