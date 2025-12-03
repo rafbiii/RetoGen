@@ -1,0 +1,125 @@
+[{
+  "_id": {
+    "$oid": "607f1f77bcf86cd799439021"
+  },
+  "article_title": "MacBook Pro M3 Review: Powerhouse for Professionals",
+  "article_preview": "Detailed review of the new MacBook Pro with M3 chip for professional work",
+  "article_content": "The new MacBook Pro with M3 chip offers incredible performance for professionals... [long content here]",
+  "article_tag": "flagship",
+  "article_image": {
+    "$binary": {
+      "base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
+      "subType": "00"
+    }
+  },
+  "author_id": {
+    "$oid": "507f1f77bcf86cd799439011"
+  },
+  "created_at": {
+    "$date": "2024-01-20T08:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-20T08:00:00.000Z"
+  },
+  "is_deleted": false
+},
+{
+  "_id": {
+    "$oid": "607f1f77bcf86cd799439022"
+  },
+  "article_title": "Best Budget Gaming Laptops 2024",
+  "article_preview": "Top 5 affordable gaming laptops that deliver great performance",
+  "article_content": "Looking for a gaming laptop that won't break the bank? Here are our top picks... [long content here]",
+  "article_tag": "gaming",
+  "article_image": {
+    "$binary": {
+      "base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+      "subType": "00"
+    }
+  },
+  "author_id": {
+    "$oid": "507f1f77bcf86cd799439011"
+  },
+  "created_at": {
+    "$date": "2024-01-19T11:30:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-19T11:30:00.000Z"
+  },
+  "is_deleted": false
+},
+{
+  "_id": {
+    "$oid": "607f1f77bcf86cd799439023"
+  },
+  "article_title": "Dell XPS 13: Perfect Office Companion",
+  "article_preview": "Why Dell XPS 13 is the best laptop for office work in 2024",
+  "article_content": "The Dell XPS 13 continues to be the gold standard for office laptops... [long content here]",
+  "article_tag": "office",
+  "article_image": {
+    "$binary": {
+      "base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
+      "subType": "00"
+    }
+  },
+  "author_id": {
+    "$oid": "507f1f77bcf86cd799439011"
+  },
+  "created_at": {
+    "$date": "2024-01-18T14:20:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-18T14:20:00.000Z"
+  },
+  "is_deleted": false
+},
+{
+  "_id": {
+    "$oid": "607f1f77bcf86cd799439024"
+  },
+  "article_title": "ASUS ROG Strix SCAR 18: Ultimate Gaming Machine",
+  "article_preview": "In-depth review of the powerful ASUS ROG Strix SCAR 18 gaming laptop",
+  "article_content": "The ASUS ROG Strix SCAR 18 is a beast of a gaming machine... [long content here]",
+  "article_tag": "gaming",
+  "article_image": {
+    "$binary": {
+      "base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+      "subType": "00"
+    }
+  },
+  "author_id": {
+    "$oid": "507f1f77bcf86cd799439011"
+  },
+  "created_at": {
+    "$date": "2024-01-17T16:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-17T16:45:00.000Z"
+  },
+  "is_deleted": false
+},
+{
+  "_id": {
+    "$oid": "607f1f77bcf86cd799439025"
+  },
+  "article_title": "Lenovo ThinkPad X1 Carbon: Business Excellence",
+  "article_preview": "The legendary ThinkPad X1 Carbon continues to impress business users",
+  "article_content": "Lenovo's ThinkPad X1 Carbon has been a favorite among business professionals... [long content here]",
+  "article_tag": "office",
+  "article_image": {
+    "$binary": {
+      "base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
+      "subType": "00"
+    }
+  },
+  "author_id": {
+    "$oid": "507f1f77bcf86cd799439011"
+  },
+  "created_at": {
+    "$date": "2024-01-16T09:15:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2024-01-16T09:15:00.000Z"
+  },
+  "is_deleted": false
+}]
