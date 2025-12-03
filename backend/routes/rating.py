@@ -133,6 +133,7 @@ async def edit_rating_get(req: EditRatingGetRequest):
     if not user:
         return {"confirmation": "token invalid"}
 
+    user_email = payload.get("email")
     try:
         rating = await db.rating.find_one({
             "_id": ObjectId(req.rating_id),
@@ -147,6 +148,7 @@ async def edit_rating_get(req: EditRatingGetRequest):
             "rating_id": str(rating["_id"]),
             "article_id": rating["article_id"],
             "owner_id": rating["owner_id"],
+            "user_email": user_email,
             "rating_value": rating["rating_value"],
             "created_at": rating["created_at"]
         }
@@ -217,6 +219,7 @@ async def edit_rating_update(req: EditRatingUpdateRequest):
             "comment_id": str(c["_id"]),
             "parent_comment_id": c.get("parent_comment_id"),
             "owner": u["username"] if u else "Unknown",
+            "user_email": u["email"],
             "comment_content": c["comment_content"]
         })
 
@@ -232,6 +235,7 @@ async def edit_rating_update(req: EditRatingUpdateRequest):
         ratings.append({
             "rating_id": str(r["_id"]),
             "owner": u["username"] if u else "Unknown",
+            "user_email": u["email"],
             "rating_value": r["rating_value"]
         })
 
