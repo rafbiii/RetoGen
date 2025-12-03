@@ -154,10 +154,13 @@ async def view_article(req: ViewArticleRequest):
             "rating_value": r["rating_value"]
         })
 
+    user_email = payload.get("email")
+    
     # ===== FINAL RESPONSE Sesuai Setup =====
     return {
         "confirmation": "successful",
         "userclass": userclass,
+        "user_email": user_email,
         "username": user["username"],
         "article_title": article["article_title"],
         "article_content": article["article_content"],
@@ -166,8 +169,6 @@ async def view_article(req: ViewArticleRequest):
         "comments": comments,
         "ratings": ratings
     }
-
-
 
 
 @router.post("/delete")

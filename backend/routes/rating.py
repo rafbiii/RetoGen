@@ -106,12 +106,14 @@ async def add_rating(req: AddRatingSchema):
             "rating_value": r["rating_value"]
         })
 
-
+    user_email = payload.get("email")
+    
     # 11) RETURN SUCCESS
     return {
         "confirmation": "successful",
         "userclass": userclass,
         "username": user["username"],
+        "user_email": user_email,
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],
@@ -233,11 +235,13 @@ async def edit_rating_update(req: EditRatingUpdateRequest):
             "rating_value": r["rating_value"]
         })
 
+    user_email = payload.get("email")
 
     return {
         "confirmation": "successful",
         "userclass": userclass,
         "username": user["username"],
+        "user_email": user_email,
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],

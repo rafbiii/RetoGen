@@ -124,10 +124,13 @@ async def add_comment(req: AddCommentRequest):
             "rating_value": r["rating_value"]
         })
 
+    user_email = payload.get("email")
+    
     return {
         "confirmation": "successful",
         "userclass": userclass,
         "username": user["username"],
+        "user_email": user_email,
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],
@@ -231,11 +234,13 @@ async def edit_comment(req: EditCommentRequest):
             "rating_value": r["rating_value"]
         })
 
+    user_email = payload.get("email")
 
     return {
         "confirmation": "successful",
         "userclass": userclass,
         "username": user["username"],
+        "user_email": user_email,
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],
@@ -390,10 +395,13 @@ async def delete_comment(req: DeleteCommentRequest):
     # =====================================================
     # 5) FINAL SUCCESS RESPONSE
     # =====================================================
+    user_email = payload.get("email")
+    
     return {
         "confirmation": "successful",
         "userclass": userclass,
-        
+        "username": user["username"],
+        "user_email": user_email,
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],
