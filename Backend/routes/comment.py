@@ -297,10 +297,10 @@ async def delete_comment(req: DeleteCommentRequest):
     try:
         comment = await db.comment.find_one({"_id": ObjectId(req.comment_id)})
     except:
-        return {"confirmation": "disini"}
+        return {"confirmation": "backend error"}
 
     if comment is None:
-        return {"confirmation": "disini"}
+        return {"confirmation": "backend error"}
 
     article_id = str(comment["article_id"])
 

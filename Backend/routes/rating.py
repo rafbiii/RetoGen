@@ -139,7 +139,7 @@ async def edit_rating_get(req: EditRatingGetRequest):
         })
 
         if not rating:
-            return {"confirmation": "disini"}
+            return {"confirmation": "backend error"}
 
         rating_data = {
             "rating_id": str(rating["_id"]),
@@ -156,7 +156,7 @@ async def edit_rating_get(req: EditRatingGetRequest):
 
     except Exception as e:
         print("ERR:", e)
-        return {"confirmation": "wkwk"}
+        return {"confirmation": "backend error"}
 
 
 
