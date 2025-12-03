@@ -6,7 +6,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:800
 export const getArticleForEdit = async (articleId, token) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/article/edit/get`, {
-      token,
+      token: token,
       article_id: articleId
     });
     return response.data;

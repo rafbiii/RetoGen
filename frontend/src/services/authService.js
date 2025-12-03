@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000' || 'http://127.0.0.1:8000';
-const BACKEND_CHECK_TIMEOUT = 3000;
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -21,7 +20,7 @@ api.interceptors.response.use(
   }
 );
 
-const realAuthService = {
+export const authService = {
   login: async (credentials) => {
     try {
       const response = await api.post('/auth/login', {
@@ -52,15 +51,32 @@ const realAuthService = {
       throw new Error("Unknown login response");
 
     } catch (error) {
-      const conf = error.message;
+      // Handle custom errors
+      if (error.message === "Email doesn't exist" || 
+          error.message === "Password is incorrect" ||
+          error.message === "Server is busy, try again later" ||
+          error.message === "Unknown login response") {
+        throw error;
+      }
 
+      // Handle network errors
+      if (error.code === 'ECONNABORTED' || error.code === 'ERR_NETWORK') {
+        throw new Error("Backend unavailable");
+      }
+
+      // Check response data
+      const conf = error.response?.data?.confirmation;
       if (conf === "email doesn't exist") {
         throw new Error("Email doesn't exist");
       }
-      if (conf === "password is incorrect") throw new Error("Password is incorrect");
-      if (conf === "backend error") throw new Error("Server is busy, try again later");
+      if (conf === "password incorrect") {
+        throw new Error("Password is incorrect");
+      }
+      if (conf === "backend error") {
+        throw new Error("Server is busy, try again later");
+      }
 
-      throw new Error(error.message || "Login failed");
+      throw new Error("Login failed");
     }
   },
 
@@ -92,10 +108,16 @@ const realAuthService = {
       throw new Error('Unknown registration response');
       
     } catch (error) {
-      // Check if it's already our custom error
+      // Handle custom errors
       if (error.message === 'Email already exists' || 
-          error.message === 'Server is busy, try again later') {
+          error.message === 'Server is busy, try again later' ||
+          error.message === 'Unknown registration response') {
         throw error;
+      }
+
+      // Handle network errors
+      if (error.code === 'ECONNABORTED' || error.code === 'ERR_NETWORK') {
+        throw new Error('Backend unavailable');
       }
 
       // Check response data
@@ -110,58 +132,6 @@ const realAuthService = {
       throw new Error('Server is busy, try again later');
     }
   },
-};
-
-let isBackendAvailable = null;
-let backendCheckPromise = null;
-
-const checkBackendAvailability = async () => {
-  if (backendCheckPromise) return backendCheckPromise;
-
-  backendCheckPromise = (async () => {
-    try {
-      const endpoints = [`${API_BASE_URL}/docs`, API_BASE_URL];
-
-      for (const endpoint of endpoints) {
-        try {
-          const response = await axios.get(endpoint, {
-            timeout: BACKEND_CHECK_TIMEOUT,
-            validateStatus: (status) => status < 500,
-          });
-
-          if (response.status >= 200 && response.status < 500) {
-            isBackendAvailable = true;
-            return true;
-          }
-        } catch {
-          continue;
-        }
-      }
-
-      throw new Error('All endpoints failed');
-    } catch {
-      isBackendAvailable = false;
-      return false;
-    }
-  })();
-
-  return backendCheckPromise;
-};
-
-checkBackendAvailability();
-
-export const authService = {
-  login: async (credentials) => {
-    if (isBackendAvailable === null) await checkBackendAvailability();
-    if (!isBackendAvailable) throw new Error('Backend unavailable');
-    return await realAuthService.login(credentials);
-  },
-
-  register: async (userData) => {
-    if (isBackendAvailable === null) await checkBackendAvailability();
-    if (!isBackendAvailable) throw new Error('Backend unavailable');
-    return await realAuthService.register(userData);
-  },
 
   logout: () => {
     localStorage.removeItem('token');
@@ -169,14 +139,7 @@ export const authService = {
 
   isAuthenticated: () => !!localStorage.getItem('token'),
 
-  recheckBackend: async () => {
-    isBackendAvailable = null;
-    backendCheckPromise = null;
-    return await checkBackendAvailability();
-  },
-
   getBackendStatus: () => ({
-    isAvailable: isBackendAvailable,
     apiUrl: API_BASE_URL,
   }),
 };
