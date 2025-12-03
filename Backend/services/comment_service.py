@@ -62,14 +62,30 @@ class CommentService:
     @staticmethod
     async def delete_comment_and_children(comment_id: str):
         try:
-            oid = ObjectId(comment_id)
+            to_delete = [comment_id]   # queue awal
 
-            # Hapus komentar utama
-            await db.comment.delete_one({"_id": oid})
+            # BFS / DFS untuk mengambil semua keturunan
+            idx = 0
+            while idx < len(to_delete):
+                current = to_delete[idx]
 
-            # Hapus semua child comment (level 1)
-            await db.comment.delete_many({"parent_comment_id": comment_id})
+                # Ambil semua child dari current
+                children = await db.comment.find(
+                    {"parent_comment_id": current}
+                ).to_list(None)
+
+                # Masukkan ke daftar delete
+                for child in children:
+                    to_delete.append(str(child["_id"]))
+
+                idx += 1
+
+            # Setelah semua keturunan terkumpul → hapus semua sekaligus
+            oid_list = [ObjectId(cid) for cid in to_delete]
+            await db.comment.delete_many({"_id": {"$in": oid_list}})
 
             return True
-        except:
+
+        except Exception as e:
+            print("DELETE ERROR:", e)
             return False
