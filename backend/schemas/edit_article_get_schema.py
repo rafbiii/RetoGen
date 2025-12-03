@@ -4,3 +4,4 @@ from pydantic import BaseModel
 class EditArticleGetRequest(BaseModel):
     token: str
     article_id: str
+    comment_id: str
