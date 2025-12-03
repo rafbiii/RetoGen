@@ -52,7 +52,7 @@ const realAuthService = {
       throw new Error("Unknown login response");
 
     } catch (error) {
-      const conf = error.response?.data?.confirmation;
+      const conf = error.message;
 
       if (conf === "email doesn't exist") {
         throw new Error("Email doesn't exist");
@@ -75,32 +75,37 @@ const realAuthService = {
 
       const data = response.data;
       
-      // Debug: Log response
-      console.log('🔍 Registration response:', JSON.stringify(data));
       console.log('🔍 Confirmation value:', data.confirmation);
 
       if (data.confirmation === 'register successful') {
         return { success: true };
       }
 
-      // Handle error cases
       if (data.confirmation === 'email already registered') {
         throw new Error('Email already exists');
-      }
-      
-      if (data.confirmation === 'username already taken') {
-        throw new Error('Username already taken');
       }
 
       if (data.confirmation === 'backend error') {
         throw new Error('Server is busy, try again later');
       }
 
-      throw new Error('Server is busy, try again later');
+      throw new Error('Unknown registration response');
+      
     } catch (error) {
+      // Check if it's already our custom error
+      if (error.message === 'Email already exists' || 
+          error.message === 'Server is busy, try again later') {
+        throw error;
+      }
+
+      // Check response data
       const conf = error.response?.data?.confirmation;
-      if (conf === 'email already registered') throw new Error('Email already exists');
-      if (conf === 'backend error') throw new Error('Server is busy, try again later');
+      if (conf === 'email already registered') {
+        throw new Error('Email already exists');
+      }
+      if (conf === 'backend error') {
+        throw new Error('Server is busy, try again later');
+      }
 
       throw new Error('Server is busy, try again later');
     }

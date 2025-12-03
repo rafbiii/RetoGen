@@ -230,7 +230,7 @@ body.dark-mode .circle-3 {
   height: auto;
   z-index: 1;
   border-radius: 16px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   background: rgba(220, 220, 220, 0.6);
   backdrop-filter: blur(10px);
@@ -250,6 +250,13 @@ body.dark-mode .showcase-image-container {
   border-radius: 12px;
   margin-top: -20px;
   position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center center;
+}
+
+.showcase-card:hover .showcase-image {
+  transform: scale(1.50);
+  z-index: 10;
 }
 
 .features {
