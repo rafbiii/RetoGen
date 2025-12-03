@@ -1,80 +1,802 @@
-[{
-  "_id": {
-    "$oid": "507f1f77bcf86cd799439011"
+[
+  {
+    "_id": {
+      "$oid": "692ffc0d255db764382a04e8"
+    },
+    "username": "fathan_arya_maulana",
+    "email": "fathanaryamaulana@gmail.com",
+    "password": "$2b$12$IDEYZCoZ2NOYBvQlhwy2JeBw2uDMOqdwAFpWfp1UVBXQdkz0ZtiEi",
+    "fullname": "fathan arya maulana",
+    "role": "admin",
+    "created_at": {
+      "$date": "2024-12-03T15:59:57.228023Z"
+    },
+    "updated_at": {
+      "$date": "2024-12-03T15:59:57.228023Z"
+    }
   },
-  "username": "admin_tech",
-  "email": "admin@techblog.com",
-  "password": "$2b$10$EXAMPLEHASHEDPASSWORD123456789",
-  "fullname": "Admin Tech",
-  "userclass": "admin",
-  "created_at": {
-    "$date": "2024-01-15T10:00:00.000Z"
+  {
+    "_id": {
+      "$oid": "692ffc0d255db764382a04e9"
+    },
+    "username": "admin_joshua1",
+    "email": "admin1@techblog.com",
+    "password": "$2b$12$kT50rwiFEHCBm9tRiokEtOjs3oG26VFwvXK8iTPySWgIMB/4fpAcG",
+    "fullname": "Joshua Martin",
+    "role": "admin",
+    "created_at": {
+      "$date": "2025-06-10T15:59:57.431753Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-18T15:59:57.431753Z"
+    }
   },
-  "updated_at": {
-    "$date": "2024-01-15T10:00:00.000Z"
+  {
+    "_id": {
+      "$oid": "692ffc0d255db764382a04ea"
+    },
+    "username": "admin_ryan2",
+    "email": "admin2@techblog.com",
+    "password": "$2b$12$FvAURcgBP9YaK0.Dn2GzT.PsutTB/VtVP75C6/RPWOuc72NQlQAU.",
+    "fullname": "Ryan Garcia",
+    "role": "admin",
+    "created_at": {
+      "$date": "2025-05-06T15:59:57.629370Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-06T15:59:57.629370Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0d255db764382a04eb"
+    },
+    "username": "admin_john3",
+    "email": "admin3@techblog.com",
+    "password": "$2b$12$0J0NMmjRQ2q/JyrhEHRaf.iFWccDMCOlVZS1IOVTpMJBd/fcVd4La",
+    "fullname": "John Martinez",
+    "role": "admin",
+    "created_at": {
+      "$date": "2025-03-08T15:59:57.830922Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-21T15:59:57.830922Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0d255db764382a04ec"
+    },
+    "username": "admin_andrew4",
+    "email": "admin4@techblog.com",
+    "password": "$2b$12$0rbMFMGejjhiz3RbnXxTT.W6TX5XLyx6CwaQ6w8r1IOCfJ8HbXQ7K",
+    "fullname": "Andrew Walker",
+    "role": "admin",
+    "created_at": {
+      "$date": "2025-06-30T15:59:58.040020Z"
+    },
+    "updated_at": {
+      "$date": "2025-10-22T15:59:58.040020Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0e255db764382a04ed"
+    },
+    "username": "admin_john5",
+    "email": "admin5@techblog.com",
+    "password": "$2b$12$PphwL.rJkDKHyeedqxpSzeLNzbZAR7juWPbIkzU/h76edf8o0MIuq",
+    "fullname": "John Jackson",
+    "role": "admin",
+    "created_at": {
+      "$date": "2025-05-31T15:59:58.239566Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-29T15:59:58.239566Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0e255db764382a04ee"
+    },
+    "username": "ninja_rachel15",
+    "email": "rachelthomas60@email.com",
+    "password": "$2b$12$SJ8wYKrSggwnheIg/KsJVOC9z.WgcRNFZ6drsi6kVzllsQH.4zXOO",
+    "fullname": "Rachel Thomas",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-05-31T15:59:58.441893Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-14T15:59:58.441893Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0e255db764382a04ef"
+    },
+    "username": "shadow_maria16",
+    "email": "mariawalker21@email.com",
+    "password": "$2b$12$wOWUsfUTJgMFREiexidyXOkyd/ZtTpCSkzIOyBNSF6sKJgrwBiLL6",
+    "fullname": "Maria Walker",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-09-08T15:59:58.641086Z"
+    },
+    "updated_at": {
+      "$date": "2025-12-03T15:59:58.641086Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0e255db764382a04f0"
+    },
+    "username": "master_john74",
+    "email": "johnbrown681@email.com",
+    "password": "$2b$12$Buf3Usu4ERUhAG8FLuVh9Otcpzs3aK1ftSwQehctrMf2WpTfQTM3G",
+    "fullname": "John Brown",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-10-01T15:59:58.841310Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-08T15:59:58.841310Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0e255db764382a04f1"
+    },
+    "username": "cyber_michelle17",
+    "email": "michellelewis372@email.com",
+    "password": "$2b$12$mW4Eg0LjnMgfaYMzlMtuauk.SNw6PhtxItL0X66fEpJrK.k.UJYTW",
+    "fullname": "Michelle Lewis",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-11-02T15:59:59.041324Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-13T15:59:59.041324Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0f255db764382a04f2"
+    },
+    "username": "queen_chris43",
+    "email": "chrissmith805@email.com",
+    "password": "$2b$12$RCz5MbhxJU56ZXqjgAjt..YMVXS9WQJxDQKkT/xdlLMDM/Q83k5.i",
+    "fullname": "Chris Smith",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-07-31T15:59:59.239695Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-07T15:59:59.239695Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0f255db764382a04f3"
+    },
+    "username": "king_lisa49",
+    "email": "lisaanderson794@email.com",
+    "password": "$2b$12$SnBzmPgB5SmDzTWnJac3L.fsz5IEXyqWo4FRP0L1Pg607g8HwOugy",
+    "fullname": "Lisa Anderson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-08-19T15:59:59.437184Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-18T15:59:59.437184Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0f255db764382a04f4"
+    },
+    "username": "queen_matthew24",
+    "email": "matthewanderson84@email.com",
+    "password": "$2b$12$wNXxVWElBV0wP9mPizL4QOS1FY6dO/WcB3NAHqS2pSWtM/ZU1PWL.",
+    "fullname": "Matthew Anderson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-07-09T15:59:59.640559Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-21T15:59:59.640559Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0f255db764382a04f5"
+    },
+    "username": "elite_laura35",
+    "email": "lauramoore373@email.com",
+    "password": "$2b$12$RprILdh4jMGz9uLWihJDcODLHtnCi4t0g1yvkYqqB5F7q55KVS0Ca",
+    "fullname": "Laura Moore",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-10-30T15:59:59.853868Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-22T15:59:59.853868Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc0f255db764382a04f6"
+    },
+    "username": "gamer_matthew18",
+    "email": "matthewwilson241@email.com",
+    "password": "$2b$12$o1.3K8EHHSaEgqhkVOiY2uc8tk/HzuQFoc0Nrz73U9.qCzDpeUztW",
+    "fullname": "Matthew Wilson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-05-23T16:00:00.091862Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-30T16:00:00.091862Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc10255db764382a04f7"
+    },
+    "username": "queen_john71",
+    "email": "johnlee869@email.com",
+    "password": "$2b$12$A5yHW4MyZJTi/fdrVqLJSO/GvFu3XhOdgkFMQFfxqF4zWcxFJtGS2",
+    "fullname": "John Lee",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-10-21T16:00:00.334543Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-18T16:00:00.334543Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc10255db764382a04f8"
+    },
+    "username": "alpha_stephanie69",
+    "email": "stephanielee719@email.com",
+    "password": "$2b$12$BoLGX4eFCuIS9jal9u3c2u8T.9BaTr3kINZXvcv3hUSXm0PrP45UG",
+    "fullname": "Stephanie Lee",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-09-05T16:00:00.546752Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-10T16:00:00.546752Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc10255db764382a04f9"
+    },
+    "username": "cyber_kevin31",
+    "email": "kevingarcia9@email.com",
+    "password": "$2b$12$sa.tR9OLiPOI8Fkz2BmDRObCMoK20.EFs2oGe2QwkiknvrvFtvNGK",
+    "fullname": "Kevin Garcia",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-11-21T16:00:00.755036Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-05T16:00:00.755036Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc10255db764382a04fa"
+    },
+    "username": "tech_elizabeth65",
+    "email": "elizabethrobinson564@email.com",
+    "password": "$2b$12$UfMSOiTk4GNrpzWVuBENdOh89XTNB/zeSG1lrUtgwRrEEqyAxKF3C",
+    "fullname": "Elizabeth Robinson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-08-29T16:00:00.973609Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-26T16:00:00.973609Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc10255db764382a04fb"
+    },
+    "username": "king_kevin81",
+    "email": "kevindavis388@email.com",
+    "password": "$2b$12$SnBoon45gOsmdXHAjqUlRevDkL/pMq2jsbGUheP1VWOju4ZvdyfeC",
+    "fullname": "Kevin Davis",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-10-12T16:00:01.177728Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-22T16:00:01.177728Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc11255db764382a04fc"
+    },
+    "username": "wizard_sarah99",
+    "email": "sarahsmith850@email.com",
+    "password": "$2b$12$3NE1HcK.s6gd73S10V5xhOVYt9pq9RQi9Ee6/rqu3ako4hWluI09.",
+    "fullname": "Sarah Smith",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-05-22T16:00:01.381578Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-13T16:00:01.381578Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc11255db764382a04fd"
+    },
+    "username": "ninja_kevin45",
+    "email": "kevinharris193@email.com",
+    "password": "$2b$12$vfRmwxDKEvGkl5aZeZ55jO/KjuiWL0IkA/ak5SDE5HADGiONPqbAe",
+    "fullname": "Kevin Harris",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-07-09T16:00:01.586688Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-16T16:00:01.586688Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc11255db764382a04fe"
+    },
+    "username": "wizard_matthew16",
+    "email": "matthewwilson788@email.com",
+    "password": "$2b$12$YjThZeQP/zlZSzJo9FL3PO.2QFiAuVw21d17HLO/Dnvb6x5LtvcyO",
+    "fullname": "Matthew Wilson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-06-20T16:00:01.788688Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-23T16:00:01.788688Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc11255db764382a04ff"
+    },
+    "username": "ace_andrew48",
+    "email": "andrewbrown921@email.com",
+    "password": "$2b$12$gKPAolQHouoUGT8XlC/5.eQe7HD.1fly3FrlKxbgUQxdUleI1V.CS",
+    "fullname": "Andrew Brown",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-12-02T16:00:01.989828Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-17T16:00:01.989828Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc11255db764382a0500"
+    },
+    "username": "alpha_matthew51",
+    "email": "matthewanderson135@email.com",
+    "password": "$2b$12$kK2dH7rO1FfwhaL4H7wL/et5IOvYOUMnGVHWSjz49nYGOen6JkAMG",
+    "fullname": "Matthew Anderson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-09-10T16:00:02.189389Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-13T16:00:02.189389Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc12255db764382a0501"
+    },
+    "username": "alpha_jennifer34",
+    "email": "jennifermartin409@email.com",
+    "password": "$2b$12$8bye/tKTYlMuIXNjeKBh4O4Vg67f6DiwAqTQAeywW/cnL2uYbjiWC",
+    "fullname": "Jennifer Martin",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-06-12T16:00:02.391552Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-03T16:00:02.391552Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc12255db764382a0502"
+    },
+    "username": "tech_william84",
+    "email": "williamgarcia921@email.com",
+    "password": "$2b$12$.KlQLaOywpe5H8zavAq0VOCIMlDMcXqOLlku8oO/Kes12WWxfT85W",
+    "fullname": "William Garcia",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-11-24T16:00:02.592405Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-09T16:00:02.592405Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc12255db764382a0503"
+    },
+    "username": "digital_joshua34",
+    "email": "joshuathomas779@email.com",
+    "password": "$2b$12$8Ps8m1mmJQy9z7ymQbICUe4wVZ/YJBw9E6RPsuK0By2vqWW.JTaoy",
+    "fullname": "Joshua Thomas",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-10-27T16:00:02.799175Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-22T16:00:02.799175Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc12255db764382a0504"
+    },
+    "username": "alpha_daniel31",
+    "email": "daniellewis980@email.com",
+    "password": "$2b$12$aqRVb9/HYibULlI/qV2T9eVA1MKCmvnrQQZHw7kFqgypneb9seP.u",
+    "fullname": "Daniel Lewis",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-07-08T16:00:03.002682Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-22T16:00:03.002682Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc13255db764382a0505"
+    },
+    "username": "elite_maria49",
+    "email": "mariabrown770@email.com",
+    "password": "$2b$12$oSFVc.QwyW8A49fglDcUvu3sgZj/0qAa7JDNNu9GPQo5O1pUB7qoi",
+    "fullname": "Maria Brown",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-07-06T16:00:03.200883Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-14T16:00:03.200883Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc13255db764382a0506"
+    },
+    "username": "digital_jennifer34",
+    "email": "jenniferwilson950@email.com",
+    "password": "$2b$12$Ix54wiQlovh411LGhr7uW.g0f93LHDp0fF5vy5pGD7m0bugiAurHu",
+    "fullname": "Jennifer Wilson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-07-29T16:00:03.399879Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-13T16:00:03.399879Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc13255db764382a0507"
+    },
+    "username": "gamer_robert23",
+    "email": "robertmartinez435@email.com",
+    "password": "$2b$12$tcgBoQ2MaPwBzv09tyHuxuT8NL.T/cgo4ZFWvwWhMhN5Ff6lPULp2",
+    "fullname": "Robert Martinez",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-05-24T16:00:03.598429Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-19T16:00:03.598429Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc13255db764382a0508"
+    },
+    "username": "tech_laura21",
+    "email": "lauraanderson956@email.com",
+    "password": "$2b$12$2dvQoKwFNJ.skOsmiZYRbe7JQ.9TAVyBwk9RcIXc9SLMjqEfZVbr6",
+    "fullname": "Laura Anderson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-11-06T16:00:03.801970Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-28T16:00:03.801970Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc13255db764382a0509"
+    },
+    "username": "cyber_stephanie15",
+    "email": "stephanieharris750@email.com",
+    "password": "$2b$12$JAGRmDl4UNHxu5mG9Ft7LO3fAmctnmJHAmvH./htWrNUfeAuO3/i.",
+    "fullname": "Stephanie Harris",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-12-02T16:00:04.003092Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-11T16:00:04.003092Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc14255db764382a050a"
+    },
+    "username": "wizard_joshua31",
+    "email": "joshuamartinez845@email.com",
+    "password": "$2b$12$ptPWdQH.FnDHK6b64B3npuDXXgO6pEGA4bmnd0aznnLi8ZjQS5cc2",
+    "fullname": "Joshua Martinez",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-07-21T16:00:04.204707Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-14T16:00:04.204707Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc14255db764382a050b"
+    },
+    "username": "supreme_emma63",
+    "email": "emmarobinson967@email.com",
+    "password": "$2b$12$1D8chhejXZJIIkai7Sp6W.FUDt4iWc17p1SSVFou9U1Nk7cUtsOFC",
+    "fullname": "Emma Robinson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-08-14T16:00:04.407958Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-09T16:00:04.407958Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc14255db764382a050c"
+    },
+    "username": "omega_chris12",
+    "email": "chrisbrown564@email.com",
+    "password": "$2b$12$YY0yAEJKWjx3G24ZkQfPZuK6GkZJ89ze5kmUYciMzqYXcsTho/x8C",
+    "fullname": "Chris Brown",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-09-16T16:00:04.627716Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-25T16:00:04.627716Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc14255db764382a050d"
+    },
+    "username": "supreme_stephanie52",
+    "email": "stephaniejackson432@email.com",
+    "password": "$2b$12$/3DbYovmbRlP4zr5SmQLpOnkbQgv8aNSaTFjF.J6NitIeUFXhqf3u",
+    "fullname": "Stephanie Jackson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-10-01T16:00:04.833122Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-13T16:00:04.833122Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc14255db764382a050e"
+    },
+    "username": "alpha_john34",
+    "email": "johnmoore860@email.com",
+    "password": "$2b$12$Q.n9Jeiad9P/5tNqqRaAU.UmxzGu9HY.KLyc3Stikmp2a3/tYjzEq",
+    "fullname": "John Moore",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-05-17T16:00:05.040357Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-20T16:00:05.040357Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc15255db764382a050f"
+    },
+    "username": "legend_lisa27",
+    "email": "lisaclark63@email.com",
+    "password": "$2b$12$emDdYktETembAZIbnfj4fuM3m7LFQnBYLblwT0tRpZAJMobDStLyW",
+    "fullname": "Lisa Clark",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-07-21T16:00:05.238907Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-14T16:00:05.238907Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc15255db764382a0510"
+    },
+    "username": "master_ashley14",
+    "email": "ashleybrown361@email.com",
+    "password": "$2b$12$ZcoubA4yuWcXtJMGf3qWNeFwDf0iybQfbx2qm0EU13G0ea/aGqGny",
+    "fullname": "Ashley Brown",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-11-30T16:00:05.435037Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-10T16:00:05.435037Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc15255db764382a0511"
+    },
+    "username": "storm_emma86",
+    "email": "emmalee109@email.com",
+    "password": "$2b$12$A2A6i2EOHpgCGgs.eUoRG..oEyioPEIsWDoUSREqJX1P5MWAgHwqC",
+    "fullname": "Emma Lee",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-11-10T16:00:05.648467Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-29T16:00:05.648467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc15255db764382a0512"
+    },
+    "username": "dragon_andrew33",
+    "email": "andrewrobinson112@email.com",
+    "password": "$2b$12$MTtf1NDWKr3I.5BgBJnq1ex.5MeroGHhXY0sfgbeyPMerjWmWcxGi",
+    "fullname": "Andrew Robinson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-11-21T16:00:05.853259Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-08T16:00:05.853259Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc15255db764382a0513"
+    },
+    "username": "master_brandon58",
+    "email": "brandonsmith808@email.com",
+    "password": "$2b$12$5oDpmC8onxe.9wu5h9dE0.hakE4Zoh/RX5BxNlWKE14tjLQJJMIMC",
+    "fullname": "Brandon Smith",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-06-13T16:00:06.054191Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-10T16:00:06.054191Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc16255db764382a0514"
+    },
+    "username": "gamer_brandon91",
+    "email": "brandonlewis572@email.com",
+    "password": "$2b$12$7RAXWbLFyUhY18Ao8RpdCOAIIe8q98SX7XkNxWcQ817waQls.gQ1i",
+    "fullname": "Brandon Lewis",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-11-06T16:00:06.252510Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-22T16:00:06.252510Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc16255db764382a0515"
+    },
+    "username": "gamer_michelle16",
+    "email": "michellewilson708@email.com",
+    "password": "$2b$12$2/8.LqWcohmoZp8hEZJu9euTeVH3OY5an2vzS5iKC7V3IYzlGjM3C",
+    "fullname": "Michelle Wilson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-10-07T16:00:06.448256Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-25T16:00:06.448256Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc16255db764382a0516"
+    },
+    "username": "ace_lisa47",
+    "email": "lisamartinez135@email.com",
+    "password": "$2b$12$f3BxTURUtYdCkc6rInkC2uADSivxEezBKlxGqFfUO8wwQioIE.HZm",
+    "fullname": "Lisa Martinez",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-10-29T16:00:06.660243Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-16T16:00:06.660243Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc16255db764382a0517"
+    },
+    "username": "wizard_andrew14",
+    "email": "andrewgarcia195@email.com",
+    "password": "$2b$12$vMkb7JYtPFCajI5jDCd/ZuXEujG.KF70wryIfleRlW5pR9LI4uvQK",
+    "fullname": "Andrew Garcia",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-06-13T16:00:06.875604Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-17T16:00:06.876116Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc16255db764382a0518"
+    },
+    "username": "alpha_david10",
+    "email": "davidjohnson926@email.com",
+    "password": "$2b$12$5VfUyMsS3iH1PuAobq1hhOsc2pp46BDeEnypXMwCd/gvzcHAXcEiq",
+    "fullname": "David Johnson",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-06-15T16:00:07.107103Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-08T16:00:07.107103Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc17255db764382a0519"
+    },
+    "username": "legend_john83",
+    "email": "johnmartin280@email.com",
+    "password": "$2b$12$0nZuysj2EPGVv5.Q.e/t8eJC.B8Uf/n.L9qREtOAuYyiKwFu.f3cC",
+    "fullname": "John Martin",
+    "role": "user",
+    "created_at": {
+      "$date": "2025-06-30T16:00:07.330309Z"
+    },
+    "updated_at": {
+      "$date": "2025-11-24T16:00:07.330309Z"
+    }
   }
-},
-{
-  "_id": {
-    "$oid": "507f1f77bcf86cd799439010"
-  },
-  "username": "superadmin_tech",
-  "email": "superadmin@techblog.com",
-  "password": "$2b$10$EXAMPLEHASHEDPASSWORD567890123",
-  "fullname": "Super Admin",
-  "userclass": "superadmin",
-  "created_at": {
-    "$date": "2024-01-15T10:00:00.000Z"
-  },
-  "updated_at": {
-    "$date": "2024-01-15T10:00:00.000Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "692070cc55ab97f8d2abd9d1"
-  },
-  "username": "Tsukiya0",
-  "fullname": "Fathan Arya Maulana",
-  "email": "fathanaryamaulana@gmail.com",
-  "password": "$2b$12$6uSLLZkKNNkH6euwHANPleiqiaILABDPu5qe3Niqfqc6UidmB2F4O",
-  "role": "admin",
-  "created_at": {
-    "$date": "2025-11-21T14:01:48.693Z"
-  },
-  "updated_at": {
-    "$date": "2025-11-21T14:01:48.693Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "692192aa97edfbac0ff53e3f"
-  },
-  "username": "Tsukiya0",
-  "fullname": "Fathan Arya Maulana",
-  "email": "Raingpt1@gmail.com",
-  "password": "$2b$12$ezkIPQhGhyn5eTXdq7Fv4.9k3gYY5wqSRKXiAP9wwU/bF/B/kdEXe",
-  "role": "user",
-  "created_at": {
-    "$date": "2025-11-22T10:38:34.031Z"
-  },
-  "updated_at": {
-    "$date": "2025-11-22T10:38:34.031Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6921c6ebdca710f16c021409"
-  },
-  "username": "Tsukiya0",
-  "fullname": "Fathan Arya Maulana",
-  "email": "fathanamrj95111@gmail.com",
-  "password": "$2b$12$f2VXoCDlvNxEJgo/c0GN/.3AZAZCBUsxiWMQLqlQnr5l0PLZ/I69e",
-  "role": "user",
-  "created_at": {
-    "$date": "2025-11-22T14:21:31.282Z"
-  },
-  "updated_at": {
-    "$date": "2025-11-22T14:21:31.282Z"
-  }
-}]
+]

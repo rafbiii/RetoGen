@@ -1,76 +1,1802 @@
-[{
-  "_id": {
-    "$oid": "807f1f77bcf86cd799439041"
+[
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f51c"
+    },
+    "article_id": "692ffc19255db7549464f512",
+    "owner_id": "692ffc14255db764382a050b",
+    "parent_comment_id": null,
+    "comment_content": "Looking forward to more content like this.",
+    "created_at": {
+      "$date": "2025-08-03T16:00:09.974686Z"
+    }
   },
-  "article_id": {
-    "$oid": "607f1f77bcf86cd799439021"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f51d"
+    },
+    "article_id": "692ffc19255db7549464f518",
+    "owner_id": "692ffc11255db764382a04fe",
+    "parent_comment_id": null,
+    "comment_content": "I've been considering this laptop, your review helped a lot.",
+    "created_at": {
+      "$date": "2025-10-19T16:00:09.974686Z"
+    }
   },
-  "user_id": {
-    "$oid": "507f1f77bcf86cd799439012"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f51e"
+    },
+    "article_id": "692ffc19255db7549464f511",
+    "owner_id": "692ffc11255db764382a0500",
+    "parent_comment_id": null,
+    "comment_content": "Thanks for the detailed benchmarks!",
+    "created_at": {
+      "$date": "2025-09-30T16:00:09.974686Z"
+    }
   },
-  "comment_text": "Great review! The M3 chip really is a game changer for video editing.",
-  "created_at": {
-    "$date": "2024-01-20T11:30:00.000Z"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f51f"
+    },
+    "article_id": "692ffc19255db7549464f519",
+    "owner_id": "692ffc0e255db764382a04ee",
+    "parent_comment_id": null,
+    "comment_content": "Can you provide more details about the display quality?",
+    "created_at": {
+      "$date": "2025-10-07T16:00:09.974686Z"
+    }
   },
-  "updated_at": {
-    "$date": "2024-01-20T11:30:00.000Z"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f520"
+    },
+    "article_id": "692ffc19255db7549464f514",
+    "owner_id": "692ffc11255db764382a04fd",
+    "parent_comment_id": null,
+    "comment_content": "Bookmarking this for future reference.",
+    "created_at": {
+      "$date": "2025-08-28T16:00:09.974686Z"
+    }
   },
-  "is_deleted": false
-},
-{
-  "_id": {
-    "$oid": "807f1f77bcf86cd799439042"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f521"
+    },
+    "article_id": "692ffc19255db7549464f503",
+    "owner_id": "692ffc0e255db764382a04ed",
+    "parent_comment_id": null,
+    "comment_content": "What's the warranty coverage like?",
+    "created_at": {
+      "$date": "2025-08-09T16:00:09.974686Z"
+    }
   },
-  "article_id": {
-    "$oid": "607f1f77bcf86cd799439021"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f522"
+    },
+    "article_id": "692ffc19255db7549464f501",
+    "owner_id": "692ffc15255db764382a0513",
+    "parent_comment_id": null,
+    "comment_content": "Perfect timing, I needed this information today!",
+    "created_at": {
+      "$date": "2025-09-28T16:00:09.974686Z"
+    }
   },
-  "user_id": {
-    "$oid": "507f1f77bcf86cd799439013"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f523"
+    },
+    "article_id": "692ffc19255db7549464f510",
+    "owner_id": "692ffc16255db764382a0517",
+    "parent_comment_id": null,
+    "comment_content": "I've been considering this laptop, your review helped a lot.",
+    "created_at": {
+      "$date": "2025-10-23T16:00:09.974686Z"
+    }
   },
-  "comment_text": "I've been using the M2 MacBook Pro and it's already amazing. Can't wait to upgrade to M3!",
-  "created_at": {
-    "$date": "2024-01-20T12:15:00.000Z"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f524"
+    },
+    "article_id": "692ffc19255db7549464f51b",
+    "owner_id": "692ffc11255db764382a04ff",
+    "parent_comment_id": null,
+    "comment_content": "How loud are the fans under load?",
+    "created_at": {
+      "$date": "2025-07-05T16:00:09.974686Z"
+    }
   },
-  "updated_at": {
-    "$date": "2024-01-20T12:15:00.000Z"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f525"
+    },
+    "article_id": "692ffc19255db7549464f515",
+    "owner_id": "692ffc15255db764382a0513",
+    "parent_comment_id": null,
+    "comment_content": "Very balanced and objective review.",
+    "created_at": {
+      "$date": "2025-08-28T16:00:09.974686Z"
+    }
   },
-  "is_deleted": false
-},
-{
-  "_id": {
-    "$oid": "807f1f77bcf86cd799439043"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f526"
+    },
+    "article_id": "692ffc19255db7549464f501",
+    "owner_id": "692ffc0e255db764382a04f1",
+    "parent_comment_id": null,
+    "comment_content": "How loud are the fans under load?",
+    "created_at": {
+      "$date": "2025-09-17T16:00:09.974686Z"
+    }
   },
-  "article_id": {
-    "$oid": "607f1f77bcf86cd799439022"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f527"
+    },
+    "article_id": "692ffc19255db7549464f516",
+    "owner_id": "692ffc15255db764382a0513",
+    "parent_comment_id": null,
+    "comment_content": "How's the port selection?",
+    "created_at": {
+      "$date": "2025-10-14T16:00:09.974686Z"
+    }
   },
-  "user_id": {
-    "$oid": "507f1f77bcf86cd799439014"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f528"
+    },
+    "article_id": "692ffc19255db7549464f4fe",
+    "owner_id": "692ffc14255db764382a050d",
+    "parent_comment_id": null,
+    "comment_content": "Does it support external GPU?",
+    "created_at": {
+      "$date": "2025-06-27T16:00:09.974686Z"
+    }
   },
-  "comment_text": "Thanks for this list! The Acer Nitro 5 seems perfect for my budget.",
-  "created_at": {
-    "$date": "2024-01-19T13:45:00.000Z"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f529"
+    },
+    "article_id": "692ffc19255db7549464f507",
+    "owner_id": "692ffc12255db764382a0502",
+    "parent_comment_id": null,
+    "comment_content": "This helped me make my purchase decision, thank you!",
+    "created_at": {
+      "$date": "2025-06-23T16:00:09.974686Z"
+    }
   },
-  "updated_at": {
-    "$date": "2024-01-19T13:45:00.000Z"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f52a"
+    },
+    "article_id": "692ffc19255db7549464f507",
+    "owner_id": "692ffc11255db764382a04ff",
+    "parent_comment_id": null,
+    "comment_content": "Great article! Very informative and well-written.",
+    "created_at": {
+      "$date": "2025-07-05T16:00:09.974686Z"
+    }
   },
-  "is_deleted": false
-},
-{
-  "_id": {
-    "$oid": "807f1f77bcf86cd799439044"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f52b"
+    },
+    "article_id": "692ffc19255db7549464f50c",
+    "owner_id": "692ffc16255db764382a0518",
+    "parent_comment_id": null,
+    "comment_content": "Is the upgrade worth it from the previous generation?",
+    "created_at": {
+      "$date": "2025-10-04T16:00:09.974686Z"
+    }
   },
-  "article_id": {
-    "$oid": "607f1f77bcf86cd799439023"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f52c"
+    },
+    "article_id": "692ffc19255db7549464f513",
+    "owner_id": "692ffc0d255db764382a04ec",
+    "parent_comment_id": null,
+    "comment_content": "Does it have good Linux support?",
+    "created_at": {
+      "$date": "2025-07-19T16:00:09.974686Z"
+    }
   },
-  "user_id": {
-    "$oid": "507f1f77bcf86cd799439012"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f52d"
+    },
+    "article_id": "692ffc19255db7549464f50b",
+    "owner_id": "692ffc11255db764382a04fe",
+    "parent_comment_id": null,
+    "comment_content": "Great comparison with other laptops in this category.",
+    "created_at": {
+      "$date": "2025-11-13T16:00:09.974686Z"
+    }
   },
-  "comment_text": "Dell XPS 13 has been my work laptop for 2 years now. Absolutely love it!",
-  "created_at": {
-    "$date": "2024-01-18T15:20:00.000Z"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f52e"
+    },
+    "article_id": "692ffc19255db7549464f509",
+    "owner_id": "692ffc0e255db764382a04f0",
+    "parent_comment_id": null,
+    "comment_content": "Thanks for the detailed benchmarks!",
+    "created_at": {
+      "$date": "2025-10-10T16:00:09.974686Z"
+    }
   },
-  "updated_at": {
-    "$date": "2024-01-18T15:20:00.000Z"
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f52f"
+    },
+    "article_id": "692ffc19255db7549464f505",
+    "owner_id": "692ffc13255db764382a0509",
+    "parent_comment_id": null,
+    "comment_content": "Is the RAM upgradeable?",
+    "created_at": {
+      "$date": "2025-11-20T16:00:09.974686Z"
+    }
   },
-  "is_deleted": false
-}]
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f530"
+    },
+    "article_id": "692ffc19255db7549464f50a",
+    "owner_id": "692ffc0f255db764382a04f4",
+    "parent_comment_id": null,
+    "comment_content": "Is the RAM upgradeable?",
+    "created_at": {
+      "$date": "2025-07-05T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f531"
+    },
+    "article_id": "692ffc19255db7549464f4fe",
+    "owner_id": "692ffc13255db764382a0505",
+    "parent_comment_id": null,
+    "comment_content": "Looking forward to more content like this.",
+    "created_at": {
+      "$date": "2025-11-02T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f532"
+    },
+    "article_id": "692ffc19255db7549464f517",
+    "owner_id": "692ffc15255db764382a0511",
+    "parent_comment_id": null,
+    "comment_content": "This helped me make my purchase decision, thank you!",
+    "created_at": {
+      "$date": "2025-10-01T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f533"
+    },
+    "article_id": "692ffc19255db7549464f501",
+    "owner_id": "692ffc13255db764382a0505",
+    "parent_comment_id": null,
+    "comment_content": "Great article! Very informative and well-written.",
+    "created_at": {
+      "$date": "2025-11-03T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f534"
+    },
+    "article_id": "692ffc19255db7549464f513",
+    "owner_id": "692ffc0d255db764382a04e8",
+    "parent_comment_id": null,
+    "comment_content": "How loud are the fans under load?",
+    "created_at": {
+      "$date": "2025-09-04T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f535"
+    },
+    "article_id": "692ffc19255db7549464f502",
+    "owner_id": "692ffc15255db764382a0510",
+    "parent_comment_id": null,
+    "comment_content": "I disagree with some points but overall solid review.",
+    "created_at": {
+      "$date": "2025-08-19T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f536"
+    },
+    "article_id": "692ffc19255db7549464f502",
+    "owner_id": "692ffc10255db764382a04fa",
+    "parent_comment_id": null,
+    "comment_content": "How's the keyboard for long typing sessions?",
+    "created_at": {
+      "$date": "2025-10-16T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f537"
+    },
+    "article_id": "692ffc19255db7549464f504",
+    "owner_id": "692ffc15255db764382a0513",
+    "parent_comment_id": null,
+    "comment_content": "How does it compare to the previous model?",
+    "created_at": {
+      "$date": "2025-10-06T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f538"
+    },
+    "article_id": "692ffc19255db7549464f503",
+    "owner_id": "692ffc0d255db764382a04e9",
+    "parent_comment_id": null,
+    "comment_content": "How loud are the fans under load?",
+    "created_at": {
+      "$date": "2025-09-02T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f539"
+    },
+    "article_id": "692ffc19255db7549464f508",
+    "owner_id": "692ffc0e255db764382a04ed",
+    "parent_comment_id": null,
+    "comment_content": "How loud are the fans under load?",
+    "created_at": {
+      "$date": "2025-09-16T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f53a"
+    },
+    "article_id": "692ffc19255db7549464f517",
+    "owner_id": "692ffc12255db764382a0504",
+    "parent_comment_id": null,
+    "comment_content": "Perfect timing, I needed this information today!",
+    "created_at": {
+      "$date": "2025-08-27T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f53b"
+    },
+    "article_id": "692ffc19255db7549464f508",
+    "owner_id": "692ffc10255db764382a04f7",
+    "parent_comment_id": null,
+    "comment_content": "Great article! Very informative and well-written.",
+    "created_at": {
+      "$date": "2025-09-23T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f53c"
+    },
+    "article_id": "692ffc19255db7549464f502",
+    "owner_id": "692ffc11255db764382a04fd",
+    "parent_comment_id": null,
+    "comment_content": "I learned a lot from this post. Keep up the good work!",
+    "created_at": {
+      "$date": "2025-09-01T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f53d"
+    },
+    "article_id": "692ffc19255db7549464f50e",
+    "owner_id": "692ffc0f255db764382a04f3",
+    "parent_comment_id": null,
+    "comment_content": "Perfect timing, I needed this information today!",
+    "created_at": {
+      "$date": "2025-08-16T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f53e"
+    },
+    "article_id": "692ffc19255db7549464f504",
+    "owner_id": "692ffc14255db764382a050c",
+    "parent_comment_id": null,
+    "comment_content": "Very thorough review. Appreciate the effort!",
+    "created_at": {
+      "$date": "2025-07-31T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f53f"
+    },
+    "article_id": "692ffc19255db7549464f518",
+    "owner_id": "692ffc12255db764382a0504",
+    "parent_comment_id": null,
+    "comment_content": "I disagree with some points but overall solid review.",
+    "created_at": {
+      "$date": "2025-11-15T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f540"
+    },
+    "article_id": "692ffc19255db7549464f505",
+    "owner_id": "692ffc14255db764382a050b",
+    "parent_comment_id": null,
+    "comment_content": "This helped me make my purchase decision, thank you!",
+    "created_at": {
+      "$date": "2025-10-17T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f541"
+    },
+    "article_id": "692ffc19255db7549464f50e",
+    "owner_id": "692ffc10255db764382a04fa",
+    "parent_comment_id": null,
+    "comment_content": "Thanks for sharing this detailed review.",
+    "created_at": {
+      "$date": "2025-09-23T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f542"
+    },
+    "article_id": "692ffc19255db7549464f509",
+    "owner_id": "692ffc0f255db764382a04f5",
+    "parent_comment_id": null,
+    "comment_content": "I've been considering this laptop, your review helped a lot.",
+    "created_at": {
+      "$date": "2025-08-19T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f543"
+    },
+    "article_id": "692ffc19255db7549464f50e",
+    "owner_id": "692ffc0e255db764382a04ef",
+    "parent_comment_id": null,
+    "comment_content": "This is exactly what I was looking for! Thank you!",
+    "created_at": {
+      "$date": "2025-06-24T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f544"
+    },
+    "article_id": "692ffc19255db7549464f503",
+    "owner_id": "692ffc13255db764382a0505",
+    "parent_comment_id": null,
+    "comment_content": "Could you elaborate more on the battery performance?",
+    "created_at": {
+      "$date": "2025-10-04T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f545"
+    },
+    "article_id": "692ffc19255db7549464f518",
+    "owner_id": "692ffc16255db764382a0517",
+    "parent_comment_id": null,
+    "comment_content": "Does it support external GPU?",
+    "created_at": {
+      "$date": "2025-10-07T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f546"
+    },
+    "article_id": "692ffc19255db7549464f501",
+    "owner_id": "692ffc0d255db764382a04ea",
+    "parent_comment_id": null,
+    "comment_content": "I learned a lot from this post. Keep up the good work!",
+    "created_at": {
+      "$date": "2025-09-04T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f547"
+    },
+    "article_id": "692ffc19255db7549464f506",
+    "owner_id": "692ffc10255db764382a04f9",
+    "parent_comment_id": null,
+    "comment_content": "Could you elaborate more on the battery performance?",
+    "created_at": {
+      "$date": "2025-10-16T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f548"
+    },
+    "article_id": "692ffc19255db7549464f501",
+    "owner_id": "692ffc10255db764382a04f8",
+    "parent_comment_id": null,
+    "comment_content": "How does it compare to the previous model?",
+    "created_at": {
+      "$date": "2025-09-16T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f549"
+    },
+    "article_id": "692ffc19255db7549464f505",
+    "owner_id": "692ffc13255db764382a0509",
+    "parent_comment_id": null,
+    "comment_content": "Great comparison with other laptops in this category.",
+    "created_at": {
+      "$date": "2025-08-27T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f54a"
+    },
+    "article_id": "692ffc19255db7549464f50b",
+    "owner_id": "692ffc14255db764382a050b",
+    "parent_comment_id": null,
+    "comment_content": "This is exactly what I was looking for! Thank you!",
+    "created_at": {
+      "$date": "2025-09-23T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f54b"
+    },
+    "article_id": "692ffc19255db7549464f506",
+    "owner_id": "692ffc11255db764382a04fd",
+    "parent_comment_id": null,
+    "comment_content": "How loud are the fans under load?",
+    "created_at": {
+      "$date": "2025-07-26T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f54c"
+    },
+    "article_id": "692ffc19255db7549464f516",
+    "owner_id": "692ffc12255db764382a0501",
+    "parent_comment_id": null,
+    "comment_content": "I've been considering this laptop, your review helped a lot.",
+    "created_at": {
+      "$date": "2025-10-21T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f54d"
+    },
+    "article_id": "692ffc19255db7549464f501",
+    "owner_id": "692ffc17255db764382a0519",
+    "parent_comment_id": null,
+    "comment_content": "Does it have good Linux support?",
+    "created_at": {
+      "$date": "2025-11-14T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f54e"
+    },
+    "article_id": "692ffc19255db7549464f503",
+    "owner_id": "692ffc13255db764382a0509",
+    "parent_comment_id": null,
+    "comment_content": "I've been considering this laptop, your review helped a lot.",
+    "created_at": {
+      "$date": "2025-11-22T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f54f"
+    },
+    "article_id": "692ffc19255db7549464f507",
+    "owner_id": "692ffc15255db764382a0510",
+    "parent_comment_id": null,
+    "comment_content": "Is the upgrade worth it from the previous generation?",
+    "created_at": {
+      "$date": "2025-11-10T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f550"
+    },
+    "article_id": "692ffc19255db7549464f504",
+    "owner_id": "692ffc10255db764382a04fb",
+    "parent_comment_id": null,
+    "comment_content": "Does it have good Linux support?",
+    "created_at": {
+      "$date": "2025-11-16T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f551"
+    },
+    "article_id": "692ffc19255db7549464f502",
+    "owner_id": "692ffc11255db764382a04fc",
+    "parent_comment_id": null,
+    "comment_content": "Bookmarking this for future reference.",
+    "created_at": {
+      "$date": "2025-07-07T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f552"
+    },
+    "article_id": "692ffc19255db7549464f510",
+    "owner_id": "692ffc13255db764382a0509",
+    "parent_comment_id": null,
+    "comment_content": "Interesting perspective on this laptop.",
+    "created_at": {
+      "$date": "2025-08-06T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f553"
+    },
+    "article_id": "692ffc19255db7549464f513",
+    "owner_id": "692ffc17255db764382a0519",
+    "parent_comment_id": null,
+    "comment_content": "How's the keyboard for long typing sessions?",
+    "created_at": {
+      "$date": "2025-10-04T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f554"
+    },
+    "article_id": "692ffc19255db7549464f510",
+    "owner_id": "692ffc13255db764382a0509",
+    "parent_comment_id": null,
+    "comment_content": "How loud are the fans under load?",
+    "created_at": {
+      "$date": "2025-10-16T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f555"
+    },
+    "article_id": "692ffc19255db7549464f50d",
+    "owner_id": "692ffc12255db764382a0501",
+    "parent_comment_id": null,
+    "comment_content": "How's the keyboard for long typing sessions?",
+    "created_at": {
+      "$date": "2025-11-29T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f556"
+    },
+    "article_id": "692ffc19255db7549464f505",
+    "owner_id": "692ffc0d255db764382a04eb",
+    "parent_comment_id": null,
+    "comment_content": "How does it compare to the previous model?",
+    "created_at": {
+      "$date": "2025-07-01T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f557"
+    },
+    "article_id": "692ffc19255db7549464f510",
+    "owner_id": "692ffc15255db764382a0510",
+    "parent_comment_id": null,
+    "comment_content": "This helped me make my purchase decision, thank you!",
+    "created_at": {
+      "$date": "2025-07-27T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f558"
+    },
+    "article_id": "692ffc19255db7549464f513",
+    "owner_id": "692ffc16255db764382a0516",
+    "parent_comment_id": null,
+    "comment_content": "This is exactly what I was looking for! Thank you!",
+    "created_at": {
+      "$date": "2025-09-24T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f559"
+    },
+    "article_id": "692ffc19255db7549464f518",
+    "owner_id": "692ffc11255db764382a04ff",
+    "parent_comment_id": null,
+    "comment_content": "I've been considering this laptop, your review helped a lot.",
+    "created_at": {
+      "$date": "2025-11-29T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f55a"
+    },
+    "article_id": "692ffc19255db7549464f505",
+    "owner_id": "692ffc0f255db764382a04f4",
+    "parent_comment_id": null,
+    "comment_content": "Best review I've read on this model.",
+    "created_at": {
+      "$date": "2025-09-10T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f55b"
+    },
+    "article_id": "692ffc19255db7549464f516",
+    "owner_id": "692ffc13255db764382a0505",
+    "parent_comment_id": null,
+    "comment_content": "This is exactly what I was looking for! Thank you!",
+    "created_at": {
+      "$date": "2025-09-18T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f55c"
+    },
+    "article_id": "692ffc19255db7549464f509",
+    "owner_id": "692ffc14255db764382a050c",
+    "parent_comment_id": null,
+    "comment_content": "How's the keyboard for long typing sessions?",
+    "created_at": {
+      "$date": "2025-09-22T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f55d"
+    },
+    "article_id": "692ffc19255db7549464f51a",
+    "owner_id": "692ffc10255db764382a04f7",
+    "parent_comment_id": null,
+    "comment_content": "How's the port selection?",
+    "created_at": {
+      "$date": "2025-10-15T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f55e"
+    },
+    "article_id": "692ffc19255db7549464f504",
+    "owner_id": "692ffc0d255db764382a04eb",
+    "parent_comment_id": null,
+    "comment_content": "Thanks for sharing this detailed review.",
+    "created_at": {
+      "$date": "2025-09-10T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f55f"
+    },
+    "article_id": "692ffc19255db7549464f519",
+    "owner_id": "692ffc12255db764382a0502",
+    "parent_comment_id": null,
+    "comment_content": "Very thorough review. Appreciate the effort!",
+    "created_at": {
+      "$date": "2025-11-14T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f560"
+    },
+    "article_id": "692ffc19255db7549464f51a",
+    "owner_id": "692ffc15255db764382a0511",
+    "parent_comment_id": null,
+    "comment_content": "This helped me make my purchase decision, thank you!",
+    "created_at": {
+      "$date": "2025-09-17T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f561"
+    },
+    "article_id": "692ffc19255db7549464f511",
+    "owner_id": "692ffc0d255db764382a04e9",
+    "parent_comment_id": null,
+    "comment_content": "What's the warranty coverage like?",
+    "created_at": {
+      "$date": "2025-11-01T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f562"
+    },
+    "article_id": "692ffc19255db7549464f500",
+    "owner_id": "692ffc11255db764382a0500",
+    "parent_comment_id": null,
+    "comment_content": "Perfect timing, I needed this information today!",
+    "created_at": {
+      "$date": "2025-09-20T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f563"
+    },
+    "article_id": "692ffc19255db7549464f509",
+    "owner_id": "692ffc0e255db764382a04ed",
+    "parent_comment_id": null,
+    "comment_content": "Great article! Very informative and well-written.",
+    "created_at": {
+      "$date": "2025-08-14T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f564"
+    },
+    "article_id": "692ffc19255db7549464f512",
+    "owner_id": "692ffc12255db764382a0504",
+    "parent_comment_id": null,
+    "comment_content": "Could you elaborate more on the battery performance?",
+    "created_at": {
+      "$date": "2025-09-19T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f565"
+    },
+    "article_id": "692ffc19255db7549464f4fe",
+    "owner_id": "692ffc14255db764382a050b",
+    "parent_comment_id": null,
+    "comment_content": "I have a different opinion, but I respect your analysis.",
+    "created_at": {
+      "$date": "2025-08-19T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f566"
+    },
+    "article_id": "692ffc19255db7549464f50a",
+    "owner_id": "692ffc15255db764382a0513",
+    "parent_comment_id": null,
+    "comment_content": "Interesting perspective on this laptop.",
+    "created_at": {
+      "$date": "2025-11-02T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f567"
+    },
+    "article_id": "692ffc19255db7549464f517",
+    "owner_id": "692ffc16255db764382a0514",
+    "parent_comment_id": null,
+    "comment_content": "Very balanced and objective review.",
+    "created_at": {
+      "$date": "2025-08-03T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f568"
+    },
+    "article_id": "692ffc19255db7549464f503",
+    "owner_id": "692ffc13255db764382a0506",
+    "parent_comment_id": null,
+    "comment_content": "Could you elaborate more on the battery performance?",
+    "created_at": {
+      "$date": "2025-09-08T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f569"
+    },
+    "article_id": "692ffc19255db7549464f511",
+    "owner_id": "692ffc13255db764382a0506",
+    "parent_comment_id": null,
+    "comment_content": "Thanks for sharing this detailed review.",
+    "created_at": {
+      "$date": "2025-07-27T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f56a"
+    },
+    "article_id": "692ffc19255db7549464f519",
+    "owner_id": "692ffc14255db764382a050c",
+    "parent_comment_id": null,
+    "comment_content": "Bookmarking this for future reference.",
+    "created_at": {
+      "$date": "2025-07-03T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f56b"
+    },
+    "article_id": "692ffc19255db7549464f4ff",
+    "owner_id": "692ffc16255db764382a0517",
+    "parent_comment_id": null,
+    "comment_content": "How's the keyboard for long typing sessions?",
+    "created_at": {
+      "$date": "2025-10-02T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f56c"
+    },
+    "article_id": "692ffc19255db7549464f511",
+    "owner_id": "692ffc14255db764382a050b",
+    "parent_comment_id": null,
+    "comment_content": "Thanks for sharing this detailed review.",
+    "created_at": {
+      "$date": "2025-11-11T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f56d"
+    },
+    "article_id": "692ffc19255db7549464f500",
+    "owner_id": "692ffc13255db764382a0506",
+    "parent_comment_id": null,
+    "comment_content": "How does it compare to the previous model?",
+    "created_at": {
+      "$date": "2025-11-09T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f56e"
+    },
+    "article_id": "692ffc19255db7549464f511",
+    "owner_id": "692ffc14255db764382a050b",
+    "parent_comment_id": null,
+    "comment_content": "I've been considering this laptop, your review helped a lot.",
+    "created_at": {
+      "$date": "2025-08-28T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f56f"
+    },
+    "article_id": "692ffc19255db7549464f512",
+    "owner_id": "692ffc13255db764382a0508",
+    "parent_comment_id": null,
+    "comment_content": "I have a different opinion, but I respect your analysis.",
+    "created_at": {
+      "$date": "2025-10-11T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f570"
+    },
+    "article_id": "692ffc19255db7549464f50d",
+    "owner_id": "692ffc11255db764382a0500",
+    "parent_comment_id": null,
+    "comment_content": "Excellent explanation of the technical specifications!",
+    "created_at": {
+      "$date": "2025-09-06T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f571"
+    },
+    "article_id": "692ffc19255db7549464f4fe",
+    "owner_id": "692ffc15255db764382a050f",
+    "parent_comment_id": null,
+    "comment_content": "Best review I've read on this model.",
+    "created_at": {
+      "$date": "2025-09-19T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f572"
+    },
+    "article_id": "692ffc19255db7549464f50d",
+    "owner_id": "692ffc0f255db764382a04f5",
+    "parent_comment_id": null,
+    "comment_content": "How's the port selection?",
+    "created_at": {
+      "$date": "2025-09-22T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f573"
+    },
+    "article_id": "692ffc19255db7549464f512",
+    "owner_id": "692ffc13255db764382a0505",
+    "parent_comment_id": null,
+    "comment_content": "I disagree with some points but overall solid review.",
+    "created_at": {
+      "$date": "2025-10-18T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f574"
+    },
+    "article_id": "692ffc19255db7549464f514",
+    "owner_id": "692ffc15255db764382a0512",
+    "parent_comment_id": null,
+    "comment_content": "Perfect timing, I needed this information today!",
+    "created_at": {
+      "$date": "2025-09-19T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f575"
+    },
+    "article_id": "692ffc19255db7549464f4ff",
+    "owner_id": "692ffc0d255db764382a04eb",
+    "parent_comment_id": null,
+    "comment_content": "Is the RAM upgradeable?",
+    "created_at": {
+      "$date": "2025-11-26T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f576"
+    },
+    "article_id": "692ffc19255db7549464f502",
+    "owner_id": "692ffc13255db764382a0507",
+    "parent_comment_id": null,
+    "comment_content": "This is exactly what I was looking for! Thank you!",
+    "created_at": {
+      "$date": "2025-08-30T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f577"
+    },
+    "article_id": "692ffc19255db7549464f507",
+    "owner_id": "692ffc0e255db764382a04ef",
+    "parent_comment_id": null,
+    "comment_content": "Perfect timing, I needed this information today!",
+    "created_at": {
+      "$date": "2025-08-19T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f578"
+    },
+    "article_id": "692ffc19255db7549464f505",
+    "owner_id": "692ffc16255db764382a0515",
+    "parent_comment_id": null,
+    "comment_content": "What about the thermal performance under heavy load?",
+    "created_at": {
+      "$date": "2025-09-25T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f579"
+    },
+    "article_id": "692ffc19255db7549464f511",
+    "owner_id": "692ffc17255db764382a0519",
+    "parent_comment_id": null,
+    "comment_content": "Thanks for the detailed benchmarks!",
+    "created_at": {
+      "$date": "2025-09-13T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f57a"
+    },
+    "article_id": "692ffc19255db7549464f507",
+    "owner_id": "692ffc0d255db764382a04eb",
+    "parent_comment_id": null,
+    "comment_content": "I've been considering this laptop, your review helped a lot.",
+    "created_at": {
+      "$date": "2025-09-25T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f57b"
+    },
+    "article_id": "692ffc19255db7549464f504",
+    "owner_id": "692ffc15255db764382a0513",
+    "parent_comment_id": null,
+    "comment_content": "Perfect timing, I needed this information today!",
+    "created_at": {
+      "$date": "2025-10-07T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f57c"
+    },
+    "article_id": "692ffc19255db7549464f510",
+    "owner_id": "692ffc10255db764382a04fa",
+    "parent_comment_id": null,
+    "comment_content": "Excellent explanation of the technical specifications!",
+    "created_at": {
+      "$date": "2025-11-06T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f57d"
+    },
+    "article_id": "692ffc19255db7549464f510",
+    "owner_id": "692ffc0e255db764382a04ed",
+    "parent_comment_id": "692ffc19255db7549464f523",
+    "comment_content": "I'll write a follow-up article about that soon.",
+    "created_at": {
+      "$date": "2025-10-25T05:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f57e"
+    },
+    "article_id": "692ffc19255db7549464f502",
+    "owner_id": "692ffc0d255db764382a04ea",
+    "parent_comment_id": "692ffc19255db7549464f53c",
+    "comment_content": "That's a common question. Let me explain...",
+    "created_at": {
+      "$date": "2025-09-03T02:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f57f"
+    },
+    "article_id": "692ffc19255db7549464f503",
+    "owner_id": "692ffc12255db764382a0502",
+    "parent_comment_id": "692ffc19255db7549464f568",
+    "comment_content": "Glad I could help with your decision!",
+    "created_at": {
+      "$date": "2025-09-10T05:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f580"
+    },
+    "article_id": "692ffc19255db7549464f501",
+    "owner_id": "692ffc12255db764382a0501",
+    "parent_comment_id": "692ffc19255db7549464f54d",
+    "comment_content": "Thanks for the suggestion. I'll include that info.",
+    "created_at": {
+      "$date": "2025-11-15T04:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f581"
+    },
+    "article_id": "692ffc19255db7549464f515",
+    "owner_id": "692ffc0f255db764382a04f2",
+    "parent_comment_id": "692ffc19255db7549464f525",
+    "comment_content": "I'm happy the review was useful to you.",
+    "created_at": {
+      "$date": "2025-08-29T09:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f582"
+    },
+    "article_id": "692ffc19255db7549464f50e",
+    "owner_id": "692ffc0e255db764382a04f1",
+    "parent_comment_id": "692ffc19255db7549464f543",
+    "comment_content": "Thanks for reading! Feel free to ask any questions.",
+    "created_at": {
+      "$date": "2025-06-25T03:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f583"
+    },
+    "article_id": "692ffc19255db7549464f505",
+    "owner_id": "692ffc16255db764382a0517",
+    "parent_comment_id": "692ffc19255db7549464f540",
+    "comment_content": "Thanks for the suggestion. I'll include that info.",
+    "created_at": {
+      "$date": "2025-10-18T11:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f584"
+    },
+    "article_id": "692ffc19255db7549464f516",
+    "owner_id": "692ffc13255db764382a0505",
+    "parent_comment_id": "692ffc19255db7549464f54c",
+    "comment_content": "Good question! I'll test that and update the review.",
+    "created_at": {
+      "$date": "2025-10-23T02:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f585"
+    },
+    "article_id": "692ffc19255db7549464f50d",
+    "owner_id": "692ffc0d255db764382a04ec",
+    "parent_comment_id": "692ffc19255db7549464f570",
+    "comment_content": "Good question! I'll test that and update the review.",
+    "created_at": {
+      "$date": "2025-09-07T00:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f586"
+    },
+    "article_id": "692ffc19255db7549464f512",
+    "owner_id": "692ffc10255db764382a04fa",
+    "parent_comment_id": "692ffc19255db7549464f56f",
+    "comment_content": "I appreciate your input and different perspective.",
+    "created_at": {
+      "$date": "2025-10-13T07:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f587"
+    },
+    "article_id": "692ffc19255db7549464f504",
+    "owner_id": "692ffc10255db764382a04f7",
+    "parent_comment_id": "692ffc19255db7549464f537",
+    "comment_content": "Great question! In my testing, it performed well.",
+    "created_at": {
+      "$date": "2025-10-06T22:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f588"
+    },
+    "article_id": "692ffc19255db7549464f501",
+    "owner_id": "692ffc16255db764382a0514",
+    "parent_comment_id": "692ffc19255db7549464f533",
+    "comment_content": "I'll compare it directly in an upcoming review.",
+    "created_at": {
+      "$date": "2025-11-04T00:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f589"
+    },
+    "article_id": "692ffc19255db7549464f50b",
+    "owner_id": "692ffc0e255db764382a04f0",
+    "parent_comment_id": "692ffc19255db7549464f54a",
+    "comment_content": "That's a common question. Let me explain...",
+    "created_at": {
+      "$date": "2025-09-25T07:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f58a"
+    },
+    "article_id": "692ffc19255db7549464f512",
+    "owner_id": "692ffc14255db764382a050c",
+    "parent_comment_id": "692ffc19255db7549464f51c",
+    "comment_content": "That's a common question. Let me explain...",
+    "created_at": {
+      "$date": "2025-08-03T23:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f58b"
+    },
+    "article_id": "692ffc19255db7549464f510",
+    "owner_id": "692ffc15255db764382a050f",
+    "parent_comment_id": "692ffc19255db7549464f523",
+    "comment_content": "In my experience, it's been very reliable.",
+    "created_at": {
+      "$date": "2025-10-24T07:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f58c"
+    },
+    "article_id": "692ffc19255db7549464f507",
+    "owner_id": "692ffc12255db764382a0502",
+    "parent_comment_id": "692ffc19255db7549464f52a",
+    "comment_content": "That's an interesting perspective I hadn't considered.",
+    "created_at": {
+      "$date": "2025-07-05T22:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f58d"
+    },
+    "article_id": "692ffc19255db7549464f509",
+    "owner_id": "692ffc15255db764382a0510",
+    "parent_comment_id": "692ffc19255db7549464f542",
+    "comment_content": "Thanks for your feedback! Glad you found it helpful.",
+    "created_at": {
+      "$date": "2025-08-21T05:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f58e"
+    },
+    "article_id": "692ffc19255db7549464f512",
+    "owner_id": "692ffc15255db764382a0510",
+    "parent_comment_id": "692ffc19255db7549464f564",
+    "comment_content": "Glad I could help with your decision!",
+    "created_at": {
+      "$date": "2025-09-21T01:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f58f"
+    },
+    "article_id": "692ffc19255db7549464f4fe",
+    "owner_id": "692ffc0f255db764382a04f2",
+    "parent_comment_id": "692ffc19255db7549464f571",
+    "comment_content": "Based on my testing, it handles that quite well.",
+    "created_at": {
+      "$date": "2025-09-20T06:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f590"
+    },
+    "article_id": "692ffc19255db7549464f511",
+    "owner_id": "692ffc0d255db764382a04e8",
+    "parent_comment_id": "692ffc19255db7549464f569",
+    "comment_content": "Thanks for your feedback! Glad you found it helpful.",
+    "created_at": {
+      "$date": "2025-07-29T07:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f591"
+    },
+    "article_id": "692ffc19255db7549464f50b",
+    "owner_id": "692ffc10255db764382a04f8",
+    "parent_comment_id": "692ffc19255db7549464f54a",
+    "comment_content": "I'll write a follow-up article about that soon.",
+    "created_at": {
+      "$date": "2025-09-24T08:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f592"
+    },
+    "article_id": "692ffc19255db7549464f501",
+    "owner_id": "692ffc13255db764382a0507",
+    "parent_comment_id": "692ffc19255db7549464f522",
+    "comment_content": "I'll do a dedicated video on that topic.",
+    "created_at": {
+      "$date": "2025-09-28T18:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f593"
+    },
+    "article_id": "692ffc19255db7549464f515",
+    "owner_id": "692ffc15255db764382a0511",
+    "parent_comment_id": "692ffc19255db7549464f525",
+    "comment_content": "That's an interesting perspective I hadn't considered.",
+    "created_at": {
+      "$date": "2025-08-28T19:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f594"
+    },
+    "article_id": "692ffc19255db7549464f507",
+    "owner_id": "692ffc0d255db764382a04eb",
+    "parent_comment_id": "692ffc19255db7549464f529",
+    "comment_content": "That's a common question. Let me explain...",
+    "created_at": {
+      "$date": "2025-06-25T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f595"
+    },
+    "article_id": "692ffc19255db7549464f512",
+    "owner_id": "692ffc15255db764382a0513",
+    "parent_comment_id": "692ffc19255db7549464f573",
+    "comment_content": "I'll compare it directly in an upcoming review.",
+    "created_at": {
+      "$date": "2025-10-20T11:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f596"
+    },
+    "article_id": "692ffc19255db7549464f512",
+    "owner_id": "692ffc16255db764382a0517",
+    "parent_comment_id": "692ffc19255db7549464f51c",
+    "comment_content": "I'll do a dedicated video on that topic.",
+    "created_at": {
+      "$date": "2025-08-04T20:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f597"
+    },
+    "article_id": "692ffc19255db7549464f509",
+    "owner_id": "692ffc16255db764382a0514",
+    "parent_comment_id": "692ffc19255db7549464f55c",
+    "comment_content": "Good question! I'll test that and update the review.",
+    "created_at": {
+      "$date": "2025-09-23T01:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f598"
+    },
+    "article_id": "692ffc19255db7549464f518",
+    "owner_id": "692ffc0f255db764382a04f6",
+    "parent_comment_id": "692ffc19255db7549464f545",
+    "comment_content": "Thanks for reading! Feel free to ask any questions.",
+    "created_at": {
+      "$date": "2025-10-08T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f599"
+    },
+    "article_id": "692ffc19255db7549464f50d",
+    "owner_id": "692ffc16255db764382a0514",
+    "parent_comment_id": "692ffc19255db7549464f555",
+    "comment_content": "Good catch! I'll update the article with that detail.",
+    "created_at": {
+      "$date": "2025-11-30T09:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f59a"
+    },
+    "article_id": "692ffc19255db7549464f500",
+    "owner_id": "692ffc11255db764382a04fe",
+    "parent_comment_id": "692ffc19255db7549464f562",
+    "comment_content": "That's an interesting perspective I hadn't considered.",
+    "created_at": {
+      "$date": "2025-09-21T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f59b"
+    },
+    "article_id": "692ffc19255db7549464f508",
+    "owner_id": "692ffc0e255db764382a04f1",
+    "parent_comment_id": "692ffc19255db7549464f53b",
+    "comment_content": "Thanks for reading! Feel free to ask any questions.",
+    "created_at": {
+      "$date": "2025-09-25T11:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f59c"
+    },
+    "article_id": "692ffc19255db7549464f4ff",
+    "owner_id": "692ffc10255db764382a04fb",
+    "parent_comment_id": "692ffc19255db7549464f56b",
+    "comment_content": "I appreciate your input and different perspective.",
+    "created_at": {
+      "$date": "2025-10-04T04:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f59d"
+    },
+    "article_id": "692ffc19255db7549464f50a",
+    "owner_id": "692ffc14255db764382a050b",
+    "parent_comment_id": "692ffc19255db7549464f530",
+    "comment_content": "Thanks for the suggestion. I'll include that info.",
+    "created_at": {
+      "$date": "2025-07-06T22:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f59e"
+    },
+    "article_id": "692ffc19255db7549464f511",
+    "owner_id": "692ffc0f255db764382a04f2",
+    "parent_comment_id": "692ffc19255db7549464f51e",
+    "comment_content": "That's a valid concern. Let me address it.",
+    "created_at": {
+      "$date": "2025-10-01T22:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f59f"
+    },
+    "article_id": "692ffc19255db7549464f503",
+    "owner_id": "692ffc11255db764382a04fc",
+    "parent_comment_id": "692ffc19255db7549464f568",
+    "comment_content": "Thanks for reading! Feel free to ask any questions.",
+    "created_at": {
+      "$date": "2025-09-10T00:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5a0"
+    },
+    "article_id": "692ffc19255db7549464f50b",
+    "owner_id": "692ffc13255db764382a0506",
+    "parent_comment_id": "692ffc19255db7549464f52d",
+    "comment_content": "Good catch! I'll update the article with that detail.",
+    "created_at": {
+      "$date": "2025-11-14T15:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5a1"
+    },
+    "article_id": "692ffc19255db7549464f504",
+    "owner_id": "692ffc12255db764382a0501",
+    "parent_comment_id": "692ffc19255db7549464f57b",
+    "comment_content": "In my experience, it's been very reliable.",
+    "created_at": {
+      "$date": "2025-10-08T15:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5a2"
+    },
+    "article_id": "692ffc19255db7549464f516",
+    "owner_id": "692ffc11255db764382a04fe",
+    "parent_comment_id": "692ffc19255db7549464f54c",
+    "comment_content": "I'll compare it directly in an upcoming review.",
+    "created_at": {
+      "$date": "2025-10-22T11:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5a3"
+    },
+    "article_id": "692ffc19255db7549464f512",
+    "owner_id": "692ffc12255db764382a0502",
+    "parent_comment_id": "692ffc19255db7549464f573",
+    "comment_content": "Thanks for reading! Feel free to ask any questions.",
+    "created_at": {
+      "$date": "2025-10-18T20:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5a4"
+    },
+    "article_id": "692ffc19255db7549464f504",
+    "owner_id": "692ffc0e255db764382a04ed",
+    "parent_comment_id": "692ffc19255db7549464f53e",
+    "comment_content": "Glad I could help with your decision!",
+    "created_at": {
+      "$date": "2025-08-01T10:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5a5"
+    },
+    "article_id": "692ffc19255db7549464f511",
+    "owner_id": "692ffc15255db764382a0510",
+    "parent_comment_id": "692ffc19255db7549464f51e",
+    "comment_content": "That's a valid concern. Let me address it.",
+    "created_at": {
+      "$date": "2025-10-02T09:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5a6"
+    },
+    "article_id": "692ffc19255db7549464f513",
+    "owner_id": "692ffc15255db764382a0513",
+    "parent_comment_id": "692ffc19255db7549464f553",
+    "comment_content": "Good question! I'll test that and update the review.",
+    "created_at": {
+      "$date": "2025-10-05T17:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5a7"
+    },
+    "article_id": "692ffc19255db7549464f513",
+    "owner_id": "692ffc0e255db764382a04f0",
+    "parent_comment_id": "692ffc19255db7549464f534",
+    "comment_content": "I'll write a follow-up article about that soon.",
+    "created_at": {
+      "$date": "2025-09-05T08:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5a8"
+    },
+    "article_id": "692ffc19255db7549464f508",
+    "owner_id": "692ffc13255db764382a0506",
+    "parent_comment_id": "692ffc19255db7549464f539",
+    "comment_content": "Good question! I'll test that and update the review.",
+    "created_at": {
+      "$date": "2025-09-17T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5a9"
+    },
+    "article_id": "692ffc19255db7549464f509",
+    "owner_id": "692ffc10255db764382a04fb",
+    "parent_comment_id": "692ffc19255db7549464f55c",
+    "comment_content": "In my experience, it's been very reliable.",
+    "created_at": {
+      "$date": "2025-09-24T16:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5aa"
+    },
+    "article_id": "692ffc19255db7549464f502",
+    "owner_id": "692ffc0f255db764382a04f4",
+    "parent_comment_id": "692ffc19255db7549464f53c",
+    "comment_content": "I'll do a dedicated video on that topic.",
+    "created_at": {
+      "$date": "2025-09-02T04:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5ab"
+    },
+    "article_id": "692ffc19255db7549464f502",
+    "owner_id": "692ffc0f255db764382a04f6",
+    "parent_comment_id": "692ffc19255db7549464f551",
+    "comment_content": "Great question! In my testing, it performed well.",
+    "created_at": {
+      "$date": "2025-07-08T07:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5ac"
+    },
+    "article_id": "692ffc19255db7549464f513",
+    "owner_id": "692ffc0f255db764382a04f3",
+    "parent_comment_id": "692ffc19255db7549464f52c",
+    "comment_content": "I'm happy the review was useful to you.",
+    "created_at": {
+      "$date": "2025-07-21T13:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5ad"
+    },
+    "article_id": "692ffc19255db7549464f50a",
+    "owner_id": "692ffc0d255db764382a04ea",
+    "parent_comment_id": "692ffc19255db7549464f530",
+    "comment_content": "Thanks for the suggestion. I'll include that info.",
+    "created_at": {
+      "$date": "2025-07-06T06:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5ae"
+    },
+    "article_id": "692ffc19255db7549464f516",
+    "owner_id": "692ffc17255db764382a0519",
+    "parent_comment_id": "692ffc19255db7549464f55b",
+    "comment_content": "That's a valid concern. Let me address it.",
+    "created_at": {
+      "$date": "2025-09-19T12:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5af"
+    },
+    "article_id": "692ffc19255db7549464f518",
+    "owner_id": "692ffc15255db764382a0513",
+    "parent_comment_id": "692ffc19255db7549464f545",
+    "comment_content": "That's a common question. Let me explain...",
+    "created_at": {
+      "$date": "2025-10-07T22:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5b0"
+    },
+    "article_id": "692ffc19255db7549464f513",
+    "owner_id": "692ffc0e255db764382a04ed",
+    "parent_comment_id": "692ffc19255db7549464f553",
+    "comment_content": "Thanks for reading! Feel free to ask any questions.",
+    "created_at": {
+      "$date": "2025-10-05T08:00:09.974686Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "692ffc19255db7549464f5b1"
+    },
+    "article_id": "692ffc19255db7549464f509",
+    "owner_id": "692ffc11255db764382a04fe",
+    "parent_comment_id": "692ffc19255db7549464f563",
+    "comment_content": "I'll do a dedicated video on that topic.",
+    "created_at": {
+      "$date": "2025-08-16T12:00:09.974686Z"
+    }
+  }
+]
