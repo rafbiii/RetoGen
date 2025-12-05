@@ -43,7 +43,6 @@ const CommentItem = ({
       const token = localStorage.getItem("token");
       const data = await DetailArticleService.viewArticle(token, id);
       setArticleOwner(data.user_email);
-      console.log(token, id);
     };
 
     if (id) {
@@ -56,13 +55,12 @@ const CommentItem = ({
   const isEditing = editingCommentId === comment.comment_id;
   const isReplying = replyingToCommentId === comment.comment_id;
   
-  const getUserRating = (owner) => {
-    const userRatingObj = ratings.find((r) => r.owner === owner);
+  const getUserRating = (user_email) => {
+    const userRatingObj = ratings.find((r) => r.user_email === user_email);
     return userRatingObj ? userRatingObj.rating_value : null;
   };
 
-  const commentUserRating = getUserRating(comment.owner);
-
+  const commentUserRating = getUserRating(comment.user_email);
   const effectiveDepth = Math.min(depth, 2);
   const marginLeft = effectiveDepth * 20;
   return (
@@ -287,7 +285,7 @@ function DetailView() {
     setIsLoading(true);
     try {
       const data = await DetailArticleService.viewArticle(token, id);
-      const currentUsername = data.username;
+      const currentUsername = data.user_email;
       
       if (data.confirmation === 'token invalid') {
         displayPopup('token invalid');
@@ -329,7 +327,7 @@ function DetailView() {
           }
           
           // Check if current user has already rated and get their rating
-          const userRatingObj = data.ratings.find(r => r.owner === currentUsername);
+          const userRatingObj = data.ratings.find(r => r.user_email === currentUsername);
           if (userRatingObj) {
             setHasUserRated(true);
             setUserRating(userRatingObj.rating_value);
@@ -553,7 +551,6 @@ function DetailView() {
   };
 
   const confirmEditRating = async () => {
-    // Cek apabila rating tidak berubah, jangan lanjut
     if (editRatingValue === userRating) {
       displayPopup('Rating value unchanged');
       setShowEditRatingModal(false);
@@ -583,15 +580,14 @@ function DetailView() {
       }
       
       if (data.confirmation === 'successful') {
-        // Update article data with new response
         setArticle({
           title: data.article_title,
           content: data.article_content,
           tag: data.article_tag,
           image: data.article_image
         });
-        setComments(data.comments || []);
-        setRatings(data.ratings || []);
+        setComments(data.comments);
+        setRatings(data.ratings);
         
         // Update rating states
         setUserRating(editRatingValue);
@@ -1099,7 +1095,7 @@ function DetailView() {
               </button>
               <button className="btn-confirm-report" onClick={handleReport}>
                 <FiFlag />
-                Submit Report
+                Submit
               </button>
             </div>
           </div>
