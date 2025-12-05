@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { data, useNavigate, useParams } from 'react-router-dom';
 import { FiStar, FiSend, FiEdit, FiFlag, FiTrash2, FiCheckCircle, FiAlertCircle, FiUser, FiX, FiMessageCircle } from 'react-icons/fi';
 import Navbar from '../../common/Navbar/Navbar';
 import DetailArticleService from '../../../services/DetailArticleService';
@@ -8,6 +8,7 @@ import AddCommentService from '../../../services/AddCommentService';
 import EditCommentService from '../../../services/EditCommentService';
 import DeleteCommentService from '../../../services/DeleteCommentService';
 import AddRatingService from '../../../services/AddRatingService';
+import EditRatingService from '../../../services/EditRatingService';
 import { initializeTheme } from '../../../services/themeUtils';
 import './DetailView.css';
 
@@ -41,18 +42,20 @@ const CommentItem = ({
     const fetchData = async () => {
       const token = localStorage.getItem("token");
       const data = await DetailArticleService.viewArticle(token, id);
-      setArticleOwner(data.username);
+      setArticleOwner(data.user_email);
+      console.log(token, id);
     };
 
     if (id) {
       fetchData();
     }
+    
   }, [id]);
 
-  const isOwner = comment.owner === articleOwner;
+  const isOwner = comment.user_email === articleOwner;
   const isEditing = editingCommentId === comment.comment_id;
   const isReplying = replyingToCommentId === comment.comment_id;
-
+  
   const getUserRating = (owner) => {
     const userRatingObj = ratings.find((r) => r.owner === owner);
     return userRatingObj ? userRatingObj.rating_value : null;
@@ -252,6 +255,12 @@ function DetailView() {
   const [showRatingConfirmModal, setShowRatingConfirmModal] = useState(false);
   const [pendingRating, setPendingRating] = useState(0);
   
+  // Edit rating states
+  const [isEditingRating, setIsEditingRating] = useState(false);
+  const [editRatingValue, setEditRatingValue] = useState(0);
+  const [showEditRatingModal, setShowEditRatingModal] = useState(false);
+  const [userRatingId, setUserRatingId] = useState(null);
+  
   useEffect(() => {
     initializeTheme();
   }, []);
@@ -279,7 +288,7 @@ function DetailView() {
     try {
       const data = await DetailArticleService.viewArticle(token, id);
       const currentUsername = data.username;
-
+      
       if (data.confirmation === 'token invalid') {
         displayPopup('token invalid');
         setTimeout(() => {
@@ -325,6 +334,7 @@ function DetailView() {
             setHasUserRated(true);
             setUserRating(userRatingObj.rating_value);
             setRating(userRatingObj.rating_value); // Set rating state untuk tampilan
+            setUserRatingId(userRatingObj.rating_id); // Simpan rating_id user
           }
         }
         
@@ -525,6 +535,87 @@ function DetailView() {
     setRating(userRating || 0); // Reset to user's existing rating or 0
   };
 
+  // Handle Edit Rating
+  const handleEditRatingClick = () => {
+    setEditRatingValue(userRating);
+    setIsEditingRating(true);
+    setShowEditRatingModal(true);
+  };
+
+  const handleEditRatingStarClick = (selectedRating) => {
+    setEditRatingValue(selectedRating);
+  };
+
+  const cancelEditRating = () => {
+    setShowEditRatingModal(false);
+    setEditRatingValue(0);
+    setIsEditingRating(false);
+  };
+
+  const confirmEditRating = async () => {
+    // Cek apabila rating tidak berubah, jangan lanjut
+    if (editRatingValue === userRating) {
+      displayPopup('Rating value unchanged');
+      setShowEditRatingModal(false);
+      setIsEditingRating(false);
+      return;
+    }
+
+    setIsSubmittingRating(true);
+    const token = localStorage.getItem('token');
+    
+    try {
+      const data = await EditRatingService.editRating(token, id, userRatingId, editRatingValue);
+      
+      if (data.confirmation === 'token invalid') {
+        displayPopup('token invalid');
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+        return;
+      }
+      
+      if (data.confirmation === 'backend error') {
+        displayPopup('server busy');
+        setIsSubmittingRating(false);
+        setShowEditRatingModal(false);
+        return;
+      }
+      
+      if (data.confirmation === 'successful') {
+        // Update article data with new response
+        setArticle({
+          title: data.article_title,
+          content: data.article_content,
+          tag: data.article_tag,
+          image: data.article_image
+        });
+        setComments(data.comments || []);
+        setRatings(data.ratings || []);
+        
+        // Update rating states
+        setUserRating(editRatingValue);
+        setRating(editRatingValue);
+        
+        // Recalculate average
+        if (data.ratings && data.ratings.length > 0) {
+          const sum = data.ratings.reduce((acc, r) => acc + r.rating_value, 0);
+          setAverageRating((sum / data.ratings.length).toFixed(1));
+          setRatingCount(data.ratings.length);
+        }
+        
+        displayPopup('Rating updated successfully');
+        setShowEditRatingModal(false);
+        setIsEditingRating(false);
+      }
+    } catch (error) {
+      console.error('Error editing rating:', error);
+      displayPopup('server busy');
+    }
+    
+    setIsSubmittingRating(false);
+  };
+
   const handleEditComment = (commentId, currentContent) => {
     setEditingCommentId(commentId);
     setEditCommentContent(currentContent);
@@ -595,7 +686,7 @@ function DetailView() {
     const token = localStorage.getItem('token');
     
     try {
-      const data = await DeleteCommentService.deleteComment(token, id, deletingCommentId);
+      const data = await DeleteCommentService.deleteComment(token, deletingCommentId);
 
       if (data.confirmation === 'token invalid') {
         displayPopup('token invalid');
@@ -612,9 +703,15 @@ function DetailView() {
       }
       
       if (data.confirmation === 'successful') {
-        // Update article data with new response
-        console.log("Delete comment response:", data); // Debug log
-        
+        setArticle({
+          title: data.article_title,
+          content: data.article_content,
+          tag: data.article_tag,
+          image: data.article_image
+        });
+        setComments(data.comments || []);
+        setRatings(data.ratings || []);
+
         setShowDeleteCommentModal(false);
         setDeletingCommentId(null);
         displayPopup('Comment deleted successfully');
@@ -644,7 +741,7 @@ function DetailView() {
   };
 
   const handleEditArticle = () => {
-    navigate(`/edit-article/${id}`);
+    navigate(`/admin/edit/${id}`);
   };
 
   const handleDeleteArticle = () => {
@@ -673,7 +770,8 @@ function DetailView() {
         return;
       }
       
-      if (data.confirmation === 'successful') {
+      
+      if (data.confirmation === 'successful: article deleted') {
         setShowDeleteConfirmModal(false);
         setSuccessMessage('Article deleted successfully!');
         setShowSuccessModal(true);
@@ -688,7 +786,7 @@ function DetailView() {
       setIsDeleting(false);
     }
   };
-
+  
   const cancelDelete = () => {
     setShowDeleteConfirmModal(false);
   };
@@ -752,6 +850,7 @@ function DetailView() {
     return (
       <>
         <Navbar />
+        <Navbar showBack={true} showAccount={true} onBackClick={() => navigate('/main')} />
         <div className="navbar-placeholder"></div>
         <div className="error-container">
           <h2>Article not found</h2>
@@ -836,6 +935,10 @@ function DetailView() {
                 ))}
               </div>
               <p className="rating-value">You rated: {userRating} / 5</p>
+              <button className="btn-edit-rating" onClick={handleEditRatingClick}>
+                <FiEdit />
+                Edit Rating
+              </button>
             </div>
           ) : (
             <div className="rating-input-container">
@@ -947,6 +1050,36 @@ function DetailView() {
         </div>
       )}
 
+      {/* Edit Rating Modal */}
+      {showEditRatingModal && (
+        <div className="modal-overlay" onClick={cancelEditRating}>
+          <div className="modal-content rating-confirm-modal" onClick={(e) => e.stopPropagation()}>
+            <FiEdit size={64} color="#00BCD4" />
+            <h3>Edit Your Rating</h3>
+            <p>Select your new rating for this article</p>
+            <div className="star-rating-edit-modal">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <FiStar
+                  key={star}
+                  className={`star-edit ${editRatingValue >= star ? 'active' : ''}`}
+                  onClick={() => handleEditRatingStarClick(star)}
+                />
+              ))}
+            </div>
+            <p className="rating-value-edit">New rating: {editRatingValue} / 5</p>
+            <div className="modal-buttons">
+              <button className="btn-cancel" onClick={cancelEditRating}>
+                Cancel
+              </button>
+              <button className="btn-confirm-rating" onClick={confirmEditRating} disabled={isSubmittingRating || editRatingValue === 0}>
+                <FiCheckCircle />
+                {isSubmittingRating ? 'Updating...' : 'Update'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Report Modal */}
       {showReportModal && (
         <div className="modal-overlay" onClick={() => setShowReportModal(false)}>
@@ -991,7 +1124,8 @@ function DetailView() {
               <button className="btn-cancel" onClick={cancelDelete}>
                 Cancel
               </button>
-              <button className="btn-confirm-delete" onClick={confirmDelete} disabled={isDeleting}>
+              <button className="btn-confirm-delete" onClick={confirmDelete}
+                disabled={isDeleting}>
                 <FiTrash2 />
                 {isDeleting ? 'Deleting...' : 'Delete'}
               </button>

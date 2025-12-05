@@ -103,6 +103,7 @@ async def add_comment(req: AddCommentRequest):
             "comment_id": str(c["_id"]),
             "parent_comment_id": c.get("parent_comment_id"),
             "owner": u["username"] if u else "Unknown",
+            "user_email": u["email"],
             "comment_content": c["comment_content"]
         })
 
@@ -121,13 +122,17 @@ async def add_comment(req: AddCommentRequest):
         ratings.append({
             "rating_id": str(r["_id"]),
             "owner": u["username"] if u else "Unknown",
+            "user_email": u["email"],
             "rating_value": r["rating_value"]
         })
 
+    user_email = payload.get("email")
+    
     return {
         "confirmation": "successful",
         "userclass": userclass,
         "username": user["username"],
+        "user_email": user_email,
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],
@@ -148,7 +153,7 @@ async def edit_comment(req: EditCommentRequest):
     user_email = payload.get("email")
     user = await db.user.find_one({"email": user_email})
     owner_id = str(user["_id"])
-
+    user_email = payload.get("email")
     if req.parent_comment_id:
         try:
             parent_oid = ObjectId(req.parent_comment_id)
@@ -210,6 +215,7 @@ async def edit_comment(req: EditCommentRequest):
             "comment_id": str(c["_id"]),
             "parent_comment_id": c.get("parent_comment_id"),
             "owner": u["username"] if u else "Unknown",
+            "user_email": u["email"],
             "comment_content": c["comment_content"]
         })
 
@@ -228,14 +234,17 @@ async def edit_comment(req: EditCommentRequest):
         ratings.append({
             "rating_id": str(r["_id"]),
             "owner": u["username"] if u else "Unknown",
+            "user_email": u["email"],
             "rating_value": r["rating_value"]
         })
 
+    
 
     return {
         "confirmation": "successful",
         "userclass": userclass,
         "username": user["username"],
+        "user_email": user_email,
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],
@@ -283,6 +292,7 @@ async def edit_get_comment(req: EditCommentGetRequest):
         "confirmation": "successful",
         "comment_id": str(comment["_id"]),
         "article_id": str(comment["article_id"]),
+        "user_email": user_email,
         "parent_comment_id": comment.get("parent_comment_id"),
         "comment_content": comment.get("comment_content"),
         "owner": username
@@ -365,6 +375,7 @@ async def delete_comment(req: DeleteCommentRequest):
         comments.append({
             "comment_id": str(c["_id"]),
             "parent_comment_id": c.get("parent_comment_id"),
+            "user_email": u["email"],
             "owner": u["username"] if u else "Unknown",
             "comment_content": c["comment_content"]
         })
@@ -384,16 +395,20 @@ async def delete_comment(req: DeleteCommentRequest):
         ratings.append({
             "rating_id": str(r["_id"]),
             "owner": u["username"] if u else "Unknown",
+            "user_email": u["email"],
             "rating_value": r["rating_value"]
         })
 
     # =====================================================
     # 5) FINAL SUCCESS RESPONSE
     # =====================================================
+    user_email = payload.get("email")
+    
     return {
         "confirmation": "successful",
         "userclass": userclass,
-        
+        "username": user["username"],
+        "user_email": user_email,
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],

@@ -392,6 +392,33 @@ body.dark-mode .rating-value {
   color: #e8e8e8;
 }
 
+.btn-edit-rating {
+  background: #00BCD4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  align-self: center;
+}
+
+.btn-edit-rating:hover {
+  background: #00a3b8;
+  transform: translateY(-2px);
+}
+
+.btn-edit-rating svg {
+  width: 16px;
+  height: 16px;
+}
+
 .rating-input-container {
   display: flex;
   flex-direction: column;
@@ -1121,6 +1148,45 @@ body.dark-mode .star-rating-display-modal .star-display {
   font-size: 13px !important;
   font-weight: 600;
   margin-top: 8px !important;
+}
+
+/* Edit Rating Modal */
+.star-rating-edit-modal {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.star-rating-edit-modal .star-edit {
+  width: 40px;
+  height: 40px;
+  color: #d1d5db;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.star-rating-edit-modal .star-edit:hover,
+.star-rating-edit-modal .star-edit.active {
+  color: #E34234;
+  fill: #E34234;
+  transform: scale(1.15);
+}
+
+body.dark-mode .star-rating-edit-modal .star-edit {
+  color: #4a4a4a;
+}
+
+.rating-value-edit {
+  color: #2a2a2a !important;
+  font-size: 16px !important;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 8px !important;
+}
+
+body.dark-mode .rating-value-edit {
+  color: #e8e8e8 !important;
 }
 
 .btn-confirm-rating {

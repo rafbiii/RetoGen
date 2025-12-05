@@ -75,6 +75,7 @@ function EditArticle() {
 
         const response = await getArticleForEdit(id, token);
         
+        console.log(id, token);
         if (response.confirmation === 'token invalid') {
           localStorage.removeItem('token');
           setModalType('token_invalid');
@@ -438,7 +439,7 @@ function EditArticle() {
         {showModal && (
           <div className="edit-article-modal-overlay" onClick={closeModal}>
             <div className={`edit-article-modal ${modalType}`} onClick={(e) => e.stopPropagation()}>
-              <button className="edit-article-modal-close" onClick={closeModal}>
+              <button className="edit-article-modal-close" onClick={() => {closeModal(); navigate(-1);}}>
                 <FiX />
               </button>
               {modalType === 'success' && <FiCheckCircle size={64} color="#00BCD4" />}
