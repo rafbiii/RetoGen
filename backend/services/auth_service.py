@@ -19,6 +19,7 @@ class AuthService:
             "email": data.email,
             "password": hashed_pw,
             "role": "user",
+            "report_count": 0,
             "created_at": now,
             "updated_at": now,
         }
