@@ -27,36 +27,28 @@ async def add_rating(req: AddRatingSchema):
     if not user:
         return {"confirmation": "token invalid"}
 
-    # gunakan username sebagai owner
     owner_id = str(user["_id"])
     owner_username = user["username"]
 
-
     # 4) CHECK ARTICLE
     article = await RatingService.fetch_article(req.article_id)
-    if article is None:
+    if article is None or article.get("is_deleted"):
         return {"confirmation": "backend error"}
 
-    if article.get("is_deleted") == True:
-        return {"confirmation": "backend error"}
-    
     # 5) CHECK EXISTING RATING
     already = await RatingService.get_rating_by_user(
         article_id=req.article_id,
         owner_id=owner_id
     )
-
     if already:
         return {"confirmation": "already rated"}
 
     # 6) INSERT RATING
     new_rating_id = await RatingService.add_rating(
-        article_id=req.article_id,
+        article_id=req.article_id,  # simpan sebagai string
         owner_id=owner_id,
         rating_value=req.rating_value
     )
-
-
     if not new_rating_id:
         return {"confirmation": "backend error"}
 
@@ -78,13 +70,11 @@ async def add_rating(req: AddRatingSchema):
 
     comments = []
     for c in comments_raw:
-        user = await db.user.find_one({"_id": ObjectId(c["owner_id"])})
-        username = user["username"] if user else "Unknown"
-
+        u = await db.user.find_one({"_id": ObjectId(c["owner_id"])})
         comments.append({
             "comment_id": str(c["_id"]),
             "parent_comment_id": c.get("parent_comment_id"),
-            "owner": username,
+            "owner": u["username"] if u else "Unknown",
             "comment_content": c["comment_content"]
         })
 
@@ -95,20 +85,15 @@ async def add_rating(req: AddRatingSchema):
 
     ratings = []
     for r in ratings_raw:
-        try:
-            u = await db.user.find_one({"_id": ObjectId(r["owner_id"])})
-        except:
-            u = None
-
+        u = await db.user.find_one({"_id": ObjectId(r["owner_id"])})
         ratings.append({
             "rating_id": str(r["_id"]),
             "owner": u["username"] if u else "Unknown",
             "rating_value": r["rating_value"]
         })
 
-    user_email = payload.get("email")
-
-    reports_raw = await db.report_article.find({"article_id": ObjectId(req.article_id)}).to_list(None)
+    # 11) Fetch reports
+    reports_raw = await db.report_article.find({"article_id": req.article_id}).to_list(None)
     reports = []
     for rep in reports_raw:
         reports.append({
@@ -116,8 +101,10 @@ async def add_rating(req: AddRatingSchema):
             "description": rep["description"],
             "created_at": rep.get("created_at")
         })
-    
-    # 11) RETURN SUCCESS
+
+    user_email = payload.get("email")
+
+    # 12) RETURN SUCCESS
     return {
         "confirmation": "successful",
         "userclass": userclass,
