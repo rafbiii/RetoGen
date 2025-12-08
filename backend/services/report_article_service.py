@@ -1,5 +1,6 @@
 from db.connection import db
 from bson import ObjectId
+from datetime import datetime
 
 class ReportArticleService:
 
@@ -7,10 +8,11 @@ class ReportArticleService:
     async def add_report(article_id: str, description: str):
         """Tambahkan report artikel dan update report_count"""
         try:
-            # simpan report di report_article
+            # simpan report di report_article dengan created_at
             data = {
                 "article_id": ObjectId(article_id),
-                "description": description
+                "description": description,
+                "created_at": datetime.utcnow()
             }
             result = await db.report_article.insert_one(data)
 

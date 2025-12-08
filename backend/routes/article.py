@@ -158,6 +158,15 @@ async def view_article(req: ViewArticleRequest):
 
     user_email = payload.get("email")
     
+    reports_raw = await db.report_article.find({"article_id": ObjectId(req.article_id)}).to_list(None)
+    reports = []
+    for rep in reports_raw:
+        reports.append({
+            "report_id": str(rep["_id"]),
+            "description": rep["description"],
+            "created_at": rep.get("created_at")
+        })
+    
     # ===== FINAL RESPONSE Sesuai Setup =====
     return {
         "confirmation": "successful",
@@ -169,7 +178,8 @@ async def view_article(req: ViewArticleRequest):
         "article_tag": article["article_tag"],
         "article_image": image_base64,
         "comments": comments,
-        "ratings": ratings
+        "ratings": ratings,
+        "reports": reports
     }
 
 

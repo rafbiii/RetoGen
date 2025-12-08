@@ -128,6 +128,15 @@ async def add_comment(req: AddCommentRequest):
 
     user_email = payload.get("email")
     
+    reports_raw = await db.report_article.find({"article_id": ObjectId(req.article_id)}).to_list(None)
+    reports = []
+    for rep in reports_raw:
+        reports.append({
+            "report_id": str(rep["_id"]),
+            "description": rep["description"],
+            "created_at": rep.get("created_at")
+        })
+    
     return {
         "confirmation": "successful",
         "userclass": userclass,
@@ -138,7 +147,8 @@ async def add_comment(req: AddCommentRequest):
         "article_tag": article["article_tag"],
         "article_image": image_base64,
         "comments": comments,
-        "ratings": ratings
+        "ratings": ratings,
+        "reports": reports
     }
 
 
@@ -238,7 +248,14 @@ async def edit_comment(req: EditCommentRequest):
             "rating_value": r["rating_value"]
         })
 
-    
+    reports_raw = await db.report_article.find({"article_id": ObjectId(req.article_id)}).to_list(None)
+    reports = []
+    for rep in reports_raw:
+        reports.append({
+            "report_id": str(rep["_id"]),
+            "description": rep["description"],
+            "created_at": rep.get("created_at")
+        })
 
     return {
         "confirmation": "successful",
@@ -250,7 +267,8 @@ async def edit_comment(req: EditCommentRequest):
         "article_tag": article["article_tag"],
         "article_image": image_base64,
         "comments": comments,
-        "ratings": ratings
+        "ratings": ratings,
+        "reports": reports
     }
 
 @router.post("/edit/get")
@@ -404,6 +422,15 @@ async def delete_comment(req: DeleteCommentRequest):
     # =====================================================
     user_email = payload.get("email")
     
+    reports_raw = await db.report_article.find({"article_id": ObjectId(req.article_id)}).to_list(None)
+    reports = []
+    for rep in reports_raw:
+        reports.append({
+            "report_id": str(rep["_id"]),
+            "description": rep["description"],
+            "created_at": rep.get("created_at")
+        })
+    
     return {
         "confirmation": "successful",
         "userclass": userclass,
@@ -414,5 +441,6 @@ async def delete_comment(req: DeleteCommentRequest):
         "article_tag": article["article_tag"],
         "article_image": image_base64,
         "comments": comments,
-        "ratings": ratings
+        "ratings": ratings,
+        "reports": reports
     }

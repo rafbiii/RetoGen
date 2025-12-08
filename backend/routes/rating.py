@@ -107,6 +107,15 @@ async def add_rating(req: AddRatingSchema):
         })
 
     user_email = payload.get("email")
+
+    reports_raw = await db.report_article.find({"article_id": ObjectId(req.article_id)}).to_list(None)
+    reports = []
+    for rep in reports_raw:
+        reports.append({
+            "report_id": str(rep["_id"]),
+            "description": rep["description"],
+            "created_at": rep.get("created_at")
+        })
     
     # 11) RETURN SUCCESS
     return {
@@ -119,7 +128,8 @@ async def add_rating(req: AddRatingSchema):
         "article_tag": article["article_tag"],
         "article_image": image_base64,
         "comments": comments,
-        "ratings": ratings
+        "ratings": ratings,
+        "reports": reports
     }
 
 @router.post("/edit/get")
@@ -241,6 +251,15 @@ async def edit_rating_update(req: EditRatingUpdateRequest):
 
     user_email = payload.get("email")
 
+    reports_raw = await db.report_article.find({"article_id": ObjectId(req.article_id)}).to_list(None)
+    reports = []
+    for rep in reports_raw:
+        reports.append({
+            "report_id": str(rep["_id"]),
+            "description": rep["description"],
+            "created_at": rep.get("created_at")
+        })
+    
     return {
         "confirmation": "successful",
         "userclass": userclass,
@@ -252,4 +271,5 @@ async def edit_rating_update(req: EditRatingUpdateRequest):
         "article_image": image_base64,
         "comments": comments,
         "ratings": ratings,
+        "reports": reports
     }
