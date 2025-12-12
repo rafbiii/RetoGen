@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from schemas.get_all_users_schema import GetAllUsersRequest
 from schemas.get_user_details_schema import GetUserDetailsRequest
+from schemas.make_admin_schema import MakeAdminRequest
 from schemas.delete_user_schema import DeleteUserRequest
 from services.user_service import UserService
 from services.auth_service import AuthService
@@ -115,3 +116,32 @@ async def delete_user(req: DeleteUserRequest):
         return {"confirmation": "backend error"}
 
     return {"confirmation": "successful: user deleted"}
+
+
+@router.post("/make_admin")
+async def make_admin(req: MakeAdminRequest):
+
+    # 1) Verify token
+    payload = await AuthService.verify_token(req.token)
+    if payload is None:
+        return {"confirmation": "token invalid"}
+
+    # 2) Check admin privilege
+    if not await AuthService.is_admin(payload):
+        return {"confirmation": "not admin"}
+
+    # 3) Fetch user to update
+    user = await UserService.get_user_by_id(req.user_id)
+    if user is None:
+        return {"confirmation": "user not found"}
+
+    # 4) Check if already admin
+    if user.get("role") == "admin":
+        return {"confirmation": "already admin"}
+
+    # 5) Update role -> admin
+    success = await UserService.make_admin(req.user_id)
+    if not success:
+        return {"confirmation": "backend error"}
+
+    return {"confirmation": "successful: role updated to admin"}

@@ -60,3 +60,14 @@ class UserService:
         except Exception as e:
             print("DELETE USER ERROR:", e)
             return False
+        
+    @staticmethod
+    async def make_admin(user_id: str):
+        try:
+            result = await db.user.update_one(
+                {"_id": ObjectId(user_id)},
+                {"$set": {"role": "admin"}}
+            )
+            return result.modified_count == 1
+        except:
+            return False
