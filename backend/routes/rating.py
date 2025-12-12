@@ -63,37 +63,39 @@ async def add_rating(req: AddRatingSchema):
         except:
             image_base64 = None
 
-    # 9) Fetch comments
+    # FETCH COMMENT
     comments_raw = await RatingService.get_comments(req.article_id)
-    if comments_raw is None:
-        return {"confirmation": "backend error"}
-
     comments = []
+    from bson import ObjectId
     for c in comments_raw:
         u = await db.user.find_one({"_id": ObjectId(c["owner_id"])})
         comments.append({
             "comment_id": str(c["_id"]),
             "parent_comment_id": c.get("parent_comment_id"),
             "owner": u["username"] if u else "Unknown",
+            "user_email": u["email"],
             "comment_content": c["comment_content"]
         })
 
-    # 10) Fetch ratings
+    # FETCH RATINGS → FIXED owner_id → username
     ratings_raw = await RatingService.get_ratings(req.article_id)
-    if ratings_raw is None:
-        return {"confirmation": "backend error"}
-
     ratings = []
     for r in ratings_raw:
-        u = await db.user.find_one({"_id": ObjectId(r["owner_id"])})
+        try:
+            u = await db.user.find_one({"_id": ObjectId(r["owner_id"])})
+        except:
+            u = None
+
         ratings.append({
             "rating_id": str(r["_id"]),
             "owner": u["username"] if u else "Unknown",
+            "user_email": u["email"],
             "rating_value": r["rating_value"]
         })
 
-    # 11) Fetch reports
-    reports_raw = await db.report_article.find({"article_id": req.article_id}).to_list(None)
+    user_email = payload.get("email")
+
+    reports_raw = await db.report_article.find({"article_id": ObjectId(req.article_id)}).to_list(None)
     reports = []
     for rep in reports_raw:
         reports.append({
@@ -101,10 +103,7 @@ async def add_rating(req: AddRatingSchema):
             "description": rep["description"],
             "created_at": rep.get("created_at")
         })
-
-    user_email = payload.get("email")
-
-    # 12) RETURN SUCCESS
+    
     return {
         "confirmation": "successful",
         "userclass": userclass,
