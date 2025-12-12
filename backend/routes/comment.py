@@ -330,6 +330,7 @@ async def delete_comment(req: DeleteCommentRequest):
     if comment is None:
         return {"confirmation": "backend error"}
 
+    # <-- SIMPAN article_id SEBELUM DELETE
     article_id = str(comment["article_id"])
 
     # =====================================================
@@ -378,7 +379,7 @@ async def delete_comment(req: DeleteCommentRequest):
         except:
             image_base64 = None
 
-    # Fetch comments
+    # ---- FETCH COMMENTS ----
     comments_raw = await CommentService.get_comments(article_id)
     if comments_raw is None:
         return {"confirmation": "backend error"}
@@ -393,12 +394,12 @@ async def delete_comment(req: DeleteCommentRequest):
         comments.append({
             "comment_id": str(c["_id"]),
             "parent_comment_id": c.get("parent_comment_id"),
-            "user_email": u["email"],
             "owner": u["username"] if u else "Unknown",
+            "user_email": u["email"] if u else None,
             "comment_content": c["comment_content"]
         })
 
-    # Fetch ratings
+    # ---- FETCH RATINGS ----
     ratings_raw = await RatingService.get_ratings(article_id)
     if ratings_raw is None:
         return {"confirmation": "backend error"}
@@ -413,16 +414,15 @@ async def delete_comment(req: DeleteCommentRequest):
         ratings.append({
             "rating_id": str(r["_id"]),
             "owner": u["username"] if u else "Unknown",
-            "user_email": u["email"],
+            "user_email": u["email"] if u else None,
             "rating_value": r["rating_value"]
         })
 
-    # =====================================================
-    # 5) FINAL SUCCESS RESPONSE
-    # =====================================================
-    user_email = payload.get("email")
-    
-    reports_raw = await db.report_article.find({"article_id": ObjectId(req.article_id)}).to_list(None)
+    # ---- FETCH REPORTS ----
+    reports_raw = await db.report_article.find({
+        "article_id": ObjectId(article_id)
+    }).to_list(None)
+
     reports = []
     for rep in reports_raw:
         reports.append({
@@ -430,12 +430,12 @@ async def delete_comment(req: DeleteCommentRequest):
             "description": rep["description"],
             "created_at": rep.get("created_at")
         })
-    
+
     return {
         "confirmation": "successful",
         "userclass": userclass,
         "username": user["username"],
-        "user_email": user_email,
+        "user_email": user["email"],
         "article_title": article["article_title"],
         "article_content": article["article_content"],
         "article_tag": article["article_tag"],
@@ -444,3 +444,4 @@ async def delete_comment(req: DeleteCommentRequest):
         "ratings": ratings,
         "reports": reports
     }
+

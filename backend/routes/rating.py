@@ -164,7 +164,7 @@ async def edit_rating_get(req: EditRatingGetRequest):
 async def edit_rating_update(req: EditRatingUpdateRequest):
 
     # VALIDATE RANGE
-    if not (1 <= req.rating_value <= 10):
+    if not (1 <= req.rating_value <= 5):
         return {"confirmation": "backend error"}
 
     # VERIFY TOKEN
