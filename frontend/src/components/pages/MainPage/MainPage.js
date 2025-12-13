@@ -4,7 +4,10 @@ import {
   FiSearch, 
   FiPlus, 
   FiChevronDown,
-  FiFilter
+  FiFilter,
+  FiUsers,
+  FiChevronLeft,
+  FiChevronRight
 } from 'react-icons/fi';
 import { fetchMainPageData, transformArticles } from '../../../services/MainPageService';
 import { verifyAdmin } from '../../../services/VerificationService';
@@ -23,6 +26,17 @@ function MainPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  
+  // Track if component just mounted
+  const isInitialMount = useRef(true);
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(() => {
+    // Restore last visited page from sessionStorage
+    const savedPage = sessionStorage.getItem('mainPageCurrentPage');
+    return savedPage ? parseInt(savedPage, 10) : 1;
+  });
+  const articlesPerPage = 10;
 
   // Sort options tanpa icon
   const sortOptions = [
@@ -30,6 +44,24 @@ function MainPage() {
     { value: 'oldest', label: 'Oldest' },
     { value: 'popular', label: 'Popular' }
   ];
+
+  // Scroll to saved position when component mounts
+  useEffect(() => {
+    const savedScrollPosition = sessionStorage.getItem('mainPageScrollPosition');
+    if (savedScrollPosition) {
+      // Use timeout to ensure content is loaded before scrolling
+      setTimeout(() => {
+        window.scrollTo(0, parseInt(savedScrollPosition, 10));
+        sessionStorage.removeItem('mainPageScrollPosition');
+      }, 100);
+    }
+    // Don't scroll to top automatically - let the saved page stay
+  }, []);
+
+  // Save current page to sessionStorage whenever it changes
+  useEffect(() => {
+    sessionStorage.setItem('mainPageCurrentPage', currentPage.toString());
+  }, [currentPage]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -50,13 +82,14 @@ function MainPage() {
 
   useEffect(() => {
     const loadMainPageData = async () => {
+      console.log(localStorage.getItem('token'));
       try {
         // Get token from localStorage
         const token = localStorage.getItem('token');
 
         if (!token) {
           navigate('/login');
-          return;
+          return; 
         }
 
         // Verify admin role using service
@@ -156,6 +189,78 @@ function MainPage() {
     return filtered;
   };
 
+  // Reset to page 1 when search or sort changes (but NOT on initial mount)
+  useEffect(() => {
+    if (isInitialMount.current) {
+      // Skip reset on first render
+      isInitialMount.current = false;
+    } else {
+      // Only reset page when user actively changes search or sort
+      setCurrentPage(1);
+      sessionStorage.setItem('mainPageCurrentPage', '1');
+    }
+  }, [searchTerm, sortBy]);
+
+  // Get paginated articles
+  const getPaginatedArticles = () => {
+    const filtered = getFilteredArticles();
+    const startIndex = (currentPage - 1) * articlesPerPage;
+    const endIndex = startIndex + articlesPerPage;
+    return filtered.slice(startIndex, endIndex);
+  };
+
+  // Calculate total pages
+  const getTotalPages = () => {
+    const filtered = getFilteredArticles();
+    return Math.ceil(filtered.length / articlesPerPage);
+  };
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    // Clear saved scroll position when manually changing pages
+    sessionStorage.removeItem('mainPageScrollPosition');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Save scroll position before navigating to article
+  const handleArticleClick = (articleId) => {
+    sessionStorage.setItem('mainPageScrollPosition', window.scrollY.toString());
+    navigate(`/article/${articleId}`);
+  };
+
+  // Generate page numbers to display
+  const getPageNumbers = () => {
+    const totalPages = getTotalPages();
+    const pageNumbers = [];
+    
+    if (totalPages <= 5) {
+      // Show all pages if 5 or less
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      // Show smart pagination
+      if (currentPage <= 3) {
+        pageNumbers.push(1, 2, 3, 4, 5);
+      } else if (currentPage >= totalPages - 2) {
+        for (let i = totalPages - 4; i <= totalPages; i++) {
+          pageNumbers.push(i);
+        }
+      } else {
+        pageNumbers.push(
+          currentPage - 2,
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          currentPage + 2
+        );
+      }
+    }
+    
+    return pageNumbers;
+  };
+
   // Handle sort selection
   const handleSortSelect = (value) => {
     setSortBy(value);
@@ -210,6 +315,9 @@ function MainPage() {
   }
 
   const filteredArticles = getFilteredArticles();
+  const paginatedArticles = getPaginatedArticles();
+  const totalPages = getTotalPages();
+  const pageNumbers = getPageNumbers();
 
   return (
     <div className="main-page">
@@ -270,25 +378,32 @@ function MainPage() {
             </div>
 
             {isAdmin && (
-              <button className="btn-add-article" onClick={() => navigate('/admin/write')}>
-                <FiPlus size={18} />
-                <span className="btn-add-text">Article</span>
-              </button>
+              <>
+                <button className="btn-add-article" onClick={() => navigate('/admin/write')}>
+                  <FiPlus size={18} />
+                  <span className="btn-add-text">Article</span>
+                </button>
+
+                <button className="btn-manage-user" onClick={() => navigate('/admin/users')}>
+                  <FiUsers size={18} />
+                  <span className="btn-manage-text">Manage User</span>
+                </button>
+              </>
             )}
           </div>
         </div>
 
         <div className="articles-list">
-          {filteredArticles.length > 0 ? (
-            filteredArticles.map((article) => (
+          {paginatedArticles.length > 0 ? (
+            paginatedArticles.map((article) => (
               <div
                 key={article.id}
                 className="article-card"
-                onClick={() => navigate(`/article/${article.id}`)}
+                onClick={() => handleArticleClick(article.id)}
                 role="button"
                 tabIndex={0}
                 onKeyPress={(e) => {
-                  if (e.key === 'Enter') navigate(`/article/${article.id}`);
+                  if (e.key === 'Enter') handleArticleClick(article.id);
                 }}
               >
                 <div className="card-accent"></div>
@@ -315,6 +430,43 @@ function MainPage() {
             </div>
           )}
         </div>
+
+        {/* Pagination */}
+        {filteredArticles.length > articlesPerPage && (
+          <div className="pagination">
+            {/* Previous Button */}
+            <button
+              className="pagination-button pagination-arrow"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              aria-label="Previous page"
+            >
+              <FiChevronLeft size={18} />
+            </button>
+
+            {/* Page Numbers */}
+            {pageNumbers.map((pageNumber) => (
+              <button
+                key={pageNumber}
+                className={`pagination-button ${currentPage === pageNumber ? 'active' : ''}`}
+                onClick={() => handlePageChange(pageNumber)}
+                aria-label={`Page ${pageNumber}`}
+              >
+                {pageNumber}
+              </button>
+            ))}
+
+            {/* Next Button */}
+            <button
+              className="pagination-button pagination-arrow"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              aria-label="Next page"
+            >
+              <FiChevronRight size={18} />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -75,7 +75,6 @@ function EditArticle() {
 
         const response = await getArticleForEdit(id, token);
         
-        console.log(id, token);
         if (response.confirmation === 'token invalid') {
           localStorage.removeItem('token');
           setModalType('token_invalid');
@@ -102,8 +101,6 @@ function EditArticle() {
         }
         
         if (response.confirmation === 'successful') {
-          console.log('Article data received:', response);
-          console.log('Article image:', response.article_image ? 'Image exists' : 'No image');
           
           setArticle({
             article_id: response.article_id,
@@ -119,10 +116,8 @@ function EditArticle() {
             
             if (!response.article_image.startsWith('data:image')) {
               imageToDisplay = 'data:image/jpeg;base64,' + response.article_image;
-              console.log('Added data URI prefix to image');
             }
             
-            console.log('Setting image preview, length:', imageToDisplay.length);
             setImagePreview(imageToDisplay);
           } else {
             console.log('No image in response');
@@ -165,11 +160,9 @@ function EditArticle() {
     const file = e.target.files[0];
     
     if (file) {
-      console.log('New file selected:', file.name, 'Type:', file.type);
       
       const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
       if (!validTypes.includes(file.type)) {
-        console.log('Invalid file type');
         setValidationErrors({
           ...validationErrors,
           article_image: 'Image must be PNG or JPG format'
@@ -185,14 +178,12 @@ function EditArticle() {
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64String = reader.result;
-        console.log('File converted to base64, length:', base64String.length);
         
         setArticle({
           ...article,
           article_image: base64String
         });
         setImagePreview(base64String);
-        console.log('Image preview updated with new image');
       };
       reader.readAsDataURL(file);
     }
@@ -364,12 +355,9 @@ function EditArticle() {
                 alt="Article Preview"
                 onError={(e) => {
                   console.error('Image failed to load');
-                  console.log('Image src length:', imagePreview.length);
-                  console.log('Image src preview:', imagePreview.substring(0, 100) + '...');
                   e.target.style.display = 'none';
                 }}
                 onLoad={() => {
-                  console.log('Image loaded successfully');
                 }}
               />
             </div>

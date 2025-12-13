@@ -23,7 +23,6 @@ export const verifyAdmin = async (token) => {
     });
 
     const data = response.data;
-
     // Handle different confirmations
     if (data.confirmation === 'token invalid') {
       return {

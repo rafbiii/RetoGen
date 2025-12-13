@@ -329,13 +329,13 @@ body.dark-mode .sort-option.selected {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px; /* jarak icon dan teks */
+  gap: 8px;
   transition: all 0.3s ease;
   height: 44px;
 }
 
 .btn-add-text {
-  color: #00BCD4; /* warna biru */
+  color: #00BCD4;
   font-size: 14px;
   font-weight: 500;
 }
@@ -363,6 +363,56 @@ body.dark-mode .btn-add-article {
 body.dark-mode .btn-add-article:hover {
   background: rgba(0, 188, 212, 0.12);
   border-color: rgba(0, 188, 212, 0.3);
+}
+
+/* Manage User Button - Similar to Add Article */
+.btn-manage-user {
+  background: transparent;
+  color: #6b7280;
+  border: 2px solid rgba(100, 100, 100, 0.15);
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  height: 44px;
+}
+
+.btn-manage-text {
+  color: #E34234;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-manage-user svg {
+  color: #E34234;
+}
+
+.btn-manage-user:hover {
+  background: rgba(227, 66, 52, 0.08);
+  border-color: rgba(227, 66, 52, 0.3);
+  transform: translateY(-2px);
+}
+
+/* === DARK MODE === */
+body.dark-mode .btn-manage-text {
+  color: #ff6b5e;
+}
+
+body.dark-mode .btn-manage-user {
+  background: transparent;
+  border-color: rgba(200, 200, 200, 0.15);
+}
+
+body.dark-mode .btn-manage-user svg {
+  color: #ff6b5e;
+}
+
+body.dark-mode .btn-manage-user:hover {
+  background: rgba(227, 66, 52, 0.12);
+  border-color: rgba(227, 66, 52, 0.3);
 }
 
 /* Articles List */
@@ -576,6 +626,102 @@ body.dark-mode .no-results h3 {
 
 body.dark-mode .no-results p {
   color: #b8b8b8;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  max-width: 900px;
+  margin: 40px auto 80px;
+  padding: 0 20px;
+}
+
+.pagination-button {
+  min-width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(100, 100, 100, 0.15);
+  border-radius: 8px;
+  color: #2a2a2a;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(100, 100, 100, 0.25);
+  transform: translateY(-2px);
+}
+
+.pagination-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-button.active {
+  background: #00BCD4;
+  border-color: #00BCD4;
+  color: white;
+  font-weight: 600;
+}
+
+.pagination-button.active:hover {
+  background: #00ACC1;
+  border-color: #00ACC1;
+  transform: translateY(-2px);
+}
+
+/* Dark Mode Pagination */
+body.dark-mode .pagination-button {
+  background: rgba(60, 60, 60, 0.6);
+  border-color: rgba(200, 200, 200, 0.15);
+  color: #f5f5f5;
+}
+
+body.dark-mode .pagination-button:hover:not(:disabled) {
+  background: rgba(60, 60, 60, 0.9);
+  border-color: rgba(200, 200, 200, 0.25);
+}
+
+body.dark-mode .pagination-button.active {
+  background: #00BCD4;
+  border-color: #00BCD4;
+  color: white;
+}
+
+body.dark-mode .pagination-button.active:hover {
+  background: #00ACC1;
+  border-color: #00ACC1;
+}
+
+/* Pagination Arrow Buttons */
+.pagination-arrow {
+  min-width: 44px;
+}
+
+.pagination-arrow svg {
+  color: #6b7280;
+}
+
+.pagination-arrow:hover:not(:disabled) svg {
+  color: #00BCD4;
+}
+
+body.dark-mode .pagination-arrow svg {
+  color: #b8b8b8;
+}
+
+body.dark-mode .pagination-arrow:hover:not(:disabled) svg {
+  color: #00BCD4;
 }
 
 /* Responsive Design */
