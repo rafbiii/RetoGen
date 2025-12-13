@@ -1,0 +1,242 @@
+[
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc40"
+    },
+    "reported_user_id": {
+      "$oid": "693c1263255db758f0fe283f"
+    },
+    "description": "Posting offensive content repeatedly",
+    "created_at": {
+      "$date": "2025-12-06T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc41"
+    },
+    "reported_user_id": {
+      "$oid": "693c125b255db758f0fe2826"
+    },
+    "description": "Fake or bot account suspected",
+    "created_at": {
+      "$date": "2025-11-05T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc42"
+    },
+    "reported_user_id": {
+      "$oid": "693c1257255db758f0fe281e"
+    },
+    "description": "Inappropriate username or profile",
+    "created_at": {
+      "$date": "2025-11-22T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc43"
+    },
+    "reported_user_id": {
+      "$oid": "693c1258255db758f0fe281f"
+    },
+    "description": "Sharing personal information of others",
+    "created_at": {
+      "$date": "2025-11-27T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc44"
+    },
+    "reported_user_id": {
+      "$oid": "693c125d255db758f0fe282a"
+    },
+    "description": "Threatening other users",
+    "created_at": {
+      "$date": "2025-12-02T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc45"
+    },
+    "reported_user_id": {
+      "$oid": "693c125b255db758f0fe2826"
+    },
+    "description": "Violating terms of service",
+    "created_at": {
+      "$date": "2025-11-13T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc46"
+    },
+    "reported_user_id": {
+      "$oid": "693c125c255db758f0fe2827"
+    },
+    "description": "Posting offensive content repeatedly",
+    "created_at": {
+      "$date": "2025-10-23T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc47"
+    },
+    "reported_user_id": {
+      "$oid": "693c125f255db758f0fe282f"
+    },
+    "description": "Coordinated manipulation of ratings",
+    "created_at": {
+      "$date": "2025-11-22T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc48"
+    },
+    "reported_user_id": {
+      "$oid": "693c1265255db758f0fe2844"
+    },
+    "description": "Violating terms of service",
+    "created_at": {
+      "$date": "2025-11-02T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc49"
+    },
+    "reported_user_id": {
+      "$oid": "693c125f255db758f0fe282e"
+    },
+    "description": "Fake or bot account suspected",
+    "created_at": {
+      "$date": "2025-10-29T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc4a"
+    },
+    "reported_user_id": {
+      "$oid": "693c1263255db758f0fe283e"
+    },
+    "description": "Threatening other users",
+    "created_at": {
+      "$date": "2025-11-17T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc4b"
+    },
+    "reported_user_id": {
+      "$oid": "693c125b255db758f0fe2825"
+    },
+    "description": "Impersonating another user",
+    "created_at": {
+      "$date": "2025-11-23T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc4c"
+    },
+    "reported_user_id": {
+      "$oid": "693c1260255db758f0fe2833"
+    },
+    "description": "Impersonating another user",
+    "created_at": {
+      "$date": "2025-11-10T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc4d"
+    },
+    "reported_user_id": {
+      "$oid": "693c1265255db758f0fe2843"
+    },
+    "description": "Impersonating another user",
+    "created_at": {
+      "$date": "2025-10-29T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc4e"
+    },
+    "reported_user_id": {
+      "$oid": "693c1262255db758f0fe2839"
+    },
+    "description": "Violating terms of service",
+    "created_at": {
+      "$date": "2025-11-29T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc4f"
+    },
+    "reported_user_id": {
+      "$oid": "693c1267255db758f0fe284c"
+    },
+    "description": "Excessive self-promotion",
+    "created_at": {
+      "$date": "2025-11-16T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc50"
+    },
+    "reported_user_id": {
+      "$oid": "693c125d255db758f0fe282b"
+    },
+    "description": "Violating terms of service",
+    "created_at": {
+      "$date": "2025-11-06T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc51"
+    },
+    "reported_user_id": {
+      "$oid": "693c1258255db758f0fe281f"
+    },
+    "description": "Abusing rating system",
+    "created_at": {
+      "$date": "2025-10-29T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc52"
+    },
+    "reported_user_id": {
+      "$oid": "693c1260255db758f0fe2831"
+    },
+    "description": "Impersonating another user",
+    "created_at": {
+      "$date": "2025-11-18T20:02:32.949467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db70bf4e8cc53"
+    },
+    "reported_user_id": {
+      "$oid": "693c1262255db758f0fe283a"
+    },
+    "description": "Coordinated manipulation of ratings",
+    "created_at": {
+      "$date": "2025-10-17T20:02:32.949467Z"
+    }
+  }
+]

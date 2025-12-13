@@ -56,6 +56,7 @@ class ArticleService:
                 "article_tag": tag,
                 "article_image": image_bytes,
                 "author_id": author_id,
+                "report_count": 0,
                 "created_at": now,
                 "updated_at": now,
                 "is_deleted": False

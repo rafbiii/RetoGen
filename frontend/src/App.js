@@ -7,6 +7,8 @@ import Account from './components/pages/Account/Account';
 import DetailView from './components/pages/DetailView/DetailView';
 import AdminWrite from './components/admin/AddArticle/AddArticle';
 import AdminEdit from './components/admin/EditArticle/EditArticle';
+import ViewUsers from './components/admin/ViewUsers/ViewUsers';
+import DetailUser from './components/admin/DetailUser/DetailUserAdmin';
 import './styles/global.css';
 
 function App() {
@@ -21,6 +23,9 @@ function App() {
         <Route path="/article/:id" element={<DetailView />} />
         <Route path="/admin/write" element={<AdminWrite />} />
         <Route path="/admin/edit/:id" element={<AdminEdit />} />
+        <Route path="/admin/users" element={<ViewUsers />} />
+        <Route path="/user/:id" element={<DetailUser />} />
+        <Route path="/admin/user/:id" element={<DetailUser isAdmin={true} />} />
       </Routes>
     </BrowserRouter>
   );

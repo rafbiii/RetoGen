@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from core.api_handlers import validation_exception_handler
-from routes import auth, article, comment, rating
+from routes import auth, article, comment, rating, report_article, report_user, user
 import uvicorn
 
 app = FastAPI(title="Updated Backend Template")
@@ -24,7 +24,9 @@ app.include_router(article.router, prefix="/article", tags=["Article"])
 app.include_router(auth.router, prefix="/auth", tags=["Auth"])
 app.include_router(comment.router, prefix="/comment", tags=["Comment"])
 app.include_router(rating.router, prefix="/rating", tags=["Rating"])
-
+app.include_router(report_article.router, prefix="/report_article", tags=["Report Article"])
+app.include_router(report_user.router, prefix="/report_user", tags=["Report User"])
+app.include_router(user.router, prefix="/user", tags=["User"])
 
 
 @app.get("/")
