@@ -1,0 +1,362 @@
+[
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143152"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe285c"
+    },
+    "description": "Offensive or hateful content",
+    "created_at": {
+      "$date": "2025-11-07T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143153"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2863"
+    },
+    "description": "Contains false advertising",
+    "created_at": {
+      "$date": "2025-10-26T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143154"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2870"
+    },
+    "description": "Promotes illegal activities",
+    "created_at": {
+      "$date": "2025-10-27T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143155"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe289d"
+    },
+    "description": "Inappropriate language used",
+    "created_at": {
+      "$date": "2025-10-09T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143156"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2862"
+    },
+    "description": "Clickbait title doesn't match content",
+    "created_at": {
+      "$date": "2025-11-12T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143157"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2893"
+    },
+    "description": "Clickbait title doesn't match content",
+    "created_at": {
+      "$date": "2025-11-04T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143158"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2868"
+    },
+    "description": "Clickbait title doesn't match content",
+    "created_at": {
+      "$date": "2025-11-18T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143159"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2883"
+    },
+    "description": "Offensive or hateful content",
+    "created_at": {
+      "$date": "2025-10-27T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814315a"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe287e"
+    },
+    "description": "Inappropriate language used",
+    "created_at": {
+      "$date": "2025-10-06T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814315b"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe28b0"
+    },
+    "description": "Duplicate article already exists",
+    "created_at": {
+      "$date": "2025-11-27T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814315c"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2852"
+    },
+    "description": "Contains false advertising",
+    "created_at": {
+      "$date": "2025-09-25T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814315d"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2878"
+    },
+    "description": "Contains malicious links",
+    "created_at": {
+      "$date": "2025-09-17T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814315e"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2864"
+    },
+    "description": "Inappropriate language used",
+    "created_at": {
+      "$date": "2025-10-06T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814315f"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe284f"
+    },
+    "description": "Fake review or paid promotion",
+    "created_at": {
+      "$date": "2025-09-14T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143160"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe286c"
+    },
+    "description": "Contains malicious links",
+    "created_at": {
+      "$date": "2025-09-22T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143161"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2857"
+    },
+    "description": "Copied content from other sources",
+    "created_at": {
+      "$date": "2025-10-21T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143162"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe288c"
+    },
+    "description": "Contains malicious links",
+    "created_at": {
+      "$date": "2025-12-09T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143163"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2870"
+    },
+    "description": "Contains malicious links",
+    "created_at": {
+      "$date": "2025-09-24T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143164"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe285b"
+    },
+    "description": "Violates community guidelines",
+    "created_at": {
+      "$date": "2025-09-19T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143165"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2894"
+    },
+    "description": "Promotes illegal activities",
+    "created_at": {
+      "$date": "2025-09-21T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143166"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe28a9"
+    },
+    "description": "Contains false advertising",
+    "created_at": {
+      "$date": "2025-12-09T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143167"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2895"
+    },
+    "description": "Misleading information about specifications",
+    "created_at": {
+      "$date": "2025-10-29T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143168"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2859"
+    },
+    "description": "Low quality or irrelevant content",
+    "created_at": {
+      "$date": "2025-09-23T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f8143169"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe289c"
+    },
+    "description": "Low quality or irrelevant content",
+    "created_at": {
+      "$date": "2025-09-16T20:02:32.788168Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814316a"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2895"
+    },
+    "description": "Inaccurate product information",
+    "created_at": {
+      "$date": "2025-09-15T20:02:32.789177Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814316b"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2895"
+    },
+    "description": "Copied content from other sources",
+    "created_at": {
+      "$date": "2025-11-14T20:02:32.789177Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814316c"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2883"
+    },
+    "description": "Inappropriate language used",
+    "created_at": {
+      "$date": "2025-09-22T20:02:32.789177Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814316d"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2894"
+    },
+    "description": "Clickbait title doesn't match content",
+    "created_at": {
+      "$date": "2025-09-25T20:02:32.789177Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814316e"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2866"
+    },
+    "description": "Offensive or hateful content",
+    "created_at": {
+      "$date": "2025-10-22T20:02:32.789177Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "693c1268255db732f814316f"
+    },
+    "article_id": {
+      "$oid": "693c1267255db758f0fe2892"
+    },
+    "description": "Violates community guidelines",
+    "created_at": {
+      "$date": "2025-12-04T20:02:32.789177Z"
+    }
+  }
+]

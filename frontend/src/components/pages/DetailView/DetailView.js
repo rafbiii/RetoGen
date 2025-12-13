@@ -1,221 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { data, useNavigate, useParams } from 'react-router-dom';
-import { FiStar, FiSend, FiEdit, FiFlag, FiTrash2, FiCheckCircle, FiAlertCircle, FiUser, FiX, FiMessageCircle } from 'react-icons/fi';
+import { useNavigate, useParams } from 'react-router-dom';
+import { FiStar, FiEdit, FiFlag, FiTrash2, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import Navbar from '../../common/Navbar/Navbar';
+import ArticleSection from './ArticleSection';
+import RatingsSection from './RatingsSection';
+import CommentsSection from './CommentsSection';
+import ReportsSection from './ReportsSection';
+import UserProfileModal from './UserProfileModal';
 import DetailArticleService from '../../../services/DetailArticleService';
 import DeleteArticleService from '../../../services/DeleteArticleService';
+import AddRatingService from '../../../services/AddRatingService';
+import EditRatingService from '../../../services/EditRatingService';
 import AddCommentService from '../../../services/AddCommentService';
 import EditCommentService from '../../../services/EditCommentService';
 import DeleteCommentService from '../../../services/DeleteCommentService';
-import AddRatingService from '../../../services/AddRatingService';
-import EditRatingService from '../../../services/EditRatingService';
+import ReportArticleService from '../../../services/ReportArticleService';
 import { initializeTheme } from '../../../services/themeUtils';
-import './DetailView.css';
-
-// Recursive comment component - MOVED OUTSIDE to prevent re-creation on state change
-const CommentItem = ({
-  comment,
-  depth = 0,
-  username,
-  ratings,
-  editingCommentId,
-  editCommentContent,
-  setEditCommentContent,
-  replyingToCommentId,
-  replyContent,
-  setReplyContent,
-  isSubmittingReply,
-  handleEditComment,
-  handleCancelEdit,
-  handleSaveEdit,
-  handleDeleteComment,
-  handleReplyClick,
-  handleCancelReply,
-  handleSubmitReply,
-  openReportModal
-}) => {
-
-  const { id } = useParams();
-  const [articleOwner, setArticleOwner] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      const data = await DetailArticleService.viewArticle(token, id);
-      setArticleOwner(data.user_email);
-      console.log(token, id);
-    };
-
-    if (id) {
-      fetchData();
-    }
-    
-  }, [id]);
-
-  const isOwner = comment.user_email === articleOwner;
-  const isEditing = editingCommentId === comment.comment_id;
-  const isReplying = replyingToCommentId === comment.comment_id;
-  
-  const getUserRating = (owner) => {
-    const userRatingObj = ratings.find((r) => r.owner === owner);
-    return userRatingObj ? userRatingObj.rating_value : null;
-  };
-
-  const commentUserRating = getUserRating(comment.owner);
-
-  const effectiveDepth = Math.min(depth, 2);
-  const marginLeft = effectiveDepth * 20;
-  return (
-    <div 
-      className="comment-item" 
-      style={{ marginLeft: `${marginLeft}px` }}
-    >
-      <div className="comment-header">
-        <div className="comment-author">
-          <FiUser />
-          <span className="author-name">{comment.owner}</span>
-          {commentUserRating !== null && (
-            <div className="comment-user-rating">
-              <FiStar className="rating-icon-small" />
-              <span className="rating-value-small">{commentUserRating}</span>
-            </div>
-          )}
-        </div>
-        {!isEditing && (
-        <div className="comment-actions">
-          {isOwner && (
-            <>
-              <button 
-                className="btn-action-edit" 
-                onClick={() => handleEditComment(comment.comment_id, comment.comment_content)}
-              >
-                <FiEdit />
-                Edit
-              </button>
-
-              <button 
-                className="btn-action-delete" 
-                onClick={() => handleDeleteComment(comment.comment_id)}
-              >
-                <FiTrash2 />
-                Delete
-              </button>
-            </>
-          )}
-        </div>
-      )}
-      </div>
-
-      {isEditing ? (
-        <div className="edit-comment-form">
-          <textarea
-            className="edit-textarea"
-            value={editCommentContent}
-            onChange={(e) => setEditCommentContent(e.target.value)}
-            rows="4"
-            maxLength={8192}
-          />
-          <div className="character-count">
-            {editCommentContent.length} / 8192 characters
-          </div>
-          <div className="edit-buttons">
-            <button className="btn-cancel-edit" onClick={handleCancelEdit}>
-              <FiX />
-              Cancel
-            </button>
-            <button 
-              className="btn-save-edit" 
-              onClick={() => handleSaveEdit(comment.comment_id)}
-              disabled={!editCommentContent.trim()}
-            >
-              <FiCheckCircle />
-              Save
-            </button>
-          </div>
-        </div>
-      ) : (
-        <>
-          <p className="comment-text">{comment.comment_content}</p>
-          <div className="comment-footer">
-            <button 
-              className="btn-reply" 
-              onClick={() => handleReplyClick(comment.comment_id)}
-            >
-              <FiMessageCircle />
-              Reply
-            </button>
-            <button 
-              className="btn-report-comment" 
-              onClick={() => openReportModal('comment', comment.comment_id)}
-            >
-              <FiFlag />
-              Report
-            </button>
-          </div>
-        </>
-      )}
-
-      {isReplying && (
-        <div className="reply-form">
-          <textarea
-            className="reply-textarea"
-            placeholder="Write your reply... (1-8192 characters)"
-            value={replyContent}
-            onChange={(e) => setReplyContent(e.target.value)}
-            rows="3"
-            maxLength={8192}
-          />
-          <div className="character-count">
-            {replyContent.length} / 8192 characters
-          </div>
-          <div className="reply-buttons">
-            <button className="btn-cancel-reply" onClick={handleCancelReply}>
-              <FiX />
-              Cancel
-            </button>
-            <button 
-              className="btn-submit-reply" 
-              onClick={() => handleSubmitReply(comment.comment_id)}
-              disabled={isSubmittingReply || !replyContent.trim()}
-            >
-              <FiSend />
-              {isSubmittingReply ? 'Posting...' : 'Post Reply'}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {comment.replies && comment.replies.length > 0 && (
-        <div className="replies-container">
-          {comment.replies.map(reply => (
-            <CommentItem 
-              key={reply.comment_id} 
-              comment={reply} 
-              depth={Math.min(depth + 1, 2)}
-              username={username}
-              ratings={ratings}
-              editingCommentId={editingCommentId}
-              editCommentContent={editCommentContent}
-              setEditCommentContent={setEditCommentContent}
-              replyingToCommentId={replyingToCommentId}
-              replyContent={replyContent}
-              setReplyContent={setReplyContent}
-              isSubmittingReply={isSubmittingReply}
-              handleEditComment={handleEditComment}
-              handleCancelEdit={handleCancelEdit}
-              handleSaveEdit={handleSaveEdit}
-              handleDeleteComment={handleDeleteComment}
-              handleReplyClick={handleReplyClick}
-              handleCancelReply={handleCancelReply}
-              handleSubmitReply={handleSubmitReply}
-              openReportModal={openReportModal}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
+import './DetailViewCommon.css';
 
 function DetailView() {
   const navigate = useNavigate();
@@ -223,8 +24,6 @@ function DetailView() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [showReportModal, setShowReportModal] = useState(false);
-  const [reportType, setReportType] = useState('');
-  const [reportTarget, setReportTarget] = useState(null);
   const [reportReason, setReportReason] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
@@ -233,33 +32,39 @@ function DetailView() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isSubmittingReport, setIsSubmittingReport] = useState(false);
   
-  // New states for comment and rating functionality
+  // Comment states
+  const [isSubmittingComment, setIsSubmittingComment] = useState(false);
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editCommentContent, setEditCommentContent] = useState('');
   const [deletingCommentId, setDeletingCommentId] = useState(null);
   const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false);
-  const [isSubmittingComment, setIsSubmittingComment] = useState(false);
-  const [isSubmittingRating, setIsSubmittingRating] = useState(false);
-  const [hasUserRated, setHasUserRated] = useState(false);
-  const [userRating, setUserRating] = useState(null);
-  const [averageRating, setAverageRating] = useState(0);
-  const [ratingCount, setRatingCount] = useState(0);
   
   // Reply states
   const [replyingToCommentId, setReplyingToCommentId] = useState(null);
   const [replyContent, setReplyContent] = useState('');
   const [isSubmittingReply, setIsSubmittingReply] = useState(false);
   
+  // Rating states
+  const [isSubmittingRating, setIsSubmittingRating] = useState(false);
+  const [hasUserRated, setHasUserRated] = useState(false);
+  const [userRating, setUserRating] = useState(null);
+  const [averageRating, setAverageRating] = useState(0);
+  const [ratingCount, setRatingCount] = useState(0);
+  
   // Rating confirmation modal
   const [showRatingConfirmModal, setShowRatingConfirmModal] = useState(false);
   const [pendingRating, setPendingRating] = useState(0);
   
   // Edit rating states
-  const [isEditingRating, setIsEditingRating] = useState(false);
   const [editRatingValue, setEditRatingValue] = useState(0);
   const [showEditRatingModal, setShowEditRatingModal] = useState(false);
   const [userRatingId, setUserRatingId] = useState(null);
+  
+  // User profile modal states
+  const [showUserProfileModal, setShowUserProfileModal] = useState(false);
+  const [selectedUserEmail, setSelectedUserEmail] = useState('');
   
   useEffect(() => {
     initializeTheme();
@@ -271,6 +76,7 @@ function DetailView() {
   const [username, setUsername] = useState('');
   const [comments, setComments] = useState([]);
   const [ratings, setRatings] = useState([]);
+  const [reports, setReports] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -281,71 +87,74 @@ function DetailView() {
     }
 
     fetchArticleData(token);
-  }, [id]);
+  }, [id, navigate]);
 
   const fetchArticleData = async (token) => {
-    setIsLoading(true);
-    try {
-      const data = await DetailArticleService.viewArticle(token, id);
-      const currentUsername = data.username;
-      
-      if (data.confirmation === 'token invalid') {
-        displayPopup('token invalid');
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-        return;
-      }
+  setIsLoading(true);
+  try {
+    const data = await DetailArticleService.viewArticle(token, id);
+    const currentUserEmail = data.user_email;  // ← Ganti nama variable untuk kejelasan
+    
+    if (data.confirmation === 'token invalid') {
+      displayPopup('token invalid');
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+      return;
+    }
 
-      if (data.confirmation === 'backend error') {
-        displayPopup('server busy');
-        setIsLoading(false);
-        return;
-      }
-
-      if (data.confirmation === 'successful') {
-        setArticle({
-          title: data.article_title,
-          content: data.article_content,
-          tag: data.article_tag,
-          image: data.article_image
-        });
-        setUserclass(data.userclass);
-        setUsername(currentUsername);
-        
-        // Set comments from API
-        if (data.comments && Array.isArray(data.comments)) {
-          setComments(data.comments);
-        }
-        
-        // Set ratings from API and calculate average
-        if (data.ratings && Array.isArray(data.ratings)) {
-          setRatings(data.ratings);
-          setRatingCount(data.ratings.length);
-          
-          if (data.ratings.length > 0) {
-            const sum = data.ratings.reduce((acc, r) => acc + r.rating_value, 0);
-            setAverageRating((sum / data.ratings.length).toFixed(1));
-          }
-          
-          // Check if current user has already rated and get their rating
-          const userRatingObj = data.ratings.find(r => r.owner === currentUsername);
-          if (userRatingObj) {
-            setHasUserRated(true);
-            setUserRating(userRatingObj.rating_value);
-            setRating(userRatingObj.rating_value); // Set rating state untuk tampilan
-            setUserRatingId(userRatingObj.rating_id); // Simpan rating_id user
-          }
-        }
-        
-        setIsLoading(false);
-      }
-    } catch (error) {
-      console.error('Error fetching article:', error);
+    if (data.confirmation === 'backend error') {
       displayPopup('server busy');
       setIsLoading(false);
+      return;
     }
-  };
+
+    if (data.confirmation === 'successful') {
+      setArticle({
+        title: data.article_title,
+        content: data.article_content,
+        tag: data.article_tag,
+        image: data.article_image,
+        user_email: data.user_email
+      });
+      setUserclass(data.userclass);
+      setUsername(currentUserEmail);  // ← Ini adalah email user yang LOGIN
+      
+      if (data.comments && Array.isArray(data.comments)) {
+        setComments(data.comments);
+      }
+      
+      if (data.ratings && Array.isArray(data.ratings)) {
+        setRatings(data.ratings);
+        setRatingCount(data.ratings.length);
+        
+        if (data.ratings.length > 0) {
+          const sum = data.ratings.reduce((acc, r) => acc + r.rating_value, 0);
+          setAverageRating((sum / data.ratings.length).toFixed(1));
+        }
+        
+        // ← PERBAIKI DI SINI: Gunakan currentUserEmail, bukan currentUsername
+        const userRatingObj = data.ratings.find(r => r.user_email === currentUserEmail);
+        if (userRatingObj) {
+          setHasUserRated(true);
+          setUserRating(userRatingObj.rating_value);
+          setRating(userRatingObj.rating_value);
+          setUserRatingId(userRatingObj.rating_id);
+        }
+      }
+      
+      if (data.reports && Array.isArray(data.reports)) {
+        setReports(data.reports);
+      }
+      
+      setIsLoading(false);
+    }
+  } catch (error) {
+    console.error('Error fetching article:', error);
+    displayPopup('server busy');
+    setIsLoading(false);
+  }
+};
 
   const displayPopup = (message) => {
     setPopupMessage(message);
@@ -358,7 +167,6 @@ function DetailView() {
   const handleSubmitComment = async (e) => {
     e.preventDefault();
     
-    // Validation
     if (!comment.trim()) {
       displayPopup('Comment cannot be empty');
       return;
@@ -383,7 +191,6 @@ function DetailView() {
         return;
       }
       
-
       if (data.confirmation === 'backend error') {
         displayPopup('server busy');
         setIsSubmittingComment(false);
@@ -391,15 +198,35 @@ function DetailView() {
       }
       
       if (data.confirmation === 'successful') {
-        // Update article data with new response
-        setArticle({
-          title: data.article_title,
-          content: data.article_content,
-          tag: data.article_tag,
-          image: data.article_image
-        });
-        setComments(data.comments || []);
-        setRatings(data.ratings || []);
+          const data = await DetailArticleService.viewArticle(token, id);
+          if (data.confirmation === 'successful') {
+          setArticle({
+            title: data.article_title,
+            content: data.article_content,
+            tag: data.article_tag,
+            image: data.article_image,
+            user_email: data.user_email
+          });
+          setComments(data.comments || []);
+          setRatings(data.ratings);
+          if (data.reports) setReports(data.reports);
+          
+          // ← PERBAIKI DI SINI: Gunakan username yang sudah di-set (yang merupakan email user login)
+          const newUserRating = data.ratings.find(r => r.user_email === username);
+          if (newUserRating) {
+            setUserRatingId(newUserRating.rating_id);
+            setHasUserRated(true);
+            setUserRating(newUserRating.rating_value);  // ← Tambahkan ini
+            setRating(newUserRating.rating_value);      // ← Tambahkan ini
+          }
+          
+          // Hitung ulang average rating
+          if (data.ratings && data.ratings.length > 0) {
+            const sum = data.ratings.reduce((acc, r) => acc + r.rating_value, 0);
+            setAverageRating((sum / data.ratings.length).toFixed(1));
+            setRatingCount(data.ratings.length);
+          }
+        }
         
         setComment('');
         displayPopup('Comment added successfully');
@@ -412,8 +239,17 @@ function DetailView() {
     setIsSubmittingComment(false);
   };
 
+  const handleReplyClick = (commentId) => {
+    setReplyingToCommentId(commentId);
+    setReplyContent('');
+  };
+
+  const handleCancelReply = () => {
+    setReplyingToCommentId(null);
+    setReplyContent('');
+  };
+
   const handleSubmitReply = async (parentCommentId) => {
-    // Validation
     if (!replyContent.trim()) {
       displayPopup('Reply cannot be empty');
       return;
@@ -445,18 +281,19 @@ function DetailView() {
       }
       
       if (data.confirmation === 'successful') {
-        // Update article data with new response
         setArticle({
           title: data.article_title,
           content: data.article_content,
           tag: data.article_tag,
-          image: data.article_image
+          image: data.article_image,
+          user_email: data.user_email
         });
         setComments(data.comments || []);
-        setRatings(data.ratings || []);
+        setRatings(data.ratings);
+        if (data.reports) setReports(data.reports);
         
-        setReplyContent('');
         setReplyingToCommentId(null);
+        setReplyContent('');
         displayPopup('Reply added successfully');
       }
     } catch (error) {
@@ -467,158 +304,9 @@ function DetailView() {
     setIsSubmittingReply(false);
   };
 
-  const handleRatingClick = (selectedRating) => {
-    if (hasUserRated) return; // Prevent re-rating
-    setPendingRating(selectedRating);
-    setShowRatingConfirmModal(true);
-  };
-
-  const confirmRatingSubmission = async () => {
-    setIsSubmittingRating(true);
-    const token = localStorage.getItem('token');
-    
-    try {
-      const data = await AddRatingService.addRating(token, id, pendingRating);
-      
-      if (data.confirmation === 'token invalid') {
-        displayPopup('token invalid');
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-        return;
-      }
-      
-      if (data.confirmation === 'backend error') {
-        displayPopup('server busy');
-        setIsSubmittingRating(false);
-        setShowRatingConfirmModal(false);
-        return;
-      }
-      
-      if (data.confirmation === 'successful') {
-        // Update article data with new response
-        setArticle({
-          title: data.article_title,
-          content: data.article_content,
-          tag: data.article_tag,
-          image: data.article_image
-        });
-        setComments(data.comments || []);
-        setRatings(data.ratings || []);
-        
-        // Update rating states
-        setHasUserRated(true);
-        setUserRating(pendingRating);
-        setRating(pendingRating);
-        
-        // Recalculate average
-        if (data.ratings && data.ratings.length > 0) {
-          const sum = data.ratings.reduce((acc, r) => acc + r.rating_value, 0);
-          setAverageRating((sum / data.ratings.length).toFixed(1));
-          setRatingCount(data.ratings.length);
-        }
-        
-        displayPopup('Rating submitted successfully');
-        setShowRatingConfirmModal(false);
-      }
-    } catch (error) {
-      console.error('Error submitting rating:', error);
-      displayPopup('server busy');
-    }
-    
-    setIsSubmittingRating(false);
-  };
-
-  const cancelRatingSubmission = () => {
-    setShowRatingConfirmModal(false);
-    setPendingRating(0);
-    setRating(userRating || 0); // Reset to user's existing rating or 0
-  };
-
-  // Handle Edit Rating
-  const handleEditRatingClick = () => {
-    setEditRatingValue(userRating);
-    setIsEditingRating(true);
-    setShowEditRatingModal(true);
-  };
-
-  const handleEditRatingStarClick = (selectedRating) => {
-    setEditRatingValue(selectedRating);
-  };
-
-  const cancelEditRating = () => {
-    setShowEditRatingModal(false);
-    setEditRatingValue(0);
-    setIsEditingRating(false);
-  };
-
-  const confirmEditRating = async () => {
-    // Cek apabila rating tidak berubah, jangan lanjut
-    if (editRatingValue === userRating) {
-      displayPopup('Rating value unchanged');
-      setShowEditRatingModal(false);
-      setIsEditingRating(false);
-      return;
-    }
-
-    setIsSubmittingRating(true);
-    const token = localStorage.getItem('token');
-    
-    try {
-      const data = await EditRatingService.editRating(token, id, userRatingId, editRatingValue);
-      
-      if (data.confirmation === 'token invalid') {
-        displayPopup('token invalid');
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-        return;
-      }
-      
-      if (data.confirmation === 'backend error') {
-        displayPopup('server busy');
-        setIsSubmittingRating(false);
-        setShowEditRatingModal(false);
-        return;
-      }
-      
-      if (data.confirmation === 'successful') {
-        // Update article data with new response
-        setArticle({
-          title: data.article_title,
-          content: data.article_content,
-          tag: data.article_tag,
-          image: data.article_image
-        });
-        setComments(data.comments || []);
-        setRatings(data.ratings || []);
-        
-        // Update rating states
-        setUserRating(editRatingValue);
-        setRating(editRatingValue);
-        
-        // Recalculate average
-        if (data.ratings && data.ratings.length > 0) {
-          const sum = data.ratings.reduce((acc, r) => acc + r.rating_value, 0);
-          setAverageRating((sum / data.ratings.length).toFixed(1));
-          setRatingCount(data.ratings.length);
-        }
-        
-        displayPopup('Rating updated successfully');
-        setShowEditRatingModal(false);
-        setIsEditingRating(false);
-      }
-    } catch (error) {
-      console.error('Error editing rating:', error);
-      displayPopup('server busy');
-    }
-    
-    setIsSubmittingRating(false);
-  };
-
-  const handleEditComment = (commentId, currentContent) => {
+  const handleEditComment = (commentId, content) => {
     setEditingCommentId(commentId);
-    setEditCommentContent(currentContent);
+    setEditCommentContent(content);
   };
 
   const handleCancelEdit = () => {
@@ -627,7 +315,6 @@ function DetailView() {
   };
 
   const handleSaveEdit = async (commentId) => {
-    // Validation
     if (!editCommentContent.trim()) {
       displayPopup('Comment cannot be empty');
       return;
@@ -657,15 +344,35 @@ function DetailView() {
       }
       
       if (data.confirmation === 'successful') {
-        // Update article data with new response
-        setArticle({
-          title: data.article_title,
-          content: data.article_content,
-          tag: data.article_tag,
-          image: data.article_image
-        });
-        setComments(data.comments || []);
-        setRatings(data.ratings || []);
+        const data = await DetailArticleService.viewArticle(token, id);
+          if (data.confirmation === 'successful') {
+          setArticle({
+            title: data.article_title,
+            content: data.article_content,
+            tag: data.article_tag,
+            image: data.article_image,
+            user_email: data.user_email
+          });
+          setComments(data.comments || []);
+          setRatings(data.ratings);
+          if (data.reports) setReports(data.reports);
+          
+          // ← PERBAIKI DI SINI: Gunakan username yang sudah di-set (yang merupakan email user login)
+          const newUserRating = data.ratings.find(r => r.user_email === username);
+          if (newUserRating) {
+            setUserRatingId(newUserRating.rating_id);
+            setHasUserRated(true);
+            setUserRating(newUserRating.rating_value);  // ← Tambahkan ini
+            setRating(newUserRating.rating_value);      // ← Tambahkan ini
+          }
+          
+          // Hitung ulang average rating
+          if (data.ratings && data.ratings.length > 0) {
+            const sum = data.ratings.reduce((acc, r) => acc + r.rating_value, 0);
+            setAverageRating((sum / data.ratings.length).toFixed(1));
+            setRatingCount(data.ratings.length);
+          }
+        }
         
         setEditingCommentId(null);
         setEditCommentContent('');
@@ -687,7 +394,6 @@ function DetailView() {
     
     try {
       const data = await DeleteCommentService.deleteComment(token, deletingCommentId);
-
       if (data.confirmation === 'token invalid') {
         displayPopup('token invalid');
         setTimeout(() => {
@@ -707,11 +413,13 @@ function DetailView() {
           title: data.article_title,
           content: data.article_content,
           tag: data.article_tag,
-          image: data.article_image
+          image: data.article_image,
+          user_email: data.user_email
         });
         setComments(data.comments || []);
-        setRatings(data.ratings || []);
-
+        setRatings(data.ratings);
+        if (data.reports) setReports(data.reports);
+        
         setShowDeleteCommentModal(false);
         setDeletingCommentId(null);
         displayPopup('Comment deleted successfully');
@@ -727,17 +435,234 @@ function DetailView() {
     setDeletingCommentId(null);
   };
 
-  const openReportModal = (type, target = null) => {
-    setReportType(type);
-    setReportTarget(target);
-    setShowReportModal(true);
+  const handleRatingClick = (selectedRating) => {
+    if (hasUserRated) return;
+    
+    setPendingRating(selectedRating);
+    setShowRatingConfirmModal(true);
   };
 
-  const handleReport = () => {
-    // Implement report functionality
-    displayPopup(`${reportType} reported successfully`);
-    setShowReportModal(false);
+  const confirmRatingSubmission = async () => {
+    setIsSubmittingRating(true);
+    const token = localStorage.getItem('token');
+    
+    try {
+      const data = await AddRatingService.addRating(token, id, pendingRating);
+      
+      if (data.confirmation === 'token invalid') {
+        displayPopup('token invalid');
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+        return;
+      }
+
+      if (data.confirmation === 'backend error') {
+        displayPopup('server busy');
+        setIsSubmittingRating(false);
+        setShowRatingConfirmModal(false);
+        return;
+      }
+      
+      if (data.confirmation === 'successful') {
+      const data = await DetailArticleService.viewArticle(token, id);
+        if (data.confirmation === 'successful') {
+        setArticle({
+          title: data.article_title,
+          content: data.article_content,
+          tag: data.article_tag,
+          image: data.article_image,
+          user_email: data.user_email
+        });
+        setComments(data.comments || []);
+        setRatings(data.ratings);
+        if (data.reports) setReports(data.reports);
+        
+        // ← PERBAIKI DI SINI: Gunakan username yang sudah di-set (yang merupakan email user login)
+        const newUserRating = data.ratings.find(r => r.user_email === username);
+        if (newUserRating) {
+          setUserRatingId(newUserRating.rating_id);
+          setHasUserRated(true);
+          setUserRating(newUserRating.rating_value);  // ← Tambahkan ini
+          setRating(newUserRating.rating_value);      // ← Tambahkan ini
+        }
+        
+        // Hitung ulang average rating
+        if (data.ratings && data.ratings.length > 0) {
+          const sum = data.ratings.reduce((acc, r) => acc + r.rating_value, 0);
+          setAverageRating((sum / data.ratings.length).toFixed(1));
+          setRatingCount(data.ratings.length);
+        }
+      }
+      displayPopup('Rating submitted successfully');
+      setShowRatingConfirmModal(false);
+    }
+    } catch (error) {
+      console.error('Error submitting rating:', error);
+      displayPopup('server busy');
+    }
+    
+    setIsSubmittingRating(false);
+  };
+
+  const cancelRatingSubmission = () => {
+    setShowRatingConfirmModal(false);
+    setPendingRating(0);
+    setRating(userRating || 0);
+  };
+
+  const handleEditRatingClick = () => {
+    setEditRatingValue(userRating);
+    setShowEditRatingModal(true);
+  };
+
+  const handleEditRatingStarClick = (selectedRating) => {
+    setEditRatingValue(selectedRating);
+  };
+
+  const cancelEditRating = () => {
+    setShowEditRatingModal(false);
+    setEditRatingValue(0);
+  };
+
+  const confirmEditRating = async () => {
+    if (editRatingValue === userRating) {
+      displayPopup('Rating value unchanged');
+      setShowEditRatingModal(false);
+      return;
+    }
+
+    setIsSubmittingRating(true);
+    const token = localStorage.getItem('token');
+    
+    try {
+      const data = await EditRatingService.editRating(token, id, userRatingId, editRatingValue);
+      
+      if (data.confirmation === 'token invalid') {
+        displayPopup('token invalid');
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+        return;
+      }
+      
+      if (data.confirmation === 'backend error') {
+        displayPopup('server busy');
+        setIsSubmittingRating(false);
+        setShowEditRatingModal(false);
+        return;
+      }
+      
+      if (data.confirmation === 'successful') {
+              const data = await DetailArticleService.viewArticle(token, id);
+        if (data.confirmation === 'successful') {
+        setArticle({
+          title: data.article_title,
+          content: data.article_content,
+          tag: data.article_tag,
+          image: data.article_image,
+          user_email: data.user_email
+        });
+        setComments(data.comments || []);
+        setRatings(data.ratings);
+        if (data.reports) setReports(data.reports);
+        
+        // ← PERBAIKI DI SINI: Gunakan username yang sudah di-set (yang merupakan email user login)
+        const newUserRating = data.ratings.find(r => r.user_email === username);
+        if (newUserRating) {
+          setUserRatingId(newUserRating.rating_id);
+          setHasUserRated(true);
+          setUserRating(newUserRating.rating_value);  // ← Tambahkan ini
+          setRating(newUserRating.rating_value);      // ← Tambahkan ini
+        }
+        
+        // Hitung ulang average rating
+        if (data.ratings && data.ratings.length > 0) {
+          const sum = data.ratings.reduce((acc, r) => acc + r.rating_value, 0);
+          setAverageRating((sum / data.ratings.length).toFixed(1));
+          setRatingCount(data.ratings.length);
+        }
+      }
+        displayPopup('Rating updated successfully');
+        setShowEditRatingModal(false);
+      }
+    } catch (error) {
+      console.error('Error updating rating:', error);
+      displayPopup('server busy');
+    }
+    
+    setIsSubmittingRating(false);
+  };
+
+  const openReportModal = () => {
+    setShowReportModal(true);
     setReportReason('');
+  };
+
+  const handleReport = async () => {
+    // Validation: check if description is empty
+    if (!reportReason.trim()) {
+      displayPopup('please fill description');
+      return;
+    }
+
+    setIsSubmittingReport(true);
+    const token = localStorage.getItem('token');
+    
+    try {
+      const data = await ReportArticleService.reportArticle(token, id, reportReason);
+      
+      // Handle token invalid
+      if (data.confirmation === 'token invalid') {
+        displayPopup('token invalid');
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+        return;
+      }
+      
+      // Handle article not found
+      if (data.confirmation === 'article not found') {
+        displayPopup('article not found');
+        setShowReportModal(false);
+        setReportReason('');
+        setIsSubmittingReport(false);
+        return;
+      }
+      
+      // Handle already reported
+      if (data.confirmation === 'already reported') {
+        displayPopup('you already reported this article');
+        setShowReportModal(false);
+        setReportReason('');
+        setIsSubmittingReport(false);
+        return;
+      }
+      
+      // Handle backend error
+      if (data.confirmation === 'backend error') {
+        displayPopup('server busy');
+        setShowReportModal(false);
+        setReportReason('');
+        setIsSubmittingReport(false);
+        return;
+      }
+      
+      // Handle successful report
+      if (data.confirmation === 'successful: article reported') {
+        displayPopup('article has been reported');
+        setShowReportModal(false);
+        setReportReason('');
+        
+        // Refresh article data to get updated reports
+        await fetchArticleData(token);
+      }
+    } catch (error) {
+      console.error('Error reporting article:', error);
+      displayPopup('server busy');
+    }
+    
+    setIsSubmittingReport(false);
   };
 
   const handleEditArticle = () => {
@@ -770,7 +695,6 @@ function DetailView() {
         return;
       }
       
-      
       if (data.confirmation === 'successful: article deleted') {
         setShowDeleteConfirmModal(false);
         setSuccessMessage('Article deleted successfully!');
@@ -791,33 +715,19 @@ function DetailView() {
     setShowDeleteConfirmModal(false);
   };
 
-  const handleReplyClick = (commentId) => {
-    setReplyingToCommentId(commentId);
-    setReplyContent('');
-  };
-
-  const handleCancelReply = () => {
-    setReplyingToCommentId(null);
-    setReplyContent('');
-  };
-
-  // Organize comments into parent-child structure with depth tracking
   const organizeComments = () => {
     const commentMap = new Map();
     const rootComments = [];
 
-    // First pass: create a map of all comments
     comments.forEach(comment => {
-      commentMap.set(comment.comment_id, { ...comment, replies: [], depth: 0 });
+      commentMap.set(comment.comment_id, { ...comment, replies: [] });
     });
 
-    // Second pass: organize into tree structure and track depth
     comments.forEach(comment => {
       if (comment.parent_comment_id && comment.parent_comment_id !== "") {
         const parent = commentMap.get(comment.parent_comment_id);
         const child = commentMap.get(comment.comment_id);
         if (parent && child) {
-          child.depth = parent.depth + 1;
           parent.replies.push(child);
         }
       } else {
@@ -832,6 +742,16 @@ function DetailView() {
   };
 
   const organizedComments = organizeComments();
+
+  const handleUserClick = (userEmail) => {
+    setSelectedUserEmail(userEmail);
+    setShowUserProfileModal(true);
+  };
+
+  const handleCloseUserProfileModal = () => {
+    setShowUserProfileModal(false);
+    setSelectedUserEmail('');
+  };
 
   if (isLoading) {
     return (
@@ -864,161 +784,54 @@ function DetailView() {
       <Navbar />
       <div className="navbar-placeholder"></div>
       <Navbar showBack={true} showAccount={true} onBackClick={() => navigate('/main')} />
-      <div className="article-detail">
-        {article.image && (
-          <div className="laptop-image">
-            <img src={`data:image/jpeg;base64,${article.image}`} alt={article.title} />
-          </div>
-        )}
+      
+      <ArticleSection
+        article={article}
+        averageRating={averageRating}
+        ratingCount={ratingCount}
+        userclass={userclass}
+        onEdit={handleEditArticle}
+        onDelete={handleDeleteArticle}
+        onReport={openReportModal}
+      />
 
-        <div className="article-header">
-          <div className="header-accent"></div>
-          <h1>{article.title}</h1>
-          
-          {article.tag && (
-            <div className="tag-container">
-              <span className="article-tag">{article.tag}</span>
-            </div>
-          )}
-          
-          {ratingCount > 0 && (
-            <div className="average-rating-display">
-              <div className="rating-stars">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <FiStar
-                    key={star}
-                    className={`star-display ${averageRating >= star ? 'filled' : ''}`}
-                  />
-                ))}
-              </div>
-              <span className="rating-text">
-                {averageRating} / 5 ({ratingCount} {ratingCount === 1 ? 'rating' : 'ratings'})
-              </span>
-            </div>
-          )}
-          
-          <div className="header-actions">
-            {userclass === 'admin' && (
-              <>
-                <button className="btn-edit" onClick={handleEditArticle}>
-                  <FiEdit />
-                  Edit
-                </button>
-                <button className="btn-delete" onClick={handleDeleteArticle}>
-                  <FiTrash2 />
-                  Delete
-                </button>
-              </>
-            )}
-            <button className="btn-report" onClick={() => openReportModal('article')}>
-              <FiFlag />
-              Report
-            </button>
-          </div>
-        </div>
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <RatingsSection
+          hasUserRated={hasUserRated}
+          userRating={userRating}
+          rating={rating}
+          setRating={setRating}
+          onRatingClick={handleRatingClick}
+          onEditRating={handleEditRatingClick}
+        />
 
-        <div className="article-body">
-          <p>{article.content}</p>
-        </div>
+        <CommentsSection
+          comments={comments}
+          ratings={ratings}
+          comment={comment}
+          setComment={setComment}
+          isSubmittingComment={isSubmittingComment}
+          handleSubmitComment={handleSubmitComment}
+          replyingToCommentId={replyingToCommentId}
+          replyContent={replyContent}
+          setReplyContent={setReplyContent}
+          isSubmittingReply={isSubmittingReply}
+          handleReplyClick={handleReplyClick}
+          handleSubmitReply={handleSubmitReply}
+          handleCancelReply={handleCancelReply}
+          currentUserEmail={username}
+          editingCommentId={editingCommentId}
+          editCommentContent={editCommentContent}
+          setEditCommentContent={setEditCommentContent}
+          handleEditComment={handleEditComment}
+          handleCancelEdit={handleCancelEdit}
+          handleSaveEdit={handleSaveEdit}
+          handleDeleteComment={handleDeleteComment}
+          organizedComments={organizedComments}
+          handleUserClick={handleUserClick}
+        />
 
-        {/* Rating Section - 1-5 scale */}
-        <div className="rating-section">
-          <h2>{hasUserRated ? 'Your Rating' : 'Rate This Article'}</h2>
-          {hasUserRated ? (
-            <div className="user-rating-display">
-              <div className="star-rating-display">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <FiStar
-                    key={star}
-                    className={`star-display ${userRating >= star ? 'filled' : ''}`}
-                  />
-                ))}
-              </div>
-              <p className="rating-value">You rated: {userRating} / 5</p>
-              <button className="btn-edit-rating" onClick={handleEditRatingClick}>
-                <FiEdit />
-                Edit Rating
-              </button>
-            </div>
-          ) : (
-            <div className="rating-input-container">
-              <div className="star-rating">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <FiStar
-                    key={star}
-                    className={`star ${rating >= star ? 'active' : ''}`}
-                    onClick={() => handleRatingClick(star)}
-                    onMouseEnter={() => !hasUserRated && setRating(star)}
-                    onMouseLeave={() => !hasUserRated && setRating(userRating || 0)}
-                  />
-                ))}
-              </div>
-              <p className="rating-helper">Click a star to rate from 1 to 5</p>
-            </div>
-          )}
-        </div>
-
-        {/* Comment Section */}
-        <div className="rating-section">
-          <h2>Share Your Thoughts</h2>
-          <form onSubmit={handleSubmitComment}>
-            <div className="comment-input">
-              <textarea
-                placeholder="Write your comment here... (1-8192 characters)"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                rows="4"
-                maxLength={8192}
-              />
-              <div className="character-count">
-                {comment.length} / 8192 characters
-              </div>
-              <button 
-                type="submit" 
-                className="btn-submit"
-                disabled={isSubmittingComment || !comment.trim()}
-              >
-                <FiSend />
-                {isSubmittingComment ? 'Posting...' : 'Post Comment'}
-              </button>
-            </div>
-          </form>
-        </div>
-
-        {/* Comments List */}
-        <div className="comments-section">
-          <h2>Comments ({comments.length})</h2>
-          {comments.length === 0 ? (
-            <p className="no-comments">No comments yet. Be the first to comment!</p>
-          ) : (
-            <div className="comments-list">
-              {organizedComments.map((c) => (
-                <CommentItem 
-                  key={c.comment_id} 
-                  comment={c} 
-                  depth={0}
-                  username={username}
-                  ratings={ratings}
-                  editingCommentId={editingCommentId}
-                  editCommentContent={editCommentContent}
-                  setEditCommentContent={setEditCommentContent}
-                  replyingToCommentId={replyingToCommentId}
-                  replyContent={replyContent}
-                  setReplyContent={setReplyContent}
-                  isSubmittingReply={isSubmittingReply}
-                  handleEditComment={handleEditComment}
-                  handleCancelEdit={handleCancelEdit}
-                  handleSaveEdit={handleSaveEdit}
-                  handleDeleteComment={handleDeleteComment}
-                  handleReplyClick={handleReplyClick}
-                  handleCancelReply={handleCancelReply}
-                  handleSubmitReply={handleSubmitReply}
-                  openReportModal={openReportModal}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+        <ReportsSection reports={reports} userclass={userclass} />
       </div>
 
       {/* Rating Confirmation Modal */}
@@ -1036,7 +849,7 @@ function DetailView() {
                 />
               ))}
             </div>
-            <p className="rating-warning">Note: Ratings cannot be edited once submitted.</p>
+            <p className="rating-warning">Note: You can edit your rating later.</p>
             <div className="modal-buttons">
               <button className="btn-cancel" onClick={cancelRatingSubmission}>
                 Cancel
@@ -1084,8 +897,8 @@ function DetailView() {
       {showReportModal && (
         <div className="modal-overlay" onClick={() => setShowReportModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>Report {reportType === 'article' ? 'Article' : 'Comment'}</h3>
-            <p>Please provide a reason for reporting this {reportType}:</p>
+            <h3>Report Article</h3>
+            <p>Please provide a reason for reporting this article:</p>
             <textarea
               className="report-textarea"
               placeholder="Describe the issue..."
@@ -1097,9 +910,16 @@ function DetailView() {
               <button className="btn-cancel" onClick={() => setShowReportModal(false)}>
                 Cancel
               </button>
-              <button className="btn-confirm-report" onClick={handleReport}>
+              <button 
+                className="btn-confirm-report" 
+                  onClick={() => {
+                  handleReport();
+                  handleCloseUserProfileModal();
+                }}
+                disabled={isSubmittingReport}
+              >
                 <FiFlag />
-                Submit Report
+                {isSubmittingReport ? 'Submitting...' : 'Submit'}
               </button>
             </div>
           </div>
@@ -1137,7 +957,7 @@ function DetailView() {
       {/* Delete Comment Confirmation Modal */}
       {showDeleteCommentModal && (
         <div className="modal-overlay" onClick={cancelDeleteComment}>
-          <div className="modal-content delete-confirm-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content delete-comment-modal" onClick={(e) => e.stopPropagation()}>
             <FiAlertCircle size={64} color="#E34234" />
             <h3>Delete Comment?</h3>
             <p>Are you sure you want to delete this comment? This action cannot be undone.</p>
@@ -1164,6 +984,13 @@ function DetailView() {
           </div>
         </div>
       )}
+
+      {/* User Profile Modal */}
+      <UserProfileModal
+        isOpen={showUserProfileModal}
+        onClose={handleCloseUserProfileModal}
+        userEmail={selectedUserEmail}
+      />
     </>
   );
 }

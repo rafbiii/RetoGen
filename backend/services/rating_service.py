@@ -15,8 +15,10 @@ class RatingService:
             }
             result = await db.rating.insert_one(data)
             return str(result.inserted_id)
-        except:
+        except Exception as e:
+            print("ADD RATING ERROR:", e)
             return None
+
 
 
     @staticmethod

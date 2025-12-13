@@ -71,7 +71,7 @@ function Auth() {
 
       case 'email':
         if (value.length > 0) {
-          const emailRegex = /^[a-zA-Z0-9]+@[a-z]+\.[a-z]+$/;
+          const emailRegex = /^[a-zA-Z0-9._]+@[a-z]+\.[a-z]+$/;
           if (!emailRegex.test(value)) {
             errorMessage = 'Invalid email format (e.g., user@example.com)';
           }
@@ -262,7 +262,7 @@ function Auth() {
           email: formData.email,
           password: formData.password
         });
-        
+
         navigate('/main');
       } else {
         // Register - sesuai dengan API format

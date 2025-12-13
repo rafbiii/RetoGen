@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FiSun, FiMoon, FiArrowLeft, FiUser } from 'react-icons/fi';
 import { toggleTheme, getCurrentTheme } from '../../../services/themeUtils';
 import './Navbar.css';
@@ -7,6 +7,10 @@ import './Navbar.css';
 function Navbar({ showBack = false, showAccount = false, onBackClick }) {
   const [theme, setTheme] = useState('light');
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Cek apakah sedang di halaman /account
+  const isAccountPage = location.pathname === '/account';
 
   useEffect(() => {
     setTheme(getCurrentTheme());
@@ -38,7 +42,7 @@ function Navbar({ showBack = false, showAccount = false, onBackClick }) {
             <div className="navbar-back-placeholder"></div>
           )}
           
-          <div className="navbar-logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+          <div className="navbar-logo" onClick={() => navigate('/main')} style={{ cursor: 'pointer' }}>
             <div className="navbar-icon">
               <img src="/figures/logo.png" alt="Retogen Logo" />
             </div>
@@ -51,28 +55,32 @@ function Navbar({ showBack = false, showAccount = false, onBackClick }) {
             {theme === 'dark' ? <FiMoon /> : <FiSun />}
           </button>
 
-          {showAccount ? (
-            <button 
-              className="navbar-btn navbar-btn-account" 
-              onClick={() => navigate('/account')}
-            >
-              <FiUser />
-              <span>Account</span>
-            </button>
-          ) : (
+          {!isAccountPage && (
             <>
-              <button 
-                className="navbar-btn navbar-btn-login" 
-                onClick={() => navigate('/login')}
-              >
-                Login
-              </button>
-              <button 
-                className="navbar-btn navbar-btn-register" 
-                onClick={() => navigate('/register')}
-              >
-                Sign Up
-              </button>
+              {showAccount ? (
+                <button 
+                  className="navbar-btn navbar-btn-account" 
+                  onClick={() => navigate('/account')}
+                >
+                  <FiUser />
+                  <span>Account</span>
+                </button>
+              ) : (
+                <>
+                  <button 
+                    className="navbar-btn navbar-btn-login" 
+                    onClick={() => navigate('/login')}
+                  >
+                    Login
+                  </button>
+                  <button 
+                    className="navbar-btn navbar-btn-register" 
+                    onClick={() => navigate('/register')}
+                  >
+                    Sign Up
+                  </button>
+                </>
+              )}
             </>
           )}
         </div>
